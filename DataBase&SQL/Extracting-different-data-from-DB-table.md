@@ -6,24 +6,24 @@
 
    ```SQL
    SELECT *
-     FROM COMM_GRID_DET AS A
-         ,COMM_GRID_DET_EXCELDOWN AS B
-    WHERE A.UPD_DT <> B.UPD_DT;
+     FROM A
+         ,B
+    WHERE A.C <> B.C;
    ```
 
    시간이 너무 오래걸린다. INNER JOIN을 걸어야 할 것 같다.
-   4,077,165개의 데이터가 나온당...
+   4,077,165개의 데이터가 나온다...
 
 3. 다시 쿼리를 작성했다.
 
    ```SQL
    SELECT *
-     FROM COMM_GRID_DET AS A
-    INNER JOIN COMM_GRID_DET_EXCELDOWN AS B
-       ON A.GRID_ID = B.GRID_ID
-      AND A.COL_NAME = B.COL_NAME
-      AND A.PAGE_ID = B.PAGE_ID
-    WHERE A.UPD_DT <> B.UPD_DT;
+     FROM A
+    INNER JOIN B
+       ON A.C = B.C
+      AND A.D = B.D
+      AND A.E = B.E
+    WHERE A.F <> B.F;
    ```
 
    1400개의 데이터가 나왔다.
@@ -33,10 +33,35 @@
 
    ```SQL
    SELECT A.*
-     FROM COMM_GRID_DET AS A
-     LEFT JOIN COMM_GRID_DET_EXCELDOWN AS B
-       ON A.GRID_ID = B.GRID_ID
-    WHERE B.GRID_ID IS NULL;
+     FROM A
+     LEFT JOIN B
+       ON A.C = B.C
+    WHERE B.C IS NULL;
    ```
 
-   26개의 데이터가 나온다. 이전 그리드에서 추가된 내용.
+   26개의 데이터가 나온다. 이전 테이블에서 추가된 내용.
+
+5. 4번이 뭔가 오류가 있어서 다시 작성했다.
+
+   ```SQL
+   SELECT A.*
+     FROM A
+     LEFT JOIN B
+       ON A.C = B.C
+      AND A.D = B.D
+      AND A.E = B.E
+    WHERE B.D IS NULL;
+   ```
+
+6. 각 C별로 추가된 데이터를 가져오는 쿼리
+
+   ```SQL
+   SELECT COUNT(*)
+     FROM A
+     LEFT JOIN B
+       ON A.C = B.C
+      AND A.D = B.D
+      AND A.E = B.E
+    WHERE B.D IS NULL
+      AND A.C = "SEARCH";
+   ```
