@@ -14,18 +14,18 @@
 
 
 ### 분류
- * [세미나&컨퍼런스](#Seminar & Conference)
+ * [세미나&컨퍼런스](#Seminar--Conference)
  * [자바](#Java)
  * [자바스크립트](#JavaScript)
- * [디자인패턴](#Design Pattern)
+ * [디자인패턴](#Design-Pattern)
  * [알고리즘](#Algorithm)
- * [자료구조](#DataStructure)
+ * [자료구조](#Data-Structure)
  * [스프링](#Spring)
- * [스프링부트](#Spring Boot)
- * [노드JS](#Node.js)
- * [뷰JS](#Vue.js)
+ * [스프링부트](#Spring-Boot)
+ * [노드JS](#Nodejs)
+ * [뷰JS](#Vuejs)
  * [깃](#Git)
- * [데이터베이스&SQL](#Database & SQL)
+ * [데이터베이스&SQL](#Database--SQL)
  * [리눅스](#Linux)
  * [클라우드](#Cloud)
  * [파이썬](#Python)
@@ -52,7 +52,7 @@
 
 - 
 
-### DataStructure
+### Data Structure
 
 - 
 
@@ -78,7 +78,7 @@
 
 ### Database & SQL
 
-* [DB 테이블에서 변경된 데이터 추출](DataBase&SQL/Extracting different data from DB table.md)
+* [DB 테이블에서 변경된 데이터 추출](DataBase&SQL/Extracting-different-data-from-DB-table.md)
 
 
 ### Linux
