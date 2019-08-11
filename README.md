@@ -58,7 +58,7 @@
 
 ### Spring
 
-- [IntelliJ IDEA Gradle Lombok Dependency Setting](Spring/gradle_lombok_dependency.md)
+- [IntelliJ IDEA Gradle Lombok Dependency Setting](Spring/gradle-lombok-dependency.md)
 
 ### Spring Boot
 

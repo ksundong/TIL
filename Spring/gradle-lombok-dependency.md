@@ -6,7 +6,7 @@ Google에서 열심히 찾아보았으나, Annotation Processor는 IntelliJ에�
 
 Test를 돌릴 때 에러가 발생하는 것 같아, test에도 Dependency를 작성하였다.
 
-``` gradle
+``` groovy
     //LOMBOK Dependencies
     compileOnly 'org.projectlombok:lombok:1.18.8'
     annotationProcessor 'org.projectlombok:lombok:1.18.8'
