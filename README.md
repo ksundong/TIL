@@ -84,7 +84,7 @@
 
 ### Linux
 
-* 
+* [Chsh zsh non-standard shell](Linux/chsh_zsh_non-standard_shell.md)
 
 ### Cloud
 
