@@ -81,6 +81,7 @@
 
 * [DB 테이블에서 변경된 데이터 추출](DataBase&SQL/Extracting-different-data-from-DB-table.md)
 * [IntelliJ IDEA Oracle DB Connection](DataBase&SQL/IntelliJ-Oracle-DB-Connection.md)
+* [MySQL UTF-8 Collations](DataBase&SQL/Mysql-UTF-8-Collations.md)
 
 
 ### Linux
