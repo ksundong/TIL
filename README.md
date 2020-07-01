@@ -12,7 +12,6 @@
 * 쉴 땐 확실히 쉬고(특히 주말), contributions를 초록색으로 채우는 것에 집착하지 않는다.
 * reference를 명시하고, 원작자가 참고를 허용하는 자료만 사용한다.
 
-
 ### 분류
  * [세미나&컨퍼런스](#Seminar--Conference)
  * [자바](#Java)
@@ -79,10 +78,10 @@
 
 ### Database & SQL
 
-* [DB 테이블에서 변경된 데이터 추출](DataBase&SQL/Extracting-different-data-from-DB-table.md)
-* [IntelliJ IDEA Oracle DB Connection](DataBase&SQL/IntelliJ-Oracle-DB-Connection.md)
-* [MySQL UTF-8 Collations](DataBase&SQL/Mysql-UTF-8-Collations.md)
-
+- [DB 테이블에서 변경된 데이터 추출](DataBase&SQL/Extracting-different-data-from-DB-table.md)
+- [IntelliJ IDEA Oracle DB Connection](DataBase&SQL/IntelliJ-Oracle-DB-Connection.md)
+- [MySQL UTF-8 Collations](DataBase&SQL/Mysql-UTF-8-Collations.md)
+- [MySQL Database와 Table Character set확인](DataBase&SQL/MySQL-database-table-character-set-check.md)
 
 ### Linux
 
