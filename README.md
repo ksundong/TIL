@@ -43,6 +43,7 @@
 - [Java의 날짜와 시간 API](Java/Date-Time-API.md)
 - [SecureRandom과 Random의 차이점](Java/Difference-with-SecureRandom-and-Random.md)
 - [String join](Java/String-join.md)
+- [map과 flatMap의 차이](Java/Difference-with-map-and-flatMap.md)
 
 ### JavaScript
 
