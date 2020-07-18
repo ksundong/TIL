@@ -53,3 +53,7 @@ System.out.println(list)
 ## References
 
 [Baeldung The Difference with map and flatMap](https://www.baeldung.com/java-difference-map-and-flatmap)
+
+## Thanks to
+
+글감에 도움을 주신 분: [Solar](https://github.com/blossun)
