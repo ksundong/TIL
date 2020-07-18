@@ -106,8 +106,9 @@
 
 ### Network
 
-* [네트워킹이란 무엇인가?](Network/what-is-networking.md)
+- [네트워킹이란 무엇인가?](Network/what-is-networking.md)
 - [Nginx Cors Setting](Network/nginx-cors-setting.md)
+- [HTTP Method의 멱등성](Network/http-method-idempotent.md)
 
 ### Books
 
