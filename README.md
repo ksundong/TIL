@@ -39,11 +39,12 @@
 
 ### Java
 
-* [멤버변수와 로컬변수의 차이점](Java/The-Difference-Between-Member-Variable-And-Local-Variable.md)
+- [멤버변수와 로컬변수의 차이점](Java/The-Difference-Between-Member-Variable-And-Local-Variable.md)
 - [Java의 날짜와 시간 API](Java/Date-Time-API.md)
 - [SecureRandom과 Random의 차이점](Java/Difference-with-SecureRandom-and-Random.md)
 - [String join](Java/String-join.md)
 - [map과 flatMap의 차이](Java/Difference-with-map-and-flatMap.md)
+- [자바 메모리 구조](Java/Memory-Architecture.md)
 
 ### JavaScript
 
