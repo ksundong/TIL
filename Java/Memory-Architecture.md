@@ -44,7 +44,7 @@ Method Area, Heap Area, Stack Area, PC Register, Native Method Stack으로 구�
 2. survivor1 (new)
 3. survivor2 (new)
 4. old
-5. permanent Generation (Java 8에선 Metaspace로 변경된 영역) 
+5. permanent Generation (Java 8에선 Metaspace로 변경된 영역)
 
 Java 8까지는 default GC 방식이 MSC(Mark-Sweep-Compact)고 Java 9부터는 G1(Garbage First)로 변경되었습니다.
 
