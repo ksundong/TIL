@@ -13,24 +13,26 @@
 * reference를 명시하고, 원작자가 참고를 허용하는 자료만 사용한다.
 
 ### 분류
- * [세미나&컨퍼런스](#Seminar--Conference)
- * [자바](#Java)
- * [자바스크립트](#JavaScript)
- * [디자인패턴](#Design-Pattern)
- * [알고리즘](#Algorithm)
- * [자료구조](#Data-Structure)
- * [스프링](#Spring)
- * [스프링부트](#Spring-Boot)
- * [노드JS](#Nodejs)
- * [뷰JS](#Vuejs)
- * [깃](#Git)
- * [데이터베이스&SQL](#Database--SQL)
- * [리눅스](#Linux)
- * [클라우드](#Cloud)
- * [파이썬](#Python)
- * [도구](#Tools)
- * [네트워크](#Network)
- * [도서](#Books)
+- [세미나&컨퍼런스](#Seminar--Conference)
+- [자바](#Java)
+- [자바스크립트](#JavaScript)
+- [디자인패턴](#Design-Pattern)
+- [알고리즘](#Algorithm)
+- [자료구조](#Data-Structure)
+- [스프링](#Spring)
+- [스프링부트](#Spring-Boot)
+- [ORM](#ORM)
+- [노드JS](#Nodejs)
+- [뷰JS](#Vuejs)
+- [깃](#Git)
+- [데이터베이스&SQL](#Database--SQL)
+- [리눅스](#Linux)
+- [클라우드](#Cloud)
+- [파이썬](#Python)
+- [도구](#Tools)
+- [네트워크](#Network)
+- [도서](#Books)
+
 ---
 
 ### Seminar & Conference
@@ -48,11 +50,11 @@
 
 ### JavaScript
 
-* 
+- 
 
 ### Design Pattern
 
-* 
+- 
 
 ### Algorithm
 
@@ -68,7 +70,11 @@
 
 ### Spring Boot
 
-* 
+- 
+
+### ORM
+
+- [JpaRepository의 getOne 메소드와 CurdRepository의 findById 메소드의 차이](ORM/difference-with-getone-and-findbyid.md)
 
 ### Node.js
 
