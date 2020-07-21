@@ -97,7 +97,8 @@
 
 ### Linux
 
-* [Chsh zsh non-standard shell](Linux/chsh_zsh_non-standard_shell.md)
+- [Chsh zsh non-standard shell](Linux/chsh_zsh_non-standard_shell.md)
+- [포트 사용중인 프로세스 찾기/죽이기](Linux/find-and-delete-process-using-port.md)
 
 ### Cloud
 
