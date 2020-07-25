@@ -106,7 +106,7 @@
 
 ### Python
 
-* 
+- [파이썬 리스트 메소드들](Python/python-list-method.md)
 
 ### Tools
 
