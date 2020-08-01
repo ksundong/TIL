@@ -94,6 +94,7 @@
 - [IntelliJ IDEA Oracle DB Connection](DataBase&SQL/IntelliJ-Oracle-DB-Connection.md)
 - [MySQL UTF-8 Collations](DataBase&SQL/Mysql-UTF-8-Collations.md)
 - [MySQL Database와 Table Character set확인](DataBase&SQL/MySQL-database-table-character-set-check.md)
+- [MySQL 공간데이터 저장](DataBase&SQL/mysql-store-spatial-data-type.md)
 
 ### Linux
 
