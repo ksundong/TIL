@@ -112,6 +112,7 @@
 ### Tools
 
 - [IntelliJ IDEA Plain Java 프로젝트를 Gradle 프로젝트로 바꾸는 방법](Tools/intellij-plain-java-to-gradle.md)
+- [IntelliJ 저장시에 마지막에 빈라인 추가하기](Tools/intellij-save-with-new-line.md)
 
 ### Network
 
