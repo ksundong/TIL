@@ -1,4 +1,4 @@
-## IntelliJ IDEA Plain Java 프로젝트를 Gradle 프로젝트로 바꾸는 방법
+# IntelliJ IDEA Plain Java 프로젝트를 Gradle 프로젝트로 바꾸는 방법
 
 Gradle은 설치되어 있다고 가정하였습니다. 그리고 `.gitignore` 파일을 백업해두시길 바랍니다.
 
