@@ -37,7 +37,7 @@
 
 ### Seminar & Conference
 
-* 
+- [개발자 이력서 비하인드 스토리](Seminar/개발자-이력서-비하인드-스토리.md)
 
 ### Java
 
