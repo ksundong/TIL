@@ -1,5 +1,18 @@
 # Docker로 ELK스택 설치하기
 
+## TL;DR
+
+1. https://github.com/ksundong/docker-elk-kor 급하신 분들은 여기를 사용하세요.
+
+2. ```shell
+   git clone https://github.com/ksundong/docker-elk-kor.git
+   cd docker-elk
+   ```
+
+3. ```shell
+   docker-compose build && docker-compose up -d
+   ```
+
 ## Docker를 사용하는 이유
 
 1. Docker를 이용할 수 있는 모든 플랫폼에서 동일한 방식으로 적용이 가능합니다.
