@@ -100,6 +100,7 @@
 ### Elasticsearch
 
 - [왜 Elasticsearch인가?](Elasticsearch/why-elasticsearch.md)
+- [Elasticsearch REST API들](Elasticsearch/elasticsearch-rest-apis.md)
 
 ### Linux
 
