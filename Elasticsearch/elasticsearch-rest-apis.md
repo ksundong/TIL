@@ -284,3 +284,7 @@ curl -XPOST "http://localhost:9200/my_index/_update/oWSFvHMBPvgyY3MVXs8O" -H 'Co
 둘의 차이는 result의 차이입니다.
 
 업데이트 후 조회를 해보면 `"_version": 2`로 표시되어 있습니다. 이는 Elasticsearch의 주요한 특징 중 하나로, 데이터는 불변하며, 전체 내용을 갱신하게 됩니다.
+
+## References
+
+[CRUD - 입력, 조회, 수정, 삭제 - Elastic 가이드북](https://esbook.kimjmin.net/04-data/4.2-crud)
