@@ -48,6 +48,7 @@
 - [String join](Java/String-join.md)
 - [map과 flatMap의 차이](Java/Difference-with-map-and-flatMap.md)
 - [자바 메모리 구조](Java/Memory-Architecture.md)
+- [JVM 기본 GC 확인하는 방법](Java/JVM-default-GC.md)
 
 ### JavaScript
 
