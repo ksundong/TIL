@@ -2,7 +2,7 @@
 
 1. inline if else의 사용  
    파이썬에서는 `condition ? a : b` 와같은 삼항 연산자 대신에 `a if condition else b` 와 같은 형태로 쓸 수 있다.
-2. list의 `pop(0)` 연산은 O(n)   
+2. list의 `pop(0)` 연산은 O(n)  
    파이썬 List는 다양한 연산을 지원하지만 기본적으로 가변 배열 기반이므로 `pop(0)` 연산이 O(n)의 시간복잡도를 가진다.  
    따라서 큐의 형태로 쓰인다면 `deque` 모듈을 사용하여 `popleft()` 연산을 사용하는 편이 O(1)의 시간복잡도를 가져 더 좋은 성능을 낼 수 있다.
 3. 무한 혹은 경계 값이 필요할 경우  
@@ -42,3 +42,7 @@
     로직도 간단해지고 보기 좋아진다.
 13. 좀 더 파이써닉하게 코드 짜는 법  
     `for ~ else` 문법, `list comprehension` 같은 파이썬에서만 존재하는 문법을 가능하면 적극적으로 사용하도록 노력한다.
+14. python `for ~ else` 문법  
+    https://itholic.github.io/python-for-else/  
+    `else` 아래는 for 문이 끊김 없이 다 돌았을 때 동작함
+    > for ~ else문은 “for문에서 break가 발생하지 않았을 경우”의 동작을 else문에 적어주는 것이다.
