@@ -37,3 +37,5 @@
 11. 파이썬은 `try ~ except` 를 통해 예외처리를 한다.
     Java처럼 사전에 예외조건을 캐치하고 미리 방지하는 방어적인 방식이 아니다.
     https://suwoni-codelab.com/python%20%EA%B8%B0%EB%B3%B8/2018/03/06/Python-Basic-EAFP/
+12. `heappop()` 후 `heappush()` 를 한다면 `heapreplace()` 사용을 고려해보자.
+    로직도 간단해지고 보기 좋아진다.
