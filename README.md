@@ -116,6 +116,7 @@
 ### Python
 
 - [파이썬 리스트 메소드들](Python/python-list-method.md)
+- [코드리뷰를 통해 배우는 파이썬 정리](Python/learn-python-with-code-reviews.md)
 
 ### Tools
 
