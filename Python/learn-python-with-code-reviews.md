@@ -34,3 +34,6 @@
     ```
     위와 같은 형태로 활용할 수 있다.
     https://m.blog.naver.com/PostView.nhn?blogId=wideeyed&logNo=221541104629&categoryNo=50
+11. 파이썬은 `try ~ except` 를 통해 예외처리를 한다.
+    Java처럼 사전에 예외조건을 캐치하고 미리 방지하는 방어적인 방식이 아니다.
+    https://suwoni-codelab.com/python%20%EA%B8%B0%EB%B3%B8/2018/03/06/Python-Basic-EAFP/
