@@ -24,3 +24,13 @@
 7. `zip()` 을 활용해서 iterable한 것을 묶어서 사용할 수 있다.
 8. 전역변수를 사용하기 보단 nested function(중첩 함수)를 사용하자(코드가 지저분해지지 않는 선에서)
 9. 파이썬에서 재귀 호출은 매우 느리고 꼬리재귀도 지원이 되지 않기 때문에 stack을 활용해서 재귀 구조를 풀어놓는게 좋다.
+10. `extend()`의 활용  
+    `extend()`는 내부의 iterable을 값만 추가해주는 함수다.
+    ```python3
+    dx = [0, 1, 0, -1]
+    dy = [1, 0, -1, 0]
+    ...
+    q.extend([(a + x, b + y) for x, y in zip(dx, dy)])
+    ```
+    위와 같은 형태로 활용할 수 있다.
+    https://m.blog.naver.com/PostView.nhn?blogId=wideeyed&logNo=221541104629&categoryNo=50
