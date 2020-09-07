@@ -46,3 +46,9 @@
     https://itholic.github.io/python-for-else/  
     `else` 아래는 for 문이 끊김 없이 다 돌았을 때 동작함
     > for ~ else문은 “for문에서 break가 발생하지 않았을 경우”의 동작을 else문에 적어주는 것이다.
+15. N x M 크기의 2차원 리스트 초기화 방법
+    ```python3
+    n = 3
+    m = 3
+    array = [[0] * m for _ in range(n)]
+    ```
