@@ -68,3 +68,9 @@
     - OR 연산: `num1 | num2`
     - XOR연산: `num1 ^ num2`
     - NOT연산: `~num1`
+20. 문자열 치환  
+    `str.replace(search_str, replace_str[, count])`
+    `search_str`: 탐색할 문자열  
+    `replace_str`: 대체할 문자열  
+    `count`: 치환할 횟수  
+    주의: 정규표현식은 지원하지 않음. 정규표현식을 사용하려면 `re` 모듈의 `sub` 함수를 사용한다.
