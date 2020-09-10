@@ -52,3 +52,7 @@
     m = 3
     array = [[0] * m for _ in range(n)]
     ```
+16. 문자열 padding 하는 법(0말고 다른 문자도 가능한 방법도 존재)
+    1. `str.zfill(size)` 함수 사용(0으로 크기 벗어난 값 채움)
+    2. `str.rjust(size, fill_char)` 함수 사용(`fill_char`로 채움)
+       `fill_char` 의 길이는 1글자로 제한됨
