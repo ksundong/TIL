@@ -56,3 +56,8 @@
     1. `str.zfill(size)` 함수 사용(0으로 크기 벗어난 값 채움)
     2. `str.rjust(size, fill_char)` 함수 사용(`fill_char`로 채움)
        `fill_char` 의 길이는 1글자로 제한됨
+17. `format()`의 활용
+    - 이진수 변환: `format(number, 'b')`
+    - zero padding 이진수 변환: `format(number, '0' + str(size) + 'b')`
+    - `0b` prefix 이진수 변환: `format(number, '#0' + str(size) + 'b')`
+      주의: 0b도 자릿수에 포함됨.
