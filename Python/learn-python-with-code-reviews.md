@@ -61,3 +61,5 @@
     - zero padding 이진수 변환: `format(number, '0' + str(size) + 'b')`
     - `0b` prefix 이진수 변환: `format(number, '#0' + str(size) + 'b')`
       주의: 0b도 자릿수에 포함됨.
+18. 진법 변환시 주의할 점
+    진법 변환 후 prefix가 붙어서 보통 `bin(number)[2:]` 와 같은 형태로 prefix를 제거함
