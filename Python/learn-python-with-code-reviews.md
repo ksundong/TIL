@@ -63,3 +63,8 @@
       주의: 0b도 자릿수에 포함됨.
 18. 진법 변환시 주의할 점
     진법 변환 후 prefix가 붙어서 보통 `bin(number)[2:]` 와 같은 형태로 prefix를 제거함
+19. 숫자 비트연산 방법
+    - AND연산: `num1 & num2`
+    - OR 연산: `num1 | num2`
+    - XOR연산: `num1 ^ num2`
+    - NOT연산: `~num1`
