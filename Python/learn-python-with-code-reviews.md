@@ -74,3 +74,14 @@
     `replace_str`: 대체할 문자열  
     `count`: 치환할 횟수  
     주의: 정규표현식은 지원하지 않음. 정규표현식을 사용하려면 `re` 모듈의 `sub` 함수를 사용한다.
+21. n * m 이차원 배열 90도 회전
+    ```python3
+    def rotate_a_matrix_by_90_degree(a):
+    n = len(a)
+    m = len(a[0])
+    result = [[0] * n for _ in range(m)]
+    for i in range(n):
+        for j in range(m):
+            result[j][n - i - 1] = a[i][j]
+    return result
+    ```
