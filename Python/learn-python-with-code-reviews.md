@@ -8,7 +8,7 @@
 3. 무한 혹은 경계 값이 필요할 경우  
    `sys` 모듈의 `maxsize`를 사용하거나, 코딩테스트에서 `sys` 모듈을 사용할 수 없다면, `float('inf')` 를 활용할 수 있다.
 4. PEP8 규칙을 지키자  
-   https://www.python.org/dev/peps/pep-0008
+   <https://www.python.org/dev/peps/pep-0008>
 5. 파이썬의 문자열 슬라이싱은 범위를 벗어나면 빈 문자열을 반환한다.
 
    ```python3
@@ -27,31 +27,35 @@
 9. 파이썬에서 재귀 호출은 매우 느리고 꼬리재귀도 지원이 되지 않기 때문에 stack을 활용해서 재귀 구조를 풀어놓는게 좋다.
 10. `extend()`의 활용  
     `extend()`는 내부의 iterable을 값만 추가해주는 함수다.
+
     ```python3
     dx = [0, 1, 0, -1]
     dy = [1, 0, -1, 0]
     ...
     q.extend([(a + x, b + y) for x, y in zip(dx, dy)])
     ```
+
     위와 같은 형태로 활용할 수 있다.
-    https://m.blog.naver.com/PostView.nhn?blogId=wideeyed&logNo=221541104629&categoryNo=50
+    <https://m.blog.naver.com/PostView.nhn?blogId=wideeyed&logNo=221541104629&categoryNo=50>
 11. 파이썬은 `try ~ except` 를 통해 예외처리를 한다.  
     Java처럼 사전에 예외조건을 캐치하고 미리 방지하는 방어적인 방식이 아니다.
-    https://suwoni-codelab.com/python%20%EA%B8%B0%EB%B3%B8/2018/03/06/Python-Basic-EAFP/
+    <https://suwoni-codelab.com/python%20%EA%B8%B0%EB%B3%B8/2018/03/06/Python-Basic-EAFP/>
 12. `heappop()` 후 `heappush()` 를 한다면 `heapreplace()` 사용을 고려해보자.  
     로직도 간단해지고 보기 좋아진다.
 13. 좀 더 파이써닉하게 코드 짜는 법  
     `for ~ else` 문법, `list comprehension` 같은 파이썬에서만 존재하는 문법을 가능하면 적극적으로 사용하도록 노력한다.
 14. python `for ~ else` 문법  
-    https://itholic.github.io/python-for-else/  
+    <https://itholic.github.io/python-for-else/>  
     `else` 아래는 for 문이 끊김 없이 다 돌았을 때 동작함
     > for ~ else문은 “for문에서 break가 발생하지 않았을 경우”의 동작을 else문에 적어주는 것이다.
 15. N x M 크기의 2차원 리스트 초기화 방법
+
     ```python3
     n = 3
     m = 3
     array = [[0] * m for _ in range(n)]
     ```
+
 16. 문자열 padding 하는 법(0말고 다른 문자도 가능한 방법도 존재)
     1. `str.zfill(size)` 함수 사용(0으로 크기 벗어난 값 채움)
     2. `str.rjust(size, fill_char)` 함수 사용(`fill_char`로 채움)
@@ -74,7 +78,8 @@
     `replace_str`: 대체할 문자열  
     `count`: 치환할 횟수  
     주의: 정규표현식은 지원하지 않음. 정규표현식을 사용하려면 `re` 모듈의 `sub` 함수를 사용한다.
-21. n \* m 이차원 배열 90도 회전
+21. n * m 이차원 배열 90도 회전
+
     ```python3
     def rotate_a_matrix_by_90_degree(a):
     n = len(a)
@@ -85,23 +90,29 @@
             result[j][n - i - 1] = a[i][j]
     return result
     ```
+
 22. 파이썬의 리스트는 편의 연산자 때문에 생각과는 다르게 동작할 수 있다.  
     `+` 연산자를 쓰면 뒤에 append가 된다.  
     `*` 연산자를 쓰면 리스트의 요소를 여러개 복사할 수 있다. (이건 초기화할 때 많이 사용)
 23. 파이썬은 문자열과 정수형의 합연산시에 타입 변환을 자동으로 해주지 않는다!! (Java와 차이점)
 24. 파이썬의 list comprehension 잘 사용하기
+
     ```python3
     for x in list:
         if x == y:
             count += 1
     ```
+
     이런 코드는
+
     ```python3
     count += [1 for x in list if x == y]
     ```
+
     로 변경하는게 더 파이써닉하다.
 25. 파이썬의 `*`(asterisk, 언팩 연산자)란?  
     파이썬의 `*`는 튜플이나, 리스트의 요소를 풀어 헤칠 수 있다.
+
     ```python3
     a = ('a', 'b', 'c', 'd')
     b = [1, 2, 3, 4]
@@ -110,7 +121,9 @@
     >>> print(*b)
     1 2 3 4
     ```
+
     응용해서 zip 함수와 함께 사용하는 예
+
     ```python3
     a = [('A', 13), ('B', 14), ('C', 15)]
     >>> list(zip(*a))  # 내부 요소가 튜플로 나온다
@@ -118,6 +131,7 @@
     >>> list(map(list, zip(*a)))  # 튜플에 list 함수를 적용한다.
     [['A', 'B', 'C'], [13, 14, 15]]
     ```
+
 26. 파이썬의 collections 모듈의 defaultdict 사용시 주의할 점  
     python의 defaultdict는 키가 없는 값 조회시 default값을 생성한다.  
     여기서 발생하는 문제가 바로 `for ... in` 구문을 사용할 떄 발생한다.  
