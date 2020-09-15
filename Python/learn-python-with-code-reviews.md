@@ -37,6 +37,7 @@
 
     위와 같은 형태로 활용할 수 있다.
     <https://m.blog.naver.com/PostView.nhn?blogId=wideeyed&logNo=221541104629&categoryNo=50>
+
 11. 파이썬은 `try ~ except` 를 통해 예외처리를 한다.  
     Java처럼 사전에 예외조건을 캐치하고 미리 방지하는 방어적인 방식이 아니다.
     <https://suwoni-codelab.com/python%20%EA%B8%B0%EB%B3%B8/2018/03/06/Python-Basic-EAFP/>
@@ -78,7 +79,7 @@
     `replace_str`: 대체할 문자열  
     `count`: 치환할 횟수  
     주의: 정규표현식은 지원하지 않음. 정규표현식을 사용하려면 `re` 모듈의 `sub` 함수를 사용한다.
-21. n * m 이차원 배열 90도 회전
+21. n \* m 이차원 배열 90도 회전
 
     ```python3
     def rotate_a_matrix_by_90_degree(a):
@@ -110,6 +111,7 @@
     ```
 
     로 변경하는게 더 파이써닉하다.
+
 25. 파이썬의 `*`(asterisk, 언팩 연산자)란?  
     파이썬의 `*`는 튜플이나, 리스트의 요소를 풀어 헤칠 수 있다.
 
@@ -137,3 +139,33 @@
     여기서 발생하는 문제가 바로 `for ... in` 구문을 사용할 떄 발생한다.  
     존재하지 않는 키로 검색할 때, default값을 생성하면서 크기가 변하게 되기 때문이다.  
     이런 문제상황을 해결할 때에는 `list()`로 감싸주어 복사본을 생성해주면 된다.
+27. `nonlocal`사용법  
+    파이썬에서는 중첩함수를 지원하는데, 중첩함수 내부에서 외부 함수의 변수를 사용하고 싶을 때가 있을 수 있다.  
+    이 때, 해당 변수에 `nonlocal variable` 과 같은 식으로 선언해주면 binding 가능한 해당 변수를 찾는다.  
+    단, 전역 변수는 해당되지 않는다.
+
+    ```python3
+    x = 0
+
+    def func():
+        nonlocal x
+        x = 33
+
+    func()
+    print(x)
+    ```
+
+    위와 같이는 사용할 수 없다. `no binding for nonlocal 'x' found` 가 발생한다.  
+    애초에 전역변수를 사용하려고 하지 않는 것이 좋다.
+
+    ```python3
+    def func1():
+        x = 0
+
+        def func2():
+            nonlocal x
+            x = 33
+
+        func2()
+        print(x)  # 33출력
+    ```
