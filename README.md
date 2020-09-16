@@ -1,6 +1,6 @@
 # Today I Learned
 
-- 좋은 개발자가 되기 위해 하루동안 학습한 내용이나 개발관련 경험들을 간단한 기록으로 남긴다. 
+- 좋은 개발자가 되기 위해 하루동안 학습한 내용이나 개발관련 경험들을 간단한 기록으로 남긴다.
 - 기본기를 중심으로 학습하고, 나아가 기본기를 바탕으로 발전하는 개발자가 된다.
 - 학습의 연속성을 유지하고, 반드시 제대로 숙독한 내용만 기록에 남긴다.
 - wiki처럼 운용이 가능하도록 지향한다.
@@ -26,7 +26,9 @@
 - [노드JS](#Nodejs)
 - [뷰JS](#Vuejs)
 - [깃](#Git)
-- [데이터베이스&SQL](#Database--SQL)
+- [SQL](#SQL)
+- [MySQL](#MySQL)
+- [데이터베이스](#Database)
 - [엘라스틱 서치](#Elasticsearch)
 - [리눅스](#Linux)
 - [클라우드](#Cloud)
@@ -54,19 +56,19 @@
 
 ### JavaScript
 
-- 
+-
 
 ### Design Pattern
 
-- 
+-
 
 ### Algorithm
 
-- 
+-
 
 ### Data Structure
 
-- 
+-
 
 ### Spring
 
@@ -74,7 +76,7 @@
 
 ### Spring Boot
 
-- 
+-
 
 ### ORM
 
@@ -82,23 +84,30 @@
 
 ### Node.js
 
-- 
+-
 
 ### Vue.js
 
-- 
+-
 
 ### Git
 
 - [빈 커밋 만드는 방법](Git/make-empty-git-commit.md)
 
-### Database & SQL
+### SQL
+
+-
+
+### MySQL
 
 - [DB 테이블에서 변경된 데이터 추출](DataBase&SQL/Extracting-different-data-from-DB-table.md)
-- [IntelliJ IDEA Oracle DB Connection](DataBase&SQL/IntelliJ-Oracle-DB-Connection.md)
 - [MySQL UTF-8 Collations](DataBase&SQL/Mysql-UTF-8-Collations.md)
 - [MySQL Database와 Table Character set확인](DataBase&SQL/MySQL-database-table-character-set-check.md)
 - [MySQL 공간데이터 저장](DataBase&SQL/mysql-store-spatial-data-type.md)
+
+### Database
+
+-
 
 ### Elasticsearch
 
@@ -112,7 +121,7 @@
 
 ### Cloud
 
-- 
+-
 
 ### Python
 
@@ -123,6 +132,7 @@
 
 - [IntelliJ IDEA Plain Java 프로젝트를 Gradle 프로젝트로 바꾸는 방법](Tools/intellij-plain-java-to-gradle.md)
 - [IntelliJ 저장시에 마지막에 빈라인 추가하기](Tools/intellij-save-with-new-line.md)
+- [IntelliJ IDEA Oracle DB Connection](DataBase&SQL/IntelliJ-Oracle-DB-Connection.md)
 - [Docker로 ELK 스택 설치하기](Tools/docker-elk-stack-install-guide.md)
 
 ### Network
