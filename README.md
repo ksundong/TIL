@@ -18,13 +18,9 @@
 - [자바](#Java)
 - [자바스크립트](#JavaScript)
 - [디자인패턴](#Design-Pattern)
-- [알고리즘](#Algorithm)
-- [자료구조](#Data-Structure)
 - [스프링](#Spring)
 - [스프링부트](#Spring-Boot)
 - [ORM](#ORM)
-- [노드JS](#Nodejs)
-- [뷰JS](#Vuejs)
 - [깃](#Git)
 - [SQL](#SQL)
 - [MySQL](#MySQL)
@@ -62,14 +58,6 @@
 
 -
 
-### Algorithm
-
--
-
-### Data Structure
-
--
-
 ### Spring
 
 - [IntelliJ IDEA Gradle Lombok Dependency Setting](Spring/gradle-lombok-dependency.md)
@@ -81,14 +69,6 @@
 ### ORM
 
 - [JpaRepository의 getOne 메소드와 CurdRepository의 findById 메소드의 차이](ORM/difference-with-getone-and-findbyid.md)
-
-### Node.js
-
--
-
-### Vue.js
-
--
 
 ### Git
 
