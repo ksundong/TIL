@@ -80,10 +80,10 @@
 
 ### MySQL
 
-- [DB 테이블에서 변경된 데이터 추출](DataBase&SQL/Extracting-different-data-from-DB-table.md)
-- [MySQL UTF-8 Collations](DataBase&SQL/Mysql-UTF-8-Collations.md)
-- [MySQL Database와 Table Character set확인](DataBase&SQL/MySQL-database-table-character-set-check.md)
-- [MySQL 공간데이터 저장](DataBase&SQL/mysql-store-spatial-data-type.md)
+- [DB 테이블에서 변경된 데이터 추출](MySQL/Extracting-different-data-from-DB-table.md)
+- [MySQL UTF-8 Collations](MySQL/Mysql-UTF-8-Collations.md)
+- [MySQL Database와 Table Character set확인](MySQL/MySQL-database-table-character-set-check.md)
+- [MySQL 공간데이터 저장](MySQL/mysql-store-spatial-data-type.md)
 
 ### Database
 
@@ -96,7 +96,7 @@
 
 ### Linux
 
-- [Chsh zsh non-standard shell](Linux/chsh_zsh_non-standard_shell.md)
+- [Chsh zsh non-standard shell](Linux/chsh-zsh-non-standard-shell.md)
 - [포트 사용중인 프로세스 찾기/죽이기](Linux/find-and-delete-process-using-port.md)
 
 ### Cloud
@@ -112,7 +112,7 @@
 
 - [IntelliJ IDEA Plain Java 프로젝트를 Gradle 프로젝트로 바꾸는 방법](Tools/intellij-plain-java-to-gradle.md)
 - [IntelliJ 저장시에 마지막에 빈라인 추가하기](Tools/intellij-save-with-new-line.md)
-- [IntelliJ IDEA Oracle DB Connection](DataBase&SQL/IntelliJ-Oracle-DB-Connection.md)
+- [IntelliJ IDEA Oracle DB Connection](Tools/IntelliJ-Oracle-DB-Connection.md)
 - [Docker로 ELK 스택 설치하기](Tools/docker-elk-stack-install-guide.md)
 
 ### Network
