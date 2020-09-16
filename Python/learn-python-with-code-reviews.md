@@ -83,13 +83,7 @@
 
     ```python3
     def rotate_a_matrix_by_90_degree(a):
-    n = len(a)
-    m = len(a[0])
-    result = [[0] * n for _ in range(m)]
-    for i in range(n):
-        for j in range(m):
-            result[j][n - i - 1] = a[i][j]
-    return result
+        return [list(reversed(i) for i in zip(*key))]
     ```
 
 22. 파이썬의 리스트는 편의 연산자 때문에 생각과는 다르게 동작할 수 있다.  
