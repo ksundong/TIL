@@ -76,7 +76,7 @@
 
 ### SQL
 
--
+- [스칼라값을 특별 취급 하는 이유](SQL/why-scala-is-special.md)
 
 ### MySQL
 
