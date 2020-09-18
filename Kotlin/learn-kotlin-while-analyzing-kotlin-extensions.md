@@ -79,11 +79,31 @@ private val daysLookup = (1..31).associate { it.toLong() to getOrdinal(it) }
 
 ## 3번 분석
 
+```Kotlin
+private val englishDateFormatter = DateTimeFormatterBuilder()
+        .appendPattern("yyyy-MM-dd")
+        .appendLiteral(" ")
+        .appendText(ChronoField.DAY_OF_MONTH, daysLookup)
+        .appendLiteral("")
+        .appendPattern("yyyy")
+        .toFormatter(Locale.ENGLISH)
+```
+
 Builder 패턴의 활용입니다. 별로 설명할 내용이 없네요.
 
 `appendText(ChronoField, Map<Long, String>` 메서드의 경우 ChronoField에 해당하는 값을 Key로 String을 찾는 메서드입니다.
 
 ## 4번 분석
+
+```Kotlin
+private fun getOrdinal(n: Int) = when {
+    n in 11..13 -> "${n}th"
+    n % 10 == 1 -> "${n}st"
+    n % 10 == 2 -> "${n}nd"
+    n % 10 == 3 -> "${n}rd"
+    else -> "${n}th"
+}
+```
 
 `switch`문을 대치하는 `when`문의 사용이 두드러집니다.
 
@@ -92,6 +112,15 @@ Builder 패턴의 활용입니다. 별로 설명할 내용이 없네요.
 먼저 11부터 13까지는 th를 붙이는 조건이 우선합니다. 그리고 1, 2, 3으로 끝나는 경우 각각 st, nd, rd를 붙여줍니다. 그 외 나머지는 th를 붙여줍니다.
 
 ## 5번 분석
+
+```Kotlin
+fun String.toSlug() = toLowerCase()
+        .replace("\n", " ")
+        .replace("[^a-z\\d\\s]".toRegex(), " ")
+        .split(" ")
+        .joinToString("-")
+        .replace("-+".toRegex(), "-")
+```
 
 Slug를 만들어주는 메서드입니다. Slug란 어떤 URL을 사람의 가독성 및 간결성을 위해 깔끔하게 정리한 상태로 만드는 것입니다.
 
