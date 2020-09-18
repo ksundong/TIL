@@ -122,6 +122,8 @@ fun String.toSlug() = toLowerCase()
         .replace("-+".toRegex(), "-")
 ```
 
+`String`클래스에 `toSlug()`라는 `extension function`을 선언하는 부분입니다.
+
 Slug를 만들어주는 메서드입니다. Slug란 어떤 URL을 사람의 가독성 및 간결성을 위해 깔끔하게 정리한 상태로 만드는 것입니다.
 
 먼저 모든 문자는 소문자로 만듭니다. 그리고 줄바꿈 문자를 빈 칸으로 치환합니다.
