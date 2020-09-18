@@ -43,6 +43,7 @@
 ### Java
 
 - [Java 배경지식](Java/java-background.md)
+- [Java의 정석 변수파트 중요내용 정리](Java/java-important-part-of-the-variable-part.md)
 - [멤버변수와 로컬변수의 차이점](Java/The-Difference-Between-Member-Variable-And-Local-Variable.md)
 - [Java의 날짜와 시간 API](Java/Date-Time-API.md)
 - [SecureRandom과 Random의 차이점](Java/Difference-with-SecureRandom-and-Random.md)
