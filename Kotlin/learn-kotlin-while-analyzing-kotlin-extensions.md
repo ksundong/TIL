@@ -77,10 +77,38 @@ private val daysLookup = (1..31).associate { it.toLong() to getOrdinal(it) }
 
 따라서, `<Long, String>` 형태가 반환됨을 짐작할 수 있습니다.
 
+## 3번 분석
+
+Builder 패턴의 활용입니다. 별로 설명할 내용이 없네요.
+
+`appendText(ChronoField, Map<Long, String>` 메서드의 경우 ChronoField에 해당하는 값을 Key로 String을 찾는 메서드입니다.
+
+## 4번 분석
+
+`switch`문을 대치하는 `when`문의 사용이 두드러집니다.
+
+자바의 `switch`문과 다르게 직관적으로 작성할 수 있다는 장점이 있습니다.
+
+먼저 11부터 13까지는 th를 붙이는 조건이 우선합니다. 그리고 1, 2, 3으로 끝나는 경우 각각 st, nd, rd를 붙여줍니다. 그 외 나머지는 th를 붙여줍니다.
+
+## 5번 분석
+
+Slug를 만들어주는 메서드입니다. Slug란 어떤 URL을 사람의 가독성 및 간결성을 위해 깔끔하게 정리한 상태로 만드는 것입니다.
+
+먼저 모든 문자는 소문자로 만듭니다. 그리고 줄바꿈 문자를 빈 칸으로 치환합니다.
+
+그 다음 소문자와, 숫자, 빈칸을 제외한 나머지를 전부 빈 칸으로 치환합니다.
+
+빈 칸으로 나눈 다음 `-`로 문자열을 다시 연결시켜줍니다.
+
+`-`가 연속적으로 나오는 문자열을 `-`로 바꿔줍니다.
+
 ## References
 
 - [Kotlin Reference Document/extensions](https://kotlinlang.org/docs/reference/extensions.html)
 - [Kotlin Reference Document/ranges](https://kotlinlang.org/docs/reference/ranges.html)
 - [Kotlin Reference Document/associate](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.sequences/associate.html)
 - [Kotlin Reference Document/to](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/to.html)
+- [Kotlin Reference Document/when](https://kotlinlang.org/docs/reference/control-flow.html#when-expression)
 - [Spring Boot Kotlin Guide Document](https://spring.io/guides/tutorials/spring-boot-kotlin/)
+- [Wikipedia/Clean URL](https://en.wikipedia.org/wiki/Clean_URL)
