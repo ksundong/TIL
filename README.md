@@ -84,6 +84,7 @@
 ### SQL
 
 - [스칼라값을 특별 취급 하는 이유](SQL/why-scala-is-special.md)
+- [테이블의 데이터를 전부 지울땐 DELETE를 사용하지 말자](SQL/don-t-use-delete-when-delete-all-data.md)
 
 ### MySQL
 
