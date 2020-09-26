@@ -72,3 +72,13 @@
   - `static import`문
     - `static` 멤버를 호출할 때, 클래스 이름을 생략하기 위한 기법
     - 자주 사용하는 경우, 간결한 코드를 위해서 사용
+
+## 제어자(modifier)
+
+- 제어자(modifier)는 클래스, 변수 또는 메서드의 선언부에 함께 사용되어 부가적인 의미를 부여한다.
+  - 접근 제어자(public, protected, default, private)
+  - 그 외의 제어자(static, final, abstract, native, transient, synchronized, volatile, strictfp)
+    - 몇몇개는 처음보거나 안써봤다.
+  - 제어자는 클래스나 멤버변수와 메서드에 주로 사용되며, 여러가지를 조합해서 사용할 수 있다.
+  - 접근 제어자는 하나만 선택해서 사용할 수 있다.
+  - 제어자는 보통 접근 제어자를 먼저 사용한다.
