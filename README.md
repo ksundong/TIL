@@ -148,3 +148,4 @@
 ### Interview
 
 - [객체지향 프로그래밍이란 무엇인가?](Interview/what-is-oop.md)
+- [S.O.L.I.D 원칙](Interview/solid-principles.md)
