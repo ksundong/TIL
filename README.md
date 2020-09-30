@@ -152,3 +152,4 @@
 - [RESTful API란 무엇인가?](Interview/what-is-restful-api.md)
 - [브라우저에서 서버 통신과정](Interview/browser-to-server.md)
 - [TCP와 UDP의 차이점](Interview/difference-between-tcp-and-udp.md)
+- [GET과 POST 방식의 차이점](Interview/difference-between-get-and-post.md)
