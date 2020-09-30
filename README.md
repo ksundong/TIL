@@ -153,3 +153,4 @@
 - [브라우저에서 서버 통신과정](Interview/browser-to-server.md)
 - [TCP와 UDP의 차이점](Interview/difference-between-tcp-and-udp.md)
 - [GET과 POST 방식의 차이점](Interview/difference-between-get-and-post.md)
+- [프로세스와 스레드의 차이](Interview/difference-between-process-and-thread.md)
