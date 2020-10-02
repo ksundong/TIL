@@ -156,3 +156,4 @@
 - [프로세스와 스레드의 차이](Interview/difference-between-process-and-thread.md)
 - [멀티 스레드](Interview/multi-thread.md)
 - [동시성](Interview/concurrency.md)
+- [동기와 비동기](Interview/sync-async.md)
