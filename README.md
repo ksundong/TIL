@@ -157,3 +157,4 @@
 - [멀티 스레드](Interview/multi-thread.md)
 - [동시성](Interview/concurrency.md)
 - [동기와 비동기](Interview/sync-async.md)
+- [교착상태와 기아상태](Interview/deadlock-and-starvation.md)
