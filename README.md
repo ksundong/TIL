@@ -69,7 +69,7 @@
 
 ### Design Pattern
 
--
+- [싱글톤 패턴](DesignPattern/singleton-pattern.md)
 
 ### Spring
 
