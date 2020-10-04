@@ -58,6 +58,7 @@
 - [자바 메모리 구조](Java/Memory-Architecture.md)
 - [JVM 기본 GC 확인하는 방법](Java/JVM-default-GC.md)
 - [동등성과 동일성](Java/equality-and-identity.md)
+- [JUnit5 문서 기초부분 번역](Java/junit5-basic-document.md)
 
 ### Kotlin
 
