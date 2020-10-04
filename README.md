@@ -132,6 +132,7 @@
 ### Docker
 
 - [Docker 호스트와 컨테이너 간 파일 전송하기](Docker/transfer-files-between-container-and-host.md)
+- [Docker란 무엇이고, 왜 쓰는가](Docker/docker.md)
 
 ### Network
 
