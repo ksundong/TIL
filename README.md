@@ -74,7 +74,7 @@
 
 ### Spring
 
-- [IntelliJ IDEA Gradle Lombok Dependency Setting](Spring/gradle-lombok-dependency.md)
+-
 
 ### Spring Boot
 
@@ -130,6 +130,7 @@
 - [IntelliJ 저장시에 마지막에 빈라인 추가하기](Tools/intellij-save-with-new-line.md)
 - [IntelliJ IDEA Oracle DB Connection](Tools/IntelliJ-Oracle-DB-Connection.md)
 - [Docker로 ELK 스택 설치하기](Tools/docker-elk-stack-install-guide.md)
+- [IntelliJ IDEA Gradle Lombok Dependency Setting](Tools/gradle-lombok-dependency.md)
 
 ### Docker
 
