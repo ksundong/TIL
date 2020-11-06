@@ -134,6 +134,7 @@
 - [IntelliJ IDEA Oracle DB Connection](Tools/IntelliJ-Oracle-DB-Connection.md)
 - [Docker로 ELK 스택 설치하기](Tools/docker-elk-stack-install-guide.md)
 - [IntelliJ IDEA Gradle Lombok Dependency Setting](Tools/gradle-lombok-dependency.md)
+- [Mac에서 Cmd+M 단축키 변경시키기(Minimize Window)](Tools/change-cmd-m-shortcut.md)
 
 ### Docker
 
