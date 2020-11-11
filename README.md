@@ -42,7 +42,7 @@
 
 - [개발자 이력서 비하인드 스토리](Seminar/개발자-이력서-비하인드-스토리.md)
 
-### HTML--CSS
+### HTML & CSS
 
 - [link태그와 @import문의 차이](HTML&CSS/difference-with-link-tag-and-import-statement.md)
 
