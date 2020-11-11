@@ -16,6 +16,7 @@
 - [세미나&컨퍼런스](#Seminar--Conference)
 - [HTML/CSS](#HTML--CSS)
 - [자바](#Java)
+- [백기선님 라이브 스터디](#Live-Study)
 - [코틀린](#Kotlin)
 - [자바스크립트](#JavaScript)
 - [디자인패턴](#Design-Pattern)
@@ -66,6 +67,10 @@
 - [JUnit5 문서 기초부분 번역](Java/junit5-basic-document.md)
 - [atomic vs volatile vs synchronized 차이](Java/atomic-vs-volatile-vs-synchronized.md)
 - [Java8 이후 추가된 유용한 기능들](Java/java8-after-useful-features.md)
+
+### Live-Study
+
+- [1주차: JVM은 무엇이며 자바 코드는 어떻게 실행하는 것인가](live-study/what-is-jvm-and-how-to-execute-java-code.md)
 
 ### Kotlin
 
