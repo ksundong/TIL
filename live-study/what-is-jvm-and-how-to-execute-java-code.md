@@ -12,9 +12,29 @@
 
 ### JVM이란 무엇인가
 
+JVM은 Java Virtual Machine의 약자입니다. JVM이 있음으로써 Java는 플랫폼 독립적인 코드로 작성될 수 있고, 실행될 수 있습니다. 흔히 얘기하는 "Write once, run anywhere"가 바로 JVM에서 나옵니다.
+
+JVM은 Java Bytecode를 인터프리터 방식으로 읽어서 기계어로 번역하기 때문에 초창기에 느린성능을 보였지만, JIT Compiler HotSpot JVM등의 도입으로 Native 언어와 유사한 수준의 실행속도를 보이게 되었습니다.
+
+JVM은 JDK에 포함되어 있으며, Oracle을 비롯한 여러 Vendor가 JDK를 개발하고 공급하고 있습니다. JVM은 JVM Specification 문서로 정의되어 있으며, JVM은 이를 따라야 합니다. 하지만 Spec 문서는 많은 부분을 강제하고 있지 않아서 JDK마다 구현 방식이 다를 수 있습니다.
+
+JVM은 메모리 관리를 개발자가 하지 않고, Garbage Collector가 수행합니다. 따라서, JVM을 사용하는 개발자는 Garbage Collector가 어떤 방식으로 동작하는지 학습할 필요성이 있습니다.
+
+또, 오늘날의 JVM은 Java만을 위한 가상머신이 아니게 되었습니다. 여러 언어(Scala, Kotlin, Groovy 등)들이 JVM을 이용하며, JVM을 사용하지 않는 환경을 찾기란 힘듭니다.
+
 [학습할 것으로](#학습할-것)
 
 ### 컴파일 하는 방법
+
+Java 코드를 JVM에서 바로 실행할 수 있는 것은 아니고, 컴파일 과정을 거쳐야 합니다.
+
+이 때, 컴파일 된 코드는 Java Bytecode라고 합니다.
+
+`javac <filename>.java`와 같은 명령어를 터미널에 입력해서 컴파일을 수행할 수 있습니다.
+
+package가 있는경우, classpath를 지정해주어야 하는 경우 등이 주의해야하는 경우입니다.
+
+보통은 IDE를 사용하고, build tool등을 사용해서 실제 해당 명령어를 사용해서 컴파일을 하는 경우는 적습니다.
 
 [학습할 것으로](#학습할-것)
 
