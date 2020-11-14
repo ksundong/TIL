@@ -169,6 +169,7 @@ ClassLoader의 마지막 단계입니다. 모든 static 변수들은 기본값�
 3. 가비지 컬렉터: 힙 영역에서 사용하지 않는 객체들을 관리해줍니다.
 
 [참고(Dzone)](https://dzone.com/articles/jvm-architecture-explained)
+
 [참고(HomoEfficio님의 클래스로더 훑어보기)](https://homoefficio.github.io/2018/10/13/Java-%ED%81%B4%EB%9E%98%EC%8A%A4%EB%A1%9C%EB%8D%94-%ED%9B%91%EC%96%B4%EB%B3%B4%EA%B8%B0/)
 
 [학습할 것으로](#학습할-것)
