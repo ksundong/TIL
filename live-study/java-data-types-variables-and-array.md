@@ -17,8 +17,8 @@ primitive type은 자바의 기본 타입들입니다. 총 8개 입니다.
 
 자바에서는 필드 선언시 초기화를 하지 않으면, 기본 값으로 초기화가 됩니다. 프리미티브 타입은 유의미한 값을 가지며, 레퍼런스 타입은 null로 초기화가 됩니다.
 
-- **boolean**: **참(true)** 혹은 **거짓(false)**를 나타내는 논리형 타입입니다. 1bit로도 표현가능하지만, 일반적인 JVM의 구현은 1byte를 사용하는 것으로 알려져있습니다. (크기는 JVM의 구현에 의존적입니다.) 기본 값은 `false`입니다.
-- **char**: **유니코드 문자**를 나타내는 문자형 타입입니다. 특이점으로는 unsigned 2byte기 때문에 표현할 수 있는 값의 범위는 '\u0000'(0)에서 '\uffff'(65535) 입니다. 기본 값은 `'\u0000'`입니다.
+- **boolean**: **참(true)** 혹은 **거짓(false)**를 나타내는 boolean 타입입니다. 1bit로도 표현가능하지만, 일반적인 JVM의 구현은 1byte를 사용하는 것으로 알려져있습니다. (크기는 JVM의 구현에 의존적입니다.) 기본 값은 `false`입니다.
+- **char**: **유니코드 문자**를 나타내는 정수형 타입입니다. 특이점으로는 unsigned 2byte기 때문에 표현할 수 있는 값의 범위는 '\u0000'(0)에서 '\uffff'(65535) 입니다. 기본 값은 `'\u0000'`입니다.
 - **byte**: 이름과 같이 1byte를 차지하는 정수형 타입입니다. -128 ~ 127의 범위를 가집니다. 기본 값은 `0`입니다.
 - **short**: 2byte를 차지하는 정수형 타입입니다. -32,768 ~ 32,767의 범위를 가집니다. 기본 값은 `0`입니다.
 - **int**: 4byte를 차지하는 정수형의 타입입니다. -2<sup>31</sup> ~ 2<sup>31</sup>-1 의 범위를 가집니다. 기본 값은 `0`입니다. 또, 리터럴로 정수형 값을 할당할 때, 기본적으로 사용되는 타입입니다.
@@ -49,11 +49,29 @@ primitive type은 자바의 기본 타입들입니다. 총 8개 입니다.
 
 [cs-fundamentals](https://cs-fundamentals.com/java-programming/java-primitive-data-types)
 
+[Oracle JLS 4. Types, Values, and Variables](https://docs.oracle.com/javase/specs/jls/se11/html/jls-4.html)
+
 ---
 
 [학습할 것으로](#학습할-것)
 
 ## 프리미티브 타입과 레퍼런스 타입
+
+자바의 타입은 크게 두 종류로 나눌 수 있습니다. primitive type과 reference type입니다.
+
+primitive type은 위에서 설명했고, reference type에 대해서 설명하겠습니다.
+
+reference type은 primitive type을 제외한 모든 타입들이 해당됩니다. 이런 reference type은 변수 선언시 변수에 값이 저장되는 것이 아니라 객체에 대한 힙 영역의 참조를 저장하게 됩니다. 자바의 참조는 포인터가 아니기 때문에, 개발자는 직접적으로 메모리에 접근해서 조작할 수 없습니다.
+
+또, reference type에는 특별한 타입인 `null`을 할당할 수 있지만, primitive type에는 할당할 수 없습니다. `null`의 의미가 null 참조를 의미하기 때문입니다. 공부를 하면서 든 생각인데, null 참조라고 하면서 Exception의 이름은 `NullPointerException` 이라는게 좀 신기하게 느껴졌습니다. 큰 의미를 두고 생각하진 않았습니다.
+
+### 참고
+
+[Geeks for Geeks - C/C++의 포인터와 자바의 참조의 차이](https://www.geeksforgeeks.org/is-there-any-concept-of-pointers-in-java/)
+
+[Oracle JLS 4. Types, Values, and Variables](https://docs.oracle.com/javase/specs/jls/se11/html/jls-4.html)
+
+---
 
 [학습할 것으로](#학습할-것)
 
