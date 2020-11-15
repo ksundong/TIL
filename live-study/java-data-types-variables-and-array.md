@@ -202,7 +202,7 @@ void 밑줄_사용한_숫자_표현() {
 인스턴스 변수와 클래스 변수는 멤버 변수라고 통칭하기도 합니다. 멤버 변수는 꼭 초기화를 해주지 않더라도 기본값으로 초기화되지만, 로컬 변수는 반드시 초기화를 해주어야 합니다.
 
 ```java
-Class Variables {
+class Variables {
     int instanceVar; // 0으로 초기화되는 인스턴스 변수
     static int classVar; // 0으로 초기화되는 클래스 변수
     int initInstanceVar = 10; // 명시적으로 초기화
