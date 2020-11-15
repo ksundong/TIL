@@ -208,7 +208,7 @@ Class Variables {
     int initInstanceVar = 10; // 명시적으로 초기화
     static int initClassVar = 10; // 명시적으로 초기화
 
-    void method() {
+    void method(int num) { // 매개변수는 초기화 할 수 없고, 전달받는 값을 사용만 할 수 있음
       int a; // 선언은 가능
       // int b = a; 자동으로 초기화 되지 않으므로 동작하지 않음
       a = 10; // 선언을 미리 해줬다면 이렇게 초기화 가능
