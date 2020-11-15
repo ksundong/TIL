@@ -63,7 +63,31 @@ primitive type은 위에서 설명했고, reference type에 대해서 설명하�
 
 reference type은 primitive type을 제외한 모든 타입들이 해당됩니다. 이런 reference type은 변수 선언시 변수에 값이 저장되는 것이 아니라 객체에 대한 힙 영역의 참조를 저장하게 됩니다. 자바의 참조는 포인터가 아니기 때문에, 개발자는 직접적으로 메모리에 접근해서 조작할 수 없습니다.
 
+이 참조를 저장한다는 말은, 같은 참조를 가리키고 있다면 한 쪽에서 객체의 상태를 변경하는 경우 다른 쪽에서도 영향을 받을 수 있다는 것입니다.
+
+아래의 코드는 그러한 사항을 간단히 확인해보는 코드입니다.
+
+```java
+void 상태변경() {
+    // 새로운 Hello type 인스턴스를 생성해서 a라는 변수에 참조를 저장하고,
+    // b라는 변수에 a가 가지고 있는 참조를 할당했습니다.
+    Hello a = new Hello();
+    Hello b = a;
+
+    // a, b 둘 다 새로 만든 Hello 인스턴스에 대한 참조를 가지고 있는 상태입니다.
+    // 이 때, b를 통해서 상태를 조작할 경우 a에서도 영향을 받게됩니다.
+    // property는 초기화시 0으로 초기화 되었다고 가정합니다.
+    a.showProperty(); // 0
+    b.showProperty(); // 0
+    b.changeProperty(999);
+    b.showProperty(); // 999
+    a.showProperty(); // 999로 변경된 상태를 표시합니다.
+}
+```
+
 또, reference type에는 특별한 타입인 `null`을 할당할 수 있지만, primitive type에는 할당할 수 없습니다. `null`의 의미가 null 참조를 의미하기 때문입니다. 공부를 하면서 든 생각인데, null 참조라고 하면서 Exception의 이름은 `NullPointerException` 이라는게 좀 신기하게 느껴졌습니다. 큰 의미를 두고 생각하진 않았습니다.
+
+특이한 것은 reference type의 구분을 `Class`, `Interface`, `Type Variable`(흔히 `Generic`이라고 말하는), `Array` 로 구분한다는 점입니다.
 
 ### 참고
 
