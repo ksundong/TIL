@@ -227,6 +227,20 @@ class Variables {
 
 ## 변수의 스코프와 라이프타임
 
+스코프란? 변수가 유효한 범위를 의미합니다. 의도하신 부분이 코드에서의 스코프를 의미하신 것 같습니다. (자바는 추가로 Access modifier에 의한 스코프도 추가로 정의됩니다.)
+
+| Variable Type     | Scope                                                  | LIfetime                                      |
+| ----------------- | ------------------------------------------------------ | --------------------------------------------- |
+| Instance Variable | (`static` 블록과 `static` 메서드를 제외한) 클래스 전체 | 객체가 생성되고 객체가 메모리에 살아있는 동안 |
+| Class Variable    | 클래스 전체                                            | 클래스가 초기화되고 프로그램이 끝날 때 까지   |
+| Local Variable    | 변수가 선언된 블록내부                                 | 변수 선언 이후 부터 블록을 벗어날 때까지      |
+
+### 참고
+
+<https://www.learningjournal.guru/article/programming-in-java/scope-and-lifetime-of-a-variable/>
+
+---
+
 [학습할 것으로](#학습할-것)
 
 ## 타입 변환, 캐스팅 그리고 타입 프로모션
