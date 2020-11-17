@@ -771,7 +771,7 @@ System.out.println("name = " + productInfo.name + ", total = " + productInfo.tot
 
 이 코드는 정상적으로 컴파일 되고, 필드 참조가 가능합니다.
 
-`System.out.println(productInfo.getClass().getName());` 의 출력은 `~$1` 이라는 명칭으로 컴파일 되었음을 알 수 있습니다.
+`System.out.println(productInfo.getClass().getName());` 의 출력은 `~$1` 이라는 명칭으로 익명클래스의 클래스 이름이 컴파일 되었음을 알 수 있습니다.
 
 또 다른 방식은 익명 클래스를 중간 값의 저장소로 활용하는 것입니다.
 
