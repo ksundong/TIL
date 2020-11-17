@@ -554,4 +554,271 @@ System.out.println(naems[0][2] + names[1][1]);
 
 ## 타입 추론, var
 
+`var` 키워드는 자바 10에서 추가된 기능으로, 로컬 변수의 타입 추론이라고 합니다.
+
+이 키워드의 사용은 반복되는 타입 선언을 줄여주고, 코드의 가독성을 높여줍니다.
+
+먼저 자바의 타입 추론의 역사에 대해서 알아보겠습니다.
+
+### 타입 추론의 역사
+
+타입 추론은 컴파일러가 타입을 알아낼 수 있기 때문에 타입을 입력할 필요가 없다는 아이디어에서 시작됩니다.
+
+1. Java5부터 제네릭 메서드가 있습니다. 타입 매개 변수를 추론하는 방법입니다.
+   아래의 코드는
+
+   ```java
+   List<String> cs = Collections.<String>emptyList();
+   ```
+
+   다음과 같이 변경할 수 있습니다.
+
+   ```java
+   List<String> cs = Collections.emptyList();
+   ```
+
+2. Java7부터 다이아몬드 오퍼레이터(`<>`)가 추가되었습니다. 표현식에서 제네릭의 타입 매개 변수를 생략할 수 있습니다.
+   아래의 코드는
+
+   ```java
+   Map<String, List<String>> myMap = new HashMap<String,List<String>>();
+   ```
+
+   다음과 같이 변경할 수 있습니다.
+
+   ```java
+   Map<String, List<String>> myMap = new HashMap<>();
+   ```
+
+   위의 아이디어는 컴파일러가 주변 코드에 따라 타입을 유추할 수 있다는 것입니다.
+
+3. Java8에는 람다 표현식이 추가되었고, 이 역시 마찬가지로 타입을 생략알 수 있습니다.
+   아래의 코드는
+
+   ```java
+   Predicate<String> nameValidation = (String x) -> x.length() > 0;
+   ```
+
+   다음과 같이 변경할 수 있습니다.
+
+   ```java
+   Predicate<String> nameValidation = x -> x.length() > 0;
+   ```
+
+### 로컬 변수 타입 추론
+
+`Scala`나 `C#` 같은 언어는 로컬 변수 선언시 타입을 `var`라는 키워드로 바꿀 수 있으며, 컴파일러가 적절하게 타입을 채워줍니다.
+
+예를 들어 Java10 이전에는 아래와 같은 코드가
+
+```java
+Path path = Paths.get("src/web.log");
+try (Stream<String> lines = Files.lines(path)) {
+    long warningCount
+            = lines
+                .filter(line -> line.contains("WARNING"))
+                .count();
+    System.out.println("Found " + warningCount + " warnings in the log file");
+} catch (IOException e) {
+    e.printStackTrace();
+}
+```
+
+Java10 부터는 다음과 같이 바뀔 수 있습니다.
+
+```java
+var path = Paths.get("src/web.log");
+try (var lines = Files.lines(path)) {
+    var warningCount
+            = lines
+                .filter(line -> line.contains("WARNING"))
+                .count();
+    System.out.println("Found " + warningCount + " warnings in the log file");
+} catch (IOException e) {
+    e.printStackTrace();
+}
+```
+
+이는 마법처럼 일어나는 것이 아니라 컴파일러가 추론해 낼 수 있기 때문입니다.
+
+- `Paths.get()`은 `Path` 타입을 반환합니다. 따라서 로컬 변수 `path`는 `Path` 타입임을 추론할 수 있습니다.
+- `Files.lines()`는 `Stream<String>` 타입을 반환합니다. 따라서 변수 `lines`는 `Stream<String>` 타입임을 추론할 수 있습니다.
+- `Stream`의 `count()`는 `long` 타입을 반환합니다. 따라서 로컬 변수 `warningCount`는 `long`타입임을 추론할 수 있습니다.
+
+이렇게 이미 타입이 정의 되어있기 때문에 `var`는 다른 타입의 재할당을 허용하지 않습니다.
+
+### 타입 추론의 맹점
+
+하지만, 타입 추론이 만능은 아닙니다. 특히 Java에서는 객체지향 패러다임을 사용하기 때문에 문제가 될 수 있습니다.
+
+예를 들어 `Animal` 클래스가 있고, 이 클래스의 서브 클래스인 `Cat`, `Dog`이 있다고 가정합시다.
+
+```java
+var v = new Cat();
+```
+
+이 타입은 어떻게 추론될까요? `Animal`이 될까요? `Cat`이 될까요? 이 경우 컴파일러는 초기화한 클래스의 타입을 사용하게 됩니다.
+
+따라서 다음의 코드는 컴파일되지 않습니다.
+
+```java
+v = new Dog();
+```
+
+즉, 다형성을 활용하는 코드는 `var` 타입 추론과 어울리지 않습니다.
+
+### `var`를 사용할 수 없는 위치
+
+- 필드 혹은 메서드 시그니처에서 사용이 불가능 합니다. 지역 변수에만 사용할 수 있습니다.
+
+  ```java
+  public long process(var list) { }
+  ```
+
+  위의 코드는 사용할 수 없습니다.
+
+- 명시적인 초기화 없이 `var`만 단독으로 선언할 수 없습니다.
+
+  ```java
+  var x;
+
+  error: cannot infer type for local variable x
+  var x;
+      ^
+  (cannot use 'var' on variable without initializer)
+  1 error
+  ```
+
+- `var` 변수는 `null`로 초기화 할 수 없습니다.
+
+  ```java
+  var x = null;
+
+  error: cannot infer type for local variable x
+  var x = null;
+      ^
+  (variable initializer is 'null')
+  ```
+
+- 람다식과 `var`는 명시적으로 타겟이 되는 타입을 알아야 하기 때문에 같이 사용할 수 없습니다.
+
+  ```java
+  var x = () -> {};
+
+  error: cannot infer type for local variable x
+  var x = () -> {};
+      ^
+  (lambda expression needs an explicit target-type)
+  ```
+
+### 주의해야할 `var` 선언
+
+```java
+var list = new ArrayList<>();
+```
+
+이 코드는 컴파일 되지만, 실제 `list`의 타입은 `ArrayList<Object>`로 컴파일되며, 제네릭의 이점을 얻지 못하기 때문에 피하는 것이 좋습니다.
+
+리플렉션을 통해서 런타임에 사용되는 타입을 확인해보고 싶었는데, 방법을 찾지 못했네요.
+
+대신 디컴파일해서 확인할 수 있습니다.
+
+```text
+  public static void main(java.lang.String[]);
+    Code:
+       0: new           #2                  // class java/util/ArrayList
+       3: dup
+       4: invokespecial #3                  // Method java/util/ArrayList."<init>":()V
+       7: astore_1
+       8: aload_1
+       9: ldc           #4                  // String hello
+      11: invokevirtual #5                  // Method java/util/ArrayList.add:(Ljava/lang/Object;)Z
+      14: pop
+      15: return
+```
+
+그냥 초기화만 하면, 타입을 확인할 수 없어서 추가를 통해 확인했습니다.
+
+실제로 최신 기능이라 정적 분석에서 제대로 잡아주지 못하는 모습을 보이기 때문에 주의해야 합니다.
+
+### 비표시 타입에 대한 타입 추론
+
+Java에는 표시할 수 없는 여러 타입이 있습니다. 존재하지만 명시적으로 작성할 수 없습니다. 대표적으로 익명 클래스가 있습니다. Java 코드에서 분명히 필드와 메서드를 추가할 수 있지만, 이름을 사용할 수는 없습니다.
+
+다이아몬드 오퍼레이터는 익명 클래스와 사용할 수 없으며, `var`는 그보다는 덜 제한적이어서 익명클래스나 교차 타입(제네릭에서)에서 사용할 수 있습니다. 교차 타입에 대해서는 아래의 참고 글을 읽어봅시다.
+
+`var`를 사용하면 익명 클래스를 보다 효과적으로 사용할 수 있습니다.
+
+```java
+Object productInfo = new Object() {
+        String name = "Apple";
+        int total = 30;
+};
+System.out.println("name = " + productInfo.name + ", total = " + productInfo.total);
+```
+
+위의 코드는 컴파일 되지 않습니다. 왜냐하면 `Object` 클래스에는 `name`과 `total` 이라는 필드가 존재하지 않기 때문입니다.
+
+`var`를 사용하면 이 문제를 해결할 수 있습니다.
+
+```java
+var productInfo = new Object() {
+        String name = "Apple";
+        int total = 30;
+};
+System.out.println("name = " + productInfo.name + ", total = " + productInfo.total);
+```
+
+이 코드는 정상적으로 컴파일 되고, 필드 참조가 가능합니다.
+
+`System.out.println(productInfo.getClass().getName());` 의 출력은 `~$1` 이라는 명칭으로 컴파일 되었음을 알 수 있습니다.
+
+또 다른 방식은 익명 클래스를 중간 값의 저장소로 활용하는 것입니다.
+
+```java
+var products = List.of(
+    new Product(10, 3, "Apple"),
+    new Product(5, 2, "Banana"),
+    new Product(17, 5, "Pear"));
+
+var productInfos = products
+    .stream()
+    .map(product -> new Object() {
+        String name = product.getName();
+        int total = product.getStock() * product.getValue();
+    })
+    .collect(toList());
+
+productInfos.forEach(prod -> System.out.println("name = " + prod.name + ", total = " + prod.total));
+
+This outputs:
+name = Apple, total = 30
+name = Banana, total = 10
+name = Pear, total = 85
+```
+
+와일드 카드는 프로그래머에게 복잡한 와일드 카드 관련 오류 메시지를 피하기 위해서 타입 추론이 허용되지 않습니다.
+
+### 결론
+
+타입 추론은 가독성을 높일 수 있는 경우와 그것을 사용한 것이 유용한 경우에만 선택적으로 사용해야 합니다.
+
+이 말의 의미는 편하게 코드를 작성하기 위해 `var`를 쓰는 것이 아니라, 가독성을 높이는 목적으로 사용해야 한다는 의미입니다.
+
+`var`의 유형을 개발자가 추적할 수 없거나 어려운 경우엔 `var`를 사용하지 않는 것이 좋습니다.
+
+### 추가 사항
+
+Java11에서는 람다 표현식에 `var`를 쓸 수 있습니다. 아래의 JEP-323을 참고하시면 됩니다.
+
+### 참고
+
+<https://developer.oracle.com/java/jdk-10-local-variable-type-inference.html>
+
+[자바 제네릭 교차 타입](https://itnext.io/java-generics-intersection-types-23b2fbdddfbb)
+
+[JEP-323](http://openjdk.java.net/jeps/323)
+
+---
+
 [학습할 것으로](#학습할-것)
