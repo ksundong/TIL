@@ -122,6 +122,11 @@ public static void main(String[] args) {
 
 둘의 바이트 코드가 다른 것을 확인할 수 있습니다.
 
+### 참고
+
+<https://docs.oracle.com/javase/tutorial/java/nutsandbolts/op1.html>
+<https://www.geeksforgeeks.org/operators-in-java>
+
 ---
 
 [학습할 것으로](#학습할-것)
