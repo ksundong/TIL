@@ -451,6 +451,116 @@ public static void main(String[] args) {
 
 ## switch 연산자
 
+해당 Feature의 이름은 Switch Expressions 입니다. 즉 단일 값으로 평가되는 하나의 표현식입니다. 여기서 또 하나 추가된 표현으로는 "arrow `case`" 레이블이 있는데, 기존 `switch` 문의 `break` 문 없이도 아래로 떨어지는 것을 방지해줍니다.
+
+값을 지정하기 위해서는 `break` 문 대신에 `yield` 문을 사용해야 합니다.
+
+이전의 Switch 문과 한 번 비교해봅시다.
+
+```java
+public enum Day { SUNDAY, MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY; }
+
+// ...
+
+public class Main {
+  public static void main(String[] args) {
+    int numLetters = 0;
+    Day day = Day.WEDNESDAY;
+    switch (day) {
+      case MONDAY:
+      case FRIDAY:
+      case SUNDAY:
+          numLetters = 6;
+          break;
+      case TUESDAY:
+          numLetters = 7;
+          break;
+      case THURSDAY:
+      case SATURDAY:
+          numLetters = 8;
+      case WEDNESDAY:
+          numLetters = 9;
+          break;
+      default
+          throw new IllegalStateException("Invalid day: " + day);
+    }
+    System.out.println(numLetters);
+  }
+}
+```
+
+`numLetters`라는 변수 대신에 그냥 바로 `return` 해주는 것이 더 좋을 것 같습니다. 또, `break;` 를 사용하지 않는 편이 더 좋을 것 같습니다. 특히 break;를 까먹으면 잘못될 수 있습니다.
+
+자 Switch Expressions를 사용해봅시다.
+
+```java
+Day day = Day.WEDNESDAY;
+System.out.println(
+      switch (day) {
+          case MONDAY, FRIDAY, SUNDAY -> 6;
+          case TUESDAY                -> 7;
+          case THURSDAY, SATURDAY     -> 8;
+          case WEDNESDAY              -> 9;
+          default -> throw new IllegalStateException("Invalid day: " + day);
+      }
+);
+```
+
+훨씬 간결하고 보기 좋아졌습니다.
+
+새로운 `case` 레이블은 다음의 형식을 갖습니다.
+
+`case label_1, label_2, ..., label_n -> expression; | throw-statement;| block
+
+Java 런타임은 arrow 왼편의 레이블 중 아무거나 매치가 되면, 그 오른쪽에 위치한 코드를 실행시키고, 아래로 떨어뜨리지 않습니다. `switch` 표현식의 다른 코드와 문을 실행시키지 않습니다. 만약 코드의 오른쪽에 위치한 것이 표현식이라면, 표현식의 값이 `switch` 표현식의 값이 됩니다.
+
+```java
+int numLetters = 0;
+Day day = Day.WEDNESDAY;
+switch (day) {
+    case MONDAY, FRIDAY, SUNDAY -> numLetters = 6;
+    case TUESDAY                -> numLetters = 7;
+    case THURSDAY, SATURDAY     -> numLetters = 8;
+    case WEDNESDAY              -> numLetters = 9;
+    default -> throw new IllegalStateException("Invalid day: " + day);
+};
+System.out.println(numLetters);
+```
+
+위와 같은 식으로 변수에 값을 할당해 줄수도 있고
+
+```java
+Day day = Day.WEDNESDAY;
+int numLetters = switch (day) {
+    case MONDAY:
+    case FRIDAY:
+    case SUNDAY:
+        System.out.println(6);
+        yield 6;
+    case TUESDAY:
+        System.out.println(7);
+        yield 7;
+    case THURSDAY:
+    case SATURDAY:
+        System.out.println(8);
+        yield 8;
+    case WEDNESDAY:
+        System.out.println(9);
+        yield 9;
+    default:
+        throw new IllegalStateException("Invalid day: " + day);
+};
+System.out.println(numLetters);
+```
+
+위와 같은 식으로 "colon `case`" 레이블을 사용할 수도 있습니다. 여기서 `yield` 문은 한 개의 인자를 받아, `switch` 표현식의 값으로 제공합니다.
+
+되로록이면 "arrow `case`" 레이블을 사용하는 것이 좋습니다. `break` 문을 신경 쓰거나 `yield` 문을 신경쓰지 않을 수 있도록 해줍니다. 또한, "arrow `case`" 레이블의 경우 여러 명령문이나 코드를 작성하려면 블록으로 묶어준 다음 `yield` 문으로 값을 제공해주어야 합니다.
+
+### 참고
+
+<https://docs.oracle.com/en/java/javase/13/language/switch-expressions.html>
+
 ---
 
 [학습할 것으로](#학습할-것)
