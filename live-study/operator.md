@@ -34,7 +34,7 @@
 |   +    | 더하기 연산자(문자열 연결에도 사용됩니다.) |
 |   -    | 빼기 연산자                                |
 |   \*   | 곱하기 연산자                              |
-|   /    | 나누기 연산자                              |
+|   /    | 나누기 연산자(정수형은 몫 연산자)          |
 |   %    | 나머지(모듈로) 연산자                      |
 
 ```java
@@ -94,6 +94,16 @@ try {
 실수형은 연산 과정 자체에서 오차가 발생할 수 있으며 이를 조심해야 합니다. 이는 특히 테스트 코드를 작성할 때, 어느정도의 수준의 오차를 허용할 것인지 반드시 설정해주어야 하는 이유입니다.
 
 실수형은 0으로 나누거나, 모듈로 연산을 사용하면 위와 같이 `Infinity`, `-Infinity`, `NaN` 값을 가집니다.
+
+또한 `Infinity`와 `NaN`이 피연산자인 경우 또한 존재합니다.
+
+### 참고
+
+<https://docs.oracle.com/javase/tutorial/java/nutsandbolts/op1.html>
+
+<https://www.geeksforgeeks.org/operators-in-java/>
+
+<https://www.programiz.com/java-programming/operators>
 
 ---
 
