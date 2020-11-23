@@ -97,6 +97,39 @@ try {
 
 또한 `Infinity`와 `NaN`이 피연산자인 경우 또한 존재합니다.
 
+### 단항 연산자
+
+`+`를 붙이면 양수 값을 나타냅니다. 하지만 생략해도 됩니다.
+
+`-`를 붙이면 음수 값을 나타냅니다.
+
+`++`를 붙이면 값을 1씩 증가시킵니다. 이는 피연산자의 위치에 따라 의미가 살짝 달라집니다. 오른쪽에 위치하는 경우 식을 평가하기 전 증가시키고, 왼쪽에 위치하는 경우 식을 평가한 후에 증가시킵니다.
+
+`--`를 붙이면 값을 1씩 감소시킵니다. 피연산자의 위치에 따른 의미는 위와 동일합니다.
+
+```java
+int result = +1;
+System.out.println(result); // 1
+
+result--;
+System.out.println(result); // 0
+
+result++;
+System.out.println(result); // 1
+
+for (int i = 0; i < 3; i++) {
+  System.out.println(++result); // 2, 3, 4
+}
+
+System.out.println(result); // 4(이미 이전에 증가해서 그대로 출력된다.)
+
+for (int i = 0; i < 3; i++) {
+  System.out.println(result++); // 4, 5, 6
+}
+
+System.out.println(result); // 7(마지막에 증가한다.)
+```
+
 ### 참고
 
 <https://docs.oracle.com/javase/tutorial/java/nutsandbolts/op1.html>
@@ -227,6 +260,8 @@ System.out.println(a <= b); // true
 위에서 말한 평가하지 않는 것을 short circuit evaluation이라고 하며, 식의 평가를 수행하지 않기 때문에 좀 더 빠른 결과를 얻을 수 있습니다.
 
 ### 참고
+
+<https://docs.oracle.com/javase/tutorial/java/nutsandbolts/op1.html>
 
 <https://docs.oracle.com/javase/tutorial/java/nutsandbolts/op2.html>
 
