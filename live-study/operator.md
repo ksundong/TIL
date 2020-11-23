@@ -391,6 +391,10 @@ public static void main(String[] args) {
 
 `조건 ? 참일 때 값 : 거짓일 때 값` 의 표현으로 사용합니다.
 
+### 참고
+
+<https://docs.oracle.com/javase/tutorial/java/nutsandbolts/op2.html>
+
 ---
 
 [학습할 것으로](#학습할-것)
