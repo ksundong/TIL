@@ -269,6 +269,30 @@ System.out.println(a <= b); // true
 
 ## instanceof
 
+`instanceof` 연산자는 타입 비교 연산자입니다. 이를 이용해서 객체가 클래스의 인스턴스, 하위 클래스의 인스턴스 또는 특정 인터페이스를 구현하는 클래스의 인스턴스인지 테스트할 수 있습니다.
+
+```java
+public class Main {
+
+  public static void main(String[] args) {
+    Animal animal1 = new Animal();
+    Animal animal2 = new Cat();
+
+    System.out.println("animal1 is instanceof Animal: " + (animal1 instanceof Animal)); // true
+    System.out.println("animal1 is instanceof Cat: " + (animal1 instanceof Cat)); // false
+    System.out.println("animal1 is instanceof Meowable: " + (animal1 instanceof Meowable)); // false
+
+    System.out.println("animal2 is instanceof Animal: " + (animal2 instanceof Animal)); // true
+    System.out.println("animal2 is instanceof Cat: " + (animal2 instanceof Cat)); // true
+    System.out.println("animal2 is instanceof Meowable: " + (animal2 instanceof Meowable)); // true
+  }
+}
+
+class Animal {}
+interface Meowable {}
+class Cat extends Animal implements Meowable {}
+```
+
 ---
 
 [학습할 것으로](#학습할-것)
