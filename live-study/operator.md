@@ -293,6 +293,10 @@ interface Meowable {}
 class Cat extends Animal implements Meowable {}
 ```
 
+### 참고
+
+<https://docs.oracle.com/javase/tutorial/java/nutsandbolts/op2.html>
+
 ---
 
 [학습할 것으로](#학습할-것)
