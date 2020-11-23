@@ -204,6 +204,12 @@ System.out.println(a < b);  // true
 System.out.println(a <= b); // true
 ```
 
+### 참고
+
+<https://docs.oracle.com/javase/tutorial/java/nutsandbolts/op2.html>
+
+<https://www.geeksforgeeks.org/operators-in-java/>
+
 ---
 
 [학습할 것으로](#학습할-것)
