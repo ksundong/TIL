@@ -388,11 +388,13 @@ public static void main(String[] args) {
 
 인텔리제이에서는 이런 람다 표현식으로 코드를 변경시켜주는 기능이 내장되어 있습니다.
 
-처음 람다식을 접했을 때의 엄청난 고통이 떠올랐습니다.
-
 람다식은 메서드가 매개변수로 전달되는 것이 가능하고, 결과로 반환되는 것도 가능하게 해줍니다. 이를 함수가 일급시민이다라고 표현합니다.
 
 자세한 내용은 람다식을 공부할 때 다시 공부해봅시다.
+
+### 참고
+
+<https://docs.oracle.com/javase/tutorial/java/javaOO/lambdaexpressions.html>
 
 ---
 
