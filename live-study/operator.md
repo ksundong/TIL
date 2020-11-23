@@ -27,6 +27,74 @@
 
 ## 산술 연산자
 
+산술 연산자는 우리가 흔히 말하는 더하기, 빼기, 곱하기, 나누기를 수행하는 연산자입니다. 나누기만 조금 유의하면 되는데, 몫을 구하는 연산자와, 나머지를 구하는 연산자가 따로 존재합니다.
+
+| 연산자 | 설명                                       |
+| :----: | ------------------------------------------ |
+|   +    | 더하기 연산자(문자열 연결에도 사용됩니다.) |
+|   -    | 빼기 연산자                                |
+|   \*   | 곱하기 연산자                              |
+|   /    | 나누기 연산자                              |
+|   %    | 나머지(모듈로) 연산자                      |
+
+```java
+int result = 1 + 2;
+System.out.println("1 + 2 = " + result); // 3
+
+int originalResult = result;
+result = originalResult - 1;
+System.out.println(originalResult + " - 1 = " + result); // 2
+
+originalResult = result;
+result = originalResult * 7;
+System.out.println(originalResult + " * 7 = " + result); // 14
+
+originalResult = result;
+result = originalResult / 3;
+System.out.println(originalResult + " / 3 = " + result); // 4
+
+result = originalResult % 3;
+System.out.println(originalResult + " % 3 = " + result); // 2
+
+double doubleResult = 14.0 / 3.0;
+System.out.println("14.0 / 3.0 = " + doubleResult); // 4.66667
+
+doubleResult = 14.0 % 3.0;
+System.out.println("14.0 % 3.0 = " + doubleResult); // 2.0
+
+doubleResult = 14.0 / 0.0;
+System.out.println("14.0 / 0.0 = " + doubleResult); // Infinity
+
+doubleResult = -14.0 / 0.0;
+System.out.println("14.0 / 0.0 = " + doubleResult); // -Infinity
+
+doubleResult = 14.0 % 0.0;
+System.out.println("14.0 % 0.0 = " + doubleResult); // NaN
+
+doubleResult = -14.0 % 0.0;
+System.out.println("14.0 % 0.0 = " + doubleResult); // NaN
+
+try {
+  result = 14 / 0; // ArithmeticException: / by zero
+} catch (ArithmeticException e) {
+  System.out.println("14 / 0 = " + e.getMessage());
+}
+
+try {
+  result = 14 % 0; // ArithmeticException: / by zero
+} catch (ArithmeticException e) {
+  System.out.println("14 % 0 = " + e.getMessage());
+}
+```
+
+정수형일 때 조심해야 할 것은 0으로 나누거나 모듈로 연산을 수행하는 것입니다. 이는 런타임에 발생하는 오류이기 때문에 컴파일 타임에 확인할 수 없습니다.
+
+또한, 자료형의 크기에 따른 오버플로우 문제도 조심해야 합니다.
+
+실수형은 연산 과정 자체에서 오차가 발생할 수 있으며 이를 조심해야 합니다. 이는 특히 테스트 코드를 작성할 때, 어느정도의 수준의 오차를 허용할 것인지 반드시 설정해주어야 하는 이유입니다.
+
+실수형은 0으로 나누거나, 모듈로 연산을 사용하면 위와 같이 `Infinity`, `-Infinity`, `NaN` 값을 가집니다.
+
 ---
 
 [학습할 것으로](#학습할-것)
@@ -73,7 +141,7 @@
 
 주의할 점은 할당할 수 없는 리터럴과 같은 값은 왼쪽 피연산자가 될 수 없다는 점입니다.
 
-### 복합문(Compound Statement)
+### 복합문(Compound Statement), 복합 할당(compound assignment)
 
 다른 연산자와 할당 연산자를 결합합니다.
 
@@ -86,7 +154,7 @@
 ```java
 public static void main(String[] args) {
   int a = 0;
-  
+
   a = a + 1;
 }
 ```
@@ -106,7 +174,7 @@ public static void main(String[] args) {
 ```java
 public static void main(String[] args) {
   int a = 0;
-  
+
   a += 1;
 }
 ```
