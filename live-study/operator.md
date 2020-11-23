@@ -186,6 +186,24 @@ System.out.println(b ^ c); // 1|1011110 => -34
 
 ## 관계 연산자
 
+관계 연산자는 피연산자가 같은지(==), 같지 않은지(!=), 큰지(>), 크거나 같은지(>=), 작은지(<), 작거나 같은지(<=) 비교하는 연산자들입니다.
+
+우리가 생각하는 대로 동작하는 간단한 연산자여서 사용 예만 보고 넘어가겠습니다.
+
+대신, 문자열의 동등성을 비교할 때에는 `equals()` 메서드를 사용해야 합니다.
+
+```java
+int a = 7;
+int b = 11;
+
+System.out.println(a == b); // false
+System.out.println(a != b); // true
+System.out.println(a > b);  // false
+System.out.println(a >= b); // false
+System.out.println(a < b);  // true
+System.out.println(a <= b); // true
+```
+
 ---
 
 [학습할 것으로](#학습할-것)
