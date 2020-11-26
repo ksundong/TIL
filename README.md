@@ -128,6 +128,7 @@
 
 - [Chsh zsh non-standard shell](Linux/chsh-zsh-non-standard-shell.md)
 - [포트 사용중인 프로세스 찾기/죽이기](Linux/find-and-delete-process-using-port.md)
+- [Byobu 사용법](Linux/how-to-use-byobu.md)
 
 ### Cloud
 
