@@ -29,3 +29,7 @@ byobu
 무겁다는 얘기를 듣고 안쓰기로 마음먹었다.
 
 tmux를 잘 써보자
+
+## CheatSheet
+
+<https://gist.github.com/devhero/7b9a7281db0ac4ba683f>
