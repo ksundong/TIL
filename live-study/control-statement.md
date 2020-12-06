@@ -24,6 +24,27 @@
 
 ## 선택문
 
+### `if-then`, `if-then-else` 문
+
+#### `if-then` 문
+
+`if-then`문은 가장 기본적인 제어문입니다. 이 코드는 블록 안에 있는 코드를 오직 조건이 충족될 때만 실행됨을 알려줍니다.  
+예를 들어, `Bicycle` 클래스는 자전거가 움직일 때만 속도를 줄일 수 있도록 합니다.
+
+```java
+void applyBrakes() {
+  // 자전거는 움직이고 있어야만 합니다.
+  if (this.isMoving) {
+    // then 절입니다. 현재 속도를 줄입니다.
+    this.currentSpeed--;
+  }
+}
+```
+
+#### `if-then-else` 문
+
+### `switch` 문
+
 ## 반복문
 
 ## JUnit5 학습하기
