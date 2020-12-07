@@ -47,7 +47,26 @@ void applyBrakes() {
 
 하지만 저는 개인적으로 모든 if문에 괄호를 사용하는 것을 선호합니다. 일반적으로 코드의 취약성이 높아지는 smell이라고 생각하며, 문장이 두 줄이 될 경우 중괄호를 추가해주어야 할 뿐더러 잊기도 쉽습니다.
 
+```java
+if (this.isMoving)
+    this.currentSpeed--;
+// 만약 한 문장이 더 추가되어야 한다면?
+// 중괄호도 추가해주어야 함으로 유지보수성이 떨어지게 됩니다.
+```
+
 #### `if-then-else` 문
+
+`if-then-else` 문은 `if` 절의 평가가 `false`인 경우에 실행될 두번째 경로를 제공해줍니다. 아래의 예제는 이미 자전거가 멈춰있는 경우에 이미 멈춰있다는 에러 메시지를 출력합니다.
+
+```java
+void applyBrakes() {
+  if (this.isMoving) {
+    this.currentSpeed--;
+  } else {
+    System.err.println("자전거가 이미 멈춰있습니다!");
+  }
+}
+```
 
 ### `switch` 문
 
