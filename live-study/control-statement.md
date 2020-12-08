@@ -68,6 +68,39 @@ void applyBrakes() {
 }
 ```
 
+`IfElseDemo` 라는 프로그램은 `testscore`라는 값에 따라 `grade`가 결정됩니다.
+
+```java
+class IfElseDemo {
+  public static void main(String[] args) {
+
+    int testscore = 76;
+    char grade;
+
+    if (testscore >= 90) {
+      grade = 'A';
+    } else if (testscore >= 80) {
+      grade = 'B';
+    } else if (testscore >= 70) {
+      grade = 'C';
+    } else if (testscore >= 60) {
+      grade = 'D';
+    } else {
+      grade = 'F';
+    }
+    System.out.println("Grade = " + grade);
+  }
+}
+```
+
+이 프로그램의 출력은 다음과 같을 것입니다.
+
+```java
+Grade = C
+```
+
+이 코드는 조건문 두 개를 만족하지만, 보다 위에 위치한 조건문에 위치한 식만 평가되고 아래에 존재하는 식은 평가되지 않습니다.
+
 ### `switch` 문
 
 ## 반복문
