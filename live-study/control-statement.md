@@ -103,6 +103,49 @@ Grade = C
 
 ### `switch` 문
 
+`if-then`문, `if-then-else` 문과 달리 `switch`문은 여러 경로가 실행될 수 있습니다. `switch`문은 `byte, short, char`와 `int`와 같은 기본 데이터 타입과 함께 동작합니다. 또한, `enumerated` 타입(`Enum Type`)과도 함께 사용할 수 있습니다. `String` 클래스와 더불어 `wrapper` 클래스도 사용할 수 있습니다.
+
+`SwitchDemo` 예제코드를 보시면, `month`라는 `int`타입의 변수의 값은 월을 의미합니다. 이 코드는 `month` 값을 바탕으로 `switch`문을 통해 해당 월의 이름을 보여줍니다.
+
+```java
+public class SwitchDemo {
+  public static void main(String[] args) {
+    int month = 8;
+    String monthString;
+    switch (month) {
+      case 1: monthString = "January";
+              break;
+      case 2: monthString = "February";
+              break;
+      case 3: monthString = "March";
+              break;
+      case 4: monthString = "April";
+              break;
+      case 5: monthString = "May";
+              break;
+      case 6: monthString = "June";
+              break;
+      case 7: monthString = "July";
+              break;
+      case 8: monthString = "August";
+              break;
+      case 9: monthString = "September";
+              break;
+      case 10: monthString = "October";
+               break;
+      case 11: monthString = "November";
+               break;
+      case 12: monthString = "December";
+               break;
+      default: monthString = "Invalid month";
+    }
+    System.out.println(monthString);
+  }
+}
+```
+
+이 경우에 표준 출력의 결과는 `August`로 나올 것입니다.
+
 ## 반복문
 
 ## JUnit5 학습하기
