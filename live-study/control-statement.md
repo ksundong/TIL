@@ -148,6 +148,10 @@ public class SwitchDemo {
 
 이 경우에 표준 출력의 결과는 `August`로 나올 것입니다.
 
+`switch`문의 body는 `switch block`으로 알려져 있습니다. `switch block`안에 있는 코드들은 하나 이상의 case 또는 default로 레이블 될 수 있습니다. `switch`문의 표현식이 평가되면 만족하는 모든 `case`의 코드들이 실행됩니다.
+
+그리고 switch문은 `if-then-else` 문으로도 변경가능합니다.
+
 ## 반복문
 
 ## JUnit5 학습하기
