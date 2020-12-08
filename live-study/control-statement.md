@@ -101,6 +101,8 @@ Grade = C
 
 이 코드는 조건문 두 개를 만족하지만, 보다 위에 위치한 조건문에 위치한 식만 평가되고 아래에 존재하는 식은 평가되지 않습니다.
 
+[자바 튜토리얼(if, if else)](https://docs.oracle.com/javase/tutorial/java/nutsandbolts/if.html)
+
 ### `switch` 문
 
 `if-then`문, `if-then-else` 문과 달리 `switch`문은 여러 경로가 실행될 수 있습니다. `switch`문은 `byte, short, char`와 `int`와 같은 기본 데이터 타입과 함께 동작합니다. 또한, `enumerated` 타입(`Enum Type`)과도 함께 사용할 수 있습니다. `String` 클래스와 더불어 `wrapper` 클래스도 사용할 수 있습니다.
