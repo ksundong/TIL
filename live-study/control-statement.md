@@ -243,6 +243,40 @@ public class StringSwitchDemo {
 
 ## 반복문
 
+### `while` 및 `do-while` 문
+
+`while`문은 조건이 `true`인 동안 계속해서 블록안의 문장을 반복합니다. 이를 자바에서는 이렇게 표현합니다.
+
+```java
+while (expression) {
+  statement(s)
+}
+```
+
+`while` 문은 `boolean` 값을 리턴하는 표현식을 평가합니다. 표현식이 `true`로 평가된다면, `while`문은 `while`문의 블록 안에 있는 문장들을 실행합니다. `while`문은 식이 `false`가 될 때 까지 평가하고, 블록안의 항목을 반복합니다.
+
+아래의 코드는 1부터 10까지 print하는 예제입니다.
+
+```java
+class WhileDemo {
+  public static void main(String[] args) {
+    int count = 1;
+    while (count < 11) {
+      System.out.println("Count is: " + count);
+      count++;
+    }
+  }
+}
+```
+
+조건문에 `true`를 입력해서 무한 루프를 만들 수도 있습니다.
+
+```java
+while (true) {
+  // code
+}
+```
+
 ## JUnit5 학습하기
 
 ## live-study 대시보드 만들기
