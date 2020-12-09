@@ -277,6 +277,16 @@ while (true) {
 }
 ```
 
+자바는 `do-while`문 문법도 제공합니다. 다음과 같이 쓸 수 있습니다.
+
+```java
+do {
+  statement(s)
+} while (expression);
+```
+
+`do-while`문과 `while`문의 차이는 조건식의 평가와 반복되는 부분의 순서에 있습니다. `while`문은 식을 먼저 평가하고 반복을 하는 반면, `do-while`문은 일단 한 번 실행하고 반복여부를 평가합니다. 즉, `do-while`문은 적어도 한 번의 실행을 보장하게 됩니다.
+
 ## JUnit5 학습하기
 
 ## live-study 대시보드 만들기
