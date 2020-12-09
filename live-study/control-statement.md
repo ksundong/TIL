@@ -160,6 +160,87 @@ public class SwitchDemo {
 
 기술적으로, 가장 마지막 `break`는 필요하지 않습니다. 그리고, `break`를 사용하는 편이 오류를 줄일 수 있기 때문에 권장됩니다. `default` 섹션은 `case`에서 처리되지 않는 모든 부분을 명시적으로 처리합니다.
 
+#### `switch`문에서 `String` 사용하기
+
+Java SE 7 이후 버전부터는 `String` 객체를 `switch`문의 평가식으로 사용할 수 있습니다. 다음의 예제는 각 달의 이름으로 숫자 값을 구하는 것입니다.
+
+```java
+public class StringSwitchDemo {
+
+  public static int getMonthNumber(String month) {
+
+    int monthNumber = 0;
+
+    if (month == null) {
+      return monthNumber;
+    }
+
+    switch (month.toLowerCase()) {
+      case "january":
+          monthNumber= 1;
+          break;
+      case "february":
+          monthNumber = 2;
+          break;
+      case "march":
+          monthNumber = 3;
+          break;
+      case "april":
+          monthNumber = 4;
+          break;
+      case "may":
+          monthNumber = 5;
+          break;
+      case "june":
+          monthNumber = 6;
+          break;
+      case "july":
+          monthNumber = 7;
+          break;
+      case "august":
+          monthNumber = 8;
+          break;
+      case "september":
+          monthNumber = 9;
+          break;
+      case "october":
+          monthNumber = 10;
+          break;
+      case "november":
+          monthNumber = 11;
+          break;
+      case "december":
+          monthNumber = 12;
+          break;
+      default:
+          monthNumber = 0;
+          break;
+    }
+
+    return monthNumber;
+  }
+
+  public static void main(String[] args) {
+
+    String month = "August";
+
+    int returnedMonthNumber = StringSwitchDemo.getMonthNumber(month);
+
+    if (returnedMonthNumber == 0) {
+      System.out.println("Invalid month");
+    } else {
+      System.out.println(returnedMonthNumber);
+    }
+  }
+}
+```
+
+이 코드의 결과는 8입니다.
+
+`switch` 평가식의 `String`은 `String.equals` 메서드를 이용해 비교됩니다. 이 과정에서 `toLowerCase` 메서드를 통해 case의 구분 없이 비교하게 됩니다.
+
+가급적이면 `String`과 같이 객체를 Switch로 사용할 때는 `NullPointerException`을 주의해야 합니다. `null`을 체크하는 로직을 **꼭** 추가합시다.
+
 ## 반복문
 
 ## JUnit5 학습하기
