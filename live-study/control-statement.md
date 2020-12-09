@@ -152,6 +152,12 @@ public class SwitchDemo {
 
 그리고 switch문은 `if-then-else` 문으로도 변경가능합니다.
 
+`if-then-else`문 또는 `switch`문을 선택하는 기준은 가독성과 평가문의 표현에 있습니다. `if-then-else`문은 값의 범위, 조건등으로 평가할 수 있고, `switch`문은 하나의 정수, 열거형 값, `String` 객체로 평가할 수 있습니다.
+
+또 한가지 흥미로운 점은 `break` 문입니다. 매 `break` 문은 이를 감싸고 있는 `switch`문을 종료시킵니다. 제어 흐름은 `switch` 블록 다음의 첫번째 문에서 계속됩니다. `break`문은 필요합니다. 이 `break`문이 없으면, `switch`블록은 계속해서 떨어집니다.(한 번 조건에 맞는다면, 그 다음부터는 조건에 관계없이 실행됩니다.) 이를 _fall through_ 라고 합니다.
+
+제가 생각하기엔 `switch`문과 `if-then-else`는 사용처가 다른느낌을 많이 받았는데, 비슷하지만 많이 다르다고 생각합니다.
+
 ## 반복문
 
 ## JUnit5 학습하기
