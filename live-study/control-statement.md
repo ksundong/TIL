@@ -287,6 +287,22 @@ do {
 
 `do-while`문과 `while`문의 차이는 조건식의 평가와 반복되는 부분의 순서에 있습니다. `while`문은 식을 먼저 평가하고 반복을 하는 반면, `do-while`문은 일단 한 번 실행하고 반복여부를 평가합니다. 즉, `do-while`문은 적어도 한 번의 실행을 보장하게 됩니다.
 
+### `for` 문
+
+`for`문은 범위 반복을 하는 간결한 방법을 제공합니다. 일반적인 `for`문은 다음과 같이 표현됩니다.
+
+```java
+for (initialization; termination; increment) {
+  statement(s)
+}
+```
+
+`for`문을 사용할 때 유의할 점이 있습니다.
+
+- `initialization` 표현식은 루프를 초기화합니다. 이것은 루프가 실행되기 전 한 번만 실행됩니다.
+- `termination` 표현식이 `false` 값으로 평가될 때까지 반복하게 됩니다.
+- `increment` 표현식은 반복이 끝날 때마다 실행됩니다. 이 값은 증가하거나 감소하게 할 수 있습니다.
+
 ## JUnit5 학습하기
 
 ## live-study 대시보드 만들기
