@@ -303,6 +303,41 @@ for (initialization; termination; increment) {
 - `termination` 표현식이 `false` 값으로 평가될 때까지 반복하게 됩니다.
 - `increment` 표현식은 반복이 끝날 때마다 실행됩니다. 이 값은 증가하거나 감소하게 할 수 있습니다.
 
+```java
+class ForDemo {
+  public static void main(String[] args) {
+    for (int i = 1; i < 11; i++) {
+      System.out.println("Count is: " + i);
+    }
+  }
+}
+```
+
+결과:
+
+```text
+Count is: 1
+Count is: 2
+Count is: 3
+Count is: 4
+Count is: 5
+Count is: 6
+Count is: 7
+Count is: 8
+Count is: 9
+Count is: 10
+```
+
+`i`가 어떻게 선언되고, 초기화되며, 어떤 방식으로 평가되고, 증가하는 지를 알아야 합니다. 이 변수가 루프 외부에서 필요하지 않는 경우 초기화 식에서 선언하는 것이 좋습니다. 그렇게 하면 변수가 딱 사용되는 범위만큼 수명을 갖게되고, 오류가 줄어들 수 있습니다. `for`문에는 `i`, `j`, `k` 와 같은 변수들이 주로 사용됩니다.
+
+`for`문의 세 식은 모두 선택사항입니다. 모두 비워두면 무한 루프가 됩니다.
+
+```java
+for (;;) {
+  // 코드 입력
+}
+```
+
 ## JUnit5 학습하기
 
 ## live-study 대시보드 만들기
