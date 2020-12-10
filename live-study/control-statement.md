@@ -338,6 +338,36 @@ for (;;) {
 }
 ```
 
+`enhanced for`문은 배열이나 컬렉션 같이 연속된 정보를 접근하는 방법입니다. `for`문 보다 훨씬 간결하고 읽기 쉽습니다.
+
+```java
+class EnhancedForDemo {
+  public static void main(String[] args) {
+    int[] numbers = {1, 2, 3, 4, 5, 6, 7, 8 ,9, 10};
+
+    for (int item : numbers) {
+      System.out.println(item);
+    }
+  }
+}
+```
+
+결과
+
+```text
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+```
+
+가능하다면 이 형식을 사용하는 것을 권장합니다. 일단 가독성이 좋고, 내부적으로 iterator를 사용하는 경우 인덱스를 통한 접근보다 빠른 경우가 있기 때문입니다.
 ## JUnit5 학습하기
 
 ## live-study 대시보드 만들기
