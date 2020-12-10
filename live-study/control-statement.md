@@ -241,6 +241,10 @@ public class StringSwitchDemo {
 
 가급적이면 `String`과 같이 객체를 Switch로 사용할 때는 `NullPointerException`을 주의해야 합니다. `null`을 체크하는 로직을 **꼭** 추가합시다.
 
+### 참고
+
+[오라클 자바 튜토리얼(switch문)](https://docs.oracle.com/javase/tutorial/java/nutsandbolts/switch.html)
+
 ## 반복문
 
 ### `while` 및 `do-while` 문
@@ -286,6 +290,10 @@ do {
 ```
 
 `do-while`문과 `while`문의 차이는 조건식의 평가와 반복되는 부분의 순서에 있습니다. `while`문은 식을 먼저 평가하고 반복을 하는 반면, `do-while`문은 일단 한 번 실행하고 반복여부를 평가합니다. 즉, `do-while`문은 적어도 한 번의 실행을 보장하게 됩니다.
+
+### 참고
+
+[오라클 자바 튜토리얼(whlie문과 do-while문)](https://docs.oracle.com/javase/tutorial/java/nutsandbolts/while.html)
 
 ### `for` 문
 
@@ -368,6 +376,23 @@ class EnhancedForDemo {
 ```
 
 가능하다면 이 형식을 사용하는 것을 권장합니다. 일단 가독성이 좋고, 내부적으로 iterator를 사용하는 경우 인덱스를 통한 접근보다 빠른 경우가 있기 때문입니다.
+
+### 참고
+
+[오라클 자바 튜토리얼(for문)](https://docs.oracle.com/javase/tutorial/java/nutsandbolts/for.html)
+
+## 분기문
+
+### `break`문
+
+### `countinue`문
+
+### `return`문
+
+### 참고
+
+[오라클 자바 튜토리얼(분기문)](https://docs.oracle.com/javase/tutorial/java/nutsandbolts/branch.html)
+
 ## JUnit5 학습하기
 
 ## live-study 대시보드 만들기
