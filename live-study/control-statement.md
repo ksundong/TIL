@@ -431,7 +431,38 @@ Found 12 at 1, 0
 
 `break`문은 label이 표시된 블록을 종료하고, 제어 흐름을 그 밖으로 전달합니다.
 
-### `countinue`문
+### `continue`문
+
+`continue`문은 현재 반복을 생략합니다. 따라서 반복문인 `for`, `while`, `do-while`문에서 사용할 수 있습니다.
+
+```java
+class ContinueDemo {
+  public static void main(String[] args) {
+    String searchMe = "peter piper picked a peck of pickled peppers";
+    int max = searchMe.length();
+    int numPs = 0;
+
+    for (int i = 0; i < max; i++) {
+      // p가 아니면 넘어간다.
+      if (searchMe.charAt(i) != 'p') {
+        continue;
+      }
+
+      // p의 개수를 증가시킨다.
+      numPs++;
+    }
+    System.out.println("Found " + numPs + " p's in the string.");
+  }
+}
+```
+
+결과는 다음과 같습니다.
+
+```text
+Found 9 p's in the string.
+```
+
+label된 `continue`문은 위의 `break`문과 동일하게 동작합니다.
 
 ### `return`문
 
@@ -450,4 +481,7 @@ Found 12 at 1, 0
 ## ListNode로 Stack 구현하기
 
 ## Queue 구현하기
+
+```
+
 ```
