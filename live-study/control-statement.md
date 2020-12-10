@@ -466,6 +466,10 @@ label된 `continue`문은 위의 `break`문과 동일하게 동작합니다.
 
 ### `return`문
 
+`return`문은 현재 메서드를 탈출하는 기능으로 실행 흐름을 메서드를 호출한 위치로 반환합니다 `return`문은 두 가지 형태가 있습니다. 값을 반환하는 것과 그렇지 않은 것 두 가지 입니다. 값을 반환하기 위해서는 `return` 키워드 뒤에 반환할 값이나 변수를 입력하면 됩니다.
+
+반환하는 타입은 메서드에 선언된 반환 타입과 일치해야 합니다. `void` 라면 반환하지 않습니다.
+
 ### 참고
 
 [오라클 자바 튜토리얼(분기문)](https://docs.oracle.com/javase/tutorial/java/nutsandbolts/branch.html)
