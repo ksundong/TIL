@@ -385,6 +385,52 @@ class EnhancedForDemo {
 
 ### `break`문
 
+`break`문은 두가지 형태가 있습니다. label된 것과 label되지 않은 것이 그것입니다. label 되지 않은 것은 일반적으로 우리가 볼 수 있는 용례입니다.
+
+`break`문의 역할은 `break`문을 감싸고 있는 블록을 즉시 벗어나는 것을 의미합니다. 반복도중이라면 반복을 진행하지 않고 탈출합니다.
+
+label된 `break`문의 역할은 해당 label에 해당하는 것을 탈출함을 의미합니다. 이는 중첩된 구조에서 의미가 있으며, 일반적으로 많이 사용하는 방법은 아닙니다.
+
+```java
+class BreakWithLabelDemo {
+
+  int[][] arrayOfInts = {
+    { 32, 87, 3, 509 },
+    { 12, 1076, 2000, 8 },
+    { 622, 127, 77, 955 }
+  };
+  int searchfor = 12;
+
+  int i;
+  int j = 0;
+  boolean foundIt = false;
+
+search:
+  for (i = 0; i < arrayOfInts.length; i++) {
+    for (j = 0; j < arrayOfInts[i].length; j++) {
+      if (arrayOfInts[i][j] == searchfor) {
+        foundIt = true;
+        break search;
+      }
+    }
+  }
+
+  if (fountIt) {
+    System.out.println("Found " + searchfor + " at " + i + ", " + j);
+  } else {
+    System.out.println(searchfor + " not in the array");
+  }
+}
+```
+
+결과는 다음과 같습니다.
+
+```text
+Found 12 at 1, 0
+```
+
+`break`문은 label이 표시된 블록을 종료하고, 제어 흐름을 그 밖으로 전달합니다.
+
 ### `countinue`문
 
 ### `return`문
@@ -404,3 +450,4 @@ class EnhancedForDemo {
 ## ListNode로 Stack 구현하기
 
 ## Queue 구현하기
+```
