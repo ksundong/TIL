@@ -66,9 +66,40 @@ public class Bicycle {
 
 이런 식의 코드를 지향한다면, 보다 읽기좋고, 변화에 유연한 코드를 작성할 수 있습니다.
 
+---
+
+클래스의 선언에는 필드, 생성자, 메서드 정의가 포함될 수 있습니다. 각각의 용도는 다음과 같습니다.
+
+- 필드: 인스턴스 필드에 한하여, 각 인스턴스의 속성을 나타냅니다. 클래스 필드의 경우에는 클래스 레벨에서의 속성을 나타냅니다.
+- 생성자: 새로운 객체를 생성하는 용도입니다.
+- 메서드: 클래스와 그 객체의 행동을 구현하는 용도입니다.
+
+그 밖에도 부모 클래스를 상속하는 지의 여부나, 인터페이스를 구현하는 지의 여부 등을 클래스 선언 시작지점에 정의합니다.
+
+```java
+class MyClass extends MySuperClass implements YourInterface {
+  // field, constructor, and
+  // method 정의
+}
+```
+
+위 클래스 `MyClass`는 `MySuperClass`의 서브클래스이며, `YourInterface`를 구현함을 의미하는 코드입니다.
+
+또한 접근 제어자(`public`, `private`)를 맨 앞에 추가할 수도 있으므로 클래스 선언부는 복잡해질 수 있습니다.  
+두 접근 제어자는 다른 클래스가 `MyClass`에 접근할 수 있는지를 결정합니다.
+
+클래스 선언에 포함될 수 있는 요소들입니다.
+
+1. `public`, `private` 등의 제어자들
+2. 첫글자가 대문자인 클래스 명
+3. 부모 클래스가 있는 경우 `extends` 키워드 다음에 부모 클래스의 이름을 붙입니다. 클래스는 **단 하나의** 상위 클래스만 상속할 수 있습니다. 자바는 다중상속을 지원하지 않습니다.
+4. `implements` 키워드 뒤에 인터페이스들의 목록이 올 수 있습니다. 클래스는 **여러** 인터페이스를 동시에 구현할 수 있습니다.
+5. 중괄호로 클래스 본문(body)을 선언합니다.
+
 ### 참고
 
 - [오라클 자바 튜토리얼(클래스)](https://docs.oracle.com/javase/tutorial/java/javaOO/classes.html)
+- [오라클 자바 튜토리얼(클래스 선언)](https://docs.oracle.com/javase/tutorial/java/javaOO/classdecl.html)
 - [생성자와 메서드의 차이](https://www.tutorialspoint.com/Difference-between-constructor-and-method-in-Java)
 
 ## 객체 만드는 방법 (new 키워드 이해하기)
