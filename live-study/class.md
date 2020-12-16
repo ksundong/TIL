@@ -341,7 +341,3 @@ Bicycle myBike = new Bicycle(30, 0, 8);
 ## BinrayTree라는 클래스를 정의하고 주어진 노드를 기준으로 출력하는 bfs(Node node)와 dfs(Node node) 메소드를 구현하세요.
 
 ## DFS는 왼쪽, 루트, 오른쪽 순으로 순회하세요.
-
-```
-
-```
