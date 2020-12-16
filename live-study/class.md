@@ -300,6 +300,38 @@ double sum(int a, int b);
 
 ## 생성자 정의하는 방법
 
+클래스는 클래스의 청사진으로부터 객체를 생성하기 위해 호출되는 생성자를 포함합니다. 생성자 선언은 이름이 지정되어 있다는 점과 리턴타입을 선언하지 않는다는 점을 제외하면 메서드 선언과 비슷합니다.
+
+```java
+public Bicycle(int startCadence, int startSpeed, int startGear) {
+  this.cadence = startCadence;
+  this.speed = startSpeed;
+  this.gear = startGear;
+}
+```
+
+`Bicycle` 클래스의 생성자를 위와같이 정의했다면
+
+```java
+Bicycle myBike = new Bicycle(30, 0, 8);
+```
+
+과 같은 식으로 생성자를 사용할 수 있습니다.
+
+이 코드는 `new Bicycle(30, 0, 8)` 이 객체를 위한 메모리 공간을 만들고, 해당 필드를 초기화 함을 알 수 있습니다.
+
+생성자는 여러개 선언할 수 있습니다. 여기에는 매개변수 없는 생성자도 포함됩니다. 메서드와 마찬가지로 매개변수 리스트만 다르면 됩니다.
+
+클래스에 생성자를 제공하지 않아도 되지만, 컴파일러가 기본생성자를 자동으로 생성하고, 이는 슈퍼클래스의 인수 없는 생성자를 호출하는데, 이것이 없는 경우 오류가 발생합니다. 또한, 명시적으로 슈퍼 클래스가 존재하지 않는 경우 `Object`가 슈퍼 클래스로 지정됩니다.
+
+생성자 안에서 슈퍼 클래스의 생성자를 사용할 수 있습니다. 이는 인터페이스와 상속에서 좀 더 자세히 다루는 편입니다.
+
+생성자도 접근 제어자를 사용하여 생성자를 호출할 수 있는 클래스를 제어할 수 있습니다.
+
+### 참고
+
+[오라클 자바 튜토리얼(클래스에 생성자 제공하기)](https://docs.oracle.com/javase/tutorial/java/javaOO/constructors.html)
+
 ## this 키워드 이해하기
 
 ## int 값을 가지고 있는 이진 트리를 나타내는 Node 라는 클래스를 정의하세요.
@@ -309,3 +341,7 @@ double sum(int a, int b);
 ## BinrayTree라는 클래스를 정의하고 주어진 노드를 기준으로 출력하는 bfs(Node node)와 dfs(Node node) 메소드를 구현하세요.
 
 ## DFS는 왼쪽, 루트, 오른쪽 순으로 순회하세요.
+
+```
+
+```
