@@ -334,6 +334,82 @@ Bicycle myBike = new Bicycle(30, 0, 8);
 
 ## this 키워드 이해하기
 
+`this` 키워드는 생성자, `static`이 아닌 블럭에서 사용될 수 있습니다. 이것의 의미는 `this` 키워드를 호출한 생성자나 메서드의 현재 객체를 참조합니다.  
+`this`를 사용하여 인스턴스 메서드 또는 생성자 내에서 현재 객체의 모든 멤버를 참조할 수 있습니다.(변수, 메서드)
+
+혹은 `this()`를 이용해 생성자를 호출할 수도 있습니다.
+
+### `this` 필드
+
+`this` 필드는 메서드에서 혹시라도 가려질 수 있는 필드가 있을 수 있기 때문에 사용됩니다.
+
+`Point` 클래스를 예로 들자면,
+
+```java
+public class Point {
+  public int x = 0;
+  public int y = 0;
+
+  public Point(int a, int b) {
+    x = a;
+    y = b;
+  }
+}
+```
+
+처럼 적을 수도 있지만,
+
+```java
+public class Point {
+  public int x = 0;
+  public int y = 0;
+
+  public Point(int x, int y) {
+    this.x = x;
+    this.y = y;
+  }
+}
+```
+
+이렇게 적을 수도 있습니다.
+
+이 경우가 자바에서 훨씬 많이쓰는 형식입니다. 객체의 필드는 생성자의 파라미터에 의해 가려지고, 따라서 `this` 키워드를 사용하게 됩니다.
+
+### `this` 생성자
+
+생성자에서 `this` 키워드를 사용해서 동일한 클래스의 다른 생성자를 호출할 수 있습니다. 이를 명시적 생성자 호출이라고 합니다.
+
+```java
+public class Rectangle {
+  private int x, y;
+  private int width, height;
+
+  public Rectangle() {
+    this(0, 0, 1, 1);
+  }
+
+  public Rectangle(int width, int height) {
+    this(0, 0, width, height);
+  }
+
+  public Rectangle(int x, int y, int width, int height) {
+    this.x = x;
+    this.y = y;
+    this.width = width;
+    this.height = height;
+  }
+}
+```
+
+이 클래스는 생성자의 집합을 포함합니다. 각각의 생성자는 멤버 변수들의 일부 혹은 전부를 초기화합니다. 생성자는 초기 값이 파라미터에 의해 제공되지 않는 모든 멤버 변수에 대한 기본 값을 제공합니다.  
+컴파일러는 인수의 수와 타입에 따라서 호출할 생성자를 선택합니다.
+
+중요한 규칙으로 `this`생성자는 반드시 생성자의 첫번째 줄에 등장해야 합니다.(어떻게 보면 당연합니다.)
+
+### 참조
+
+[오라클 자바 튜토리얼(this 키워드 사용)](https://docs.oracle.com/javase/tutorial/java/javaOO/thiskey.html)
+
 ## int 값을 가지고 있는 이진 트리를 나타내는 Node 라는 클래스를 정의하세요.
 
 ## int value, Node left, right를 가지고 있어야 합니다.
