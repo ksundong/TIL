@@ -75,6 +75,7 @@
 - [3주차: 연산자](live-study/operator.md)
 - [4주차: 제어문](live-study/control-statement.md)
 - [5주차: 클래스](live-study/class.md)
+- [6주차: 상속](live-study/inheritance.md)
 
 ### Kotlin
 
