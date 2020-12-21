@@ -31,6 +31,10 @@
 2. Java는 상속 횟수에 제한을 두지 않습니다.
 3. Java는 `Object` 클래스를 제외한 클래스는 모두 부모 클래스가 있어야 하며, 명시적으로 지정해주지 않은 경우 `Object` 클래스를 상속하게 됩니다.
 
+### 참고
+
+[오라클 자바 튜토리얼(상속)](https://docs.oracle.com/javase/tutorial/java/IandI/subclasses.html)
+
 ## super 키워드
 
 ## 메소드 오버라이딩
