@@ -44,6 +44,52 @@
 
 ### 슈퍼클래스 멤버에 접근
 
+위의 설명을 코드로 보여드리겠습니다.
+
+아래의 코드는 슈퍼클래스가 될 클래스인 `Superclass` 입니다. 이 클래스는 `printMethod`라는 메서드를 가지고 있습니다.
+
+```java
+public class Superclass {
+
+  public void printMethod() {
+    System.out.println("Printed in Superclass.");
+  }
+}
+```
+
+아래의 코드는 `Superclass`의 서브클래스가 될 클래스 `Subclass`입니다. 이 클래스는 `printMethod()`를 오버라이딩 하고 있습니다.
+
+```java
+public class Subclass extends Superclass {
+
+  @Override
+  public void printMethod() {
+    super.printMethod(); // super 키워드로 슈퍼클래스의 멤버 메서드에 접근할 수 있습니다.
+    System.out.println("Printed in Subclass.");
+  }
+
+  public static void main(String[] args) {
+    Subclass s = new Subclass();
+    s.printMethod();
+  }
+}
+```
+
+기본적으로 상속을 하면 슈퍼클래스의 멤버 중 `private`, `default`가 아닌 멤버들을 참조할 수 있습니다. 만약 슈퍼클래스의 메서드와 동일한 시그니처를 가진 메서드를 선언한다면 이를 오버라이딩이라고 하며 재정의한다고 표현합니다. 이렇게 하면, 메서드의 동작을 변경할 수 있습니다. (매개변수와 리턴타입은 변경 불가)
+
+주로 오버라이딩 할 때는 컴파일러에서 컴파일 타임에 체크할 수 있도록 하기 위해 `@Override` 애노테이션을 붙여주는 것이 좋습니다. 오타를 쳐서 실수를 하는 경우를 방지해줍니다.
+
+그리고 이렇게 오버라이딩 된 메서드는 슈퍼클래스의 메서드를 가리기 때문에 `super`라는 키워드로 호출을 해야합니다.
+
+위의 코드를 컴파일하고 실행하면 다음과 같이 출력됩니다.
+
+```text
+Printed in Superclass.
+Printed in Subclass.
+```
+
+객체지향의 원칙중에서 LSP(Liskov Substitution Principle)이 있는데, 오버라이딩을 하면서 이 원칙이 깨지도록 하면 안됩니다. (이 원칙은 상위 타입의 객체를 하위 타입의 객체로 치환하더라도 상위 타입을 사용하는 다른 코드는 이전과 동일하게 동작해야 한다는 원칙입니다.)
+
 ### 서브클래스 생성자에서 접근
 
 ### 참고
