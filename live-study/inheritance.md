@@ -92,6 +92,37 @@ Printed in Subclass.
 
 ### 서브클래스 생성자에서 접근
 
+`super` 키워드는 서브클래스 생성자에서 슈퍼클래스의 생성자를 호출하는데도 사용할 수 있습니다.
+
+```java
+public MountainBike (int startHeight, int startCadence, int startSpeed, int startGear) {
+  super(startCadence, startSpeed, startGear);
+  seatHeight = startHeight;
+}
+```
+
+위 코드를 보면 MountainBike의 생성자는 슈퍼클래스의 생성자를 호출해서 값을 초기화 함을 알 수 있습니다.
+
+슈퍼클래스의 생성자를 호출하는 것은 서브클래스 생성자의 맨 첫번째 줄에 입력해야합니다. 슈퍼클래스의 생성자를 호출하는 문법은
+
+```java
+super();
+```
+
+또는
+
+```java
+super(parameter list);
+```
+
+입니다. `super()`를 호출하면 슈퍼클래스의 인자없는 생성자가 호출됩니다. `super(parameter list)`를 호출하면, 해당 파라미터 리스트에 매핑되는 생성자가 호출됩니다.
+
+#### 알아두기
+
+만약 슈퍼클래스 생성자가 서브클래스 생성자에서 명시적으로 수행되지 않았다면, 자바 컴파일러가 자동으로 슈퍼클래스의 인자없는 생성자를 넣어줍니다. 만약 슈퍼클래스가 인자없는 생성자를 가지고 있지 않다면 컴파일 에러가 발생합니다. `Object`는 해당 생성자가 있습니다. 만약 `Object`가 유일한 슈퍼클래스라면 아무런 문제도 없을 것입니다.
+
+만약, 서브클래스의 생성자가 슈퍼클래스의 생성자를 실행한다면, `Object`의 생성자까지 호출되는 생성자의 체인이 있을 것이라고 생각할 겁니다. 이것은 복잡한 상속관계를 다룰 때 꼭 인지할 필요가 있습니다.
+
 ### 참고
 
 [오라클 자바 튜토리얼(super 키워드)](https://docs.oracle.com/javase/tutorial/java/IandI/super.html)
