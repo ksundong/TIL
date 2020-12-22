@@ -131,6 +131,44 @@ super(parameter list);
 
 ### 인스턴스 메소드
 
+슈퍼클래스에 있는 메서드의 시그니처와 리턴타입이 동일한 서브클래스의 메서드는 슈퍼클래스의 메서드를 재정의 할 수 있습니다.
+
+메소드 오버라이딩은 "충분히 가까운(?)" 클래스를 상속하고 동작을 수정하는 것을 의미합니다. 메소드 오버라이딩을 할 때에는 오버라이딩 하려는 메소드의 이름, 파라미터의 수와 타입(리스트), 리턴 타입이 같아야 합니다. 오버라이딩 된 메서드는 원래 정의되어있던 리턴타입의 하위타입을 반환할 수도 있습니다. 이를 `covariant return type`이라고 합니다.
+
+찾아보니 C#은 `covariant return type`을 지원하지 않는다고 합니다.
+
+#### Covariance
+
+공변으로 번역할 수 있는 Covariance는 쉽게 말해서 슈퍼타입이 정의되었을 때, 서브타입을 허용한다고 약속하는 것입니다. 이는 리스코프 치환원칙과도 관계가 있다고 합니다.
+
+즉 상위 타입으로 정의된 요소에 하위 타입을 사용해도 괜찮다는 것입니다.
+
+#### Covariant Return Type
+
+이 공변 반환 타입은 우리가 메서드를 오버라이딩 할 때, 오버라이딩 한 메서드의 리턴타입의 서브타입을 반환하는 것을 허용한다는 것입니다.
+
+예제코드로 설명해드리겠습니다. 간단한 `Producer` 클래스와 `produce()` 메서드가 있습니다. 기본적으로 `String`을 매개변수로 받고, 서브클래스의 유연성을 위해 `Object` 타입으로 `String`이 반환됩니다.
+
+```java
+public class Producer {
+  public Object produce(String input) {
+    Object result = input.toLowerCase();
+    return result;
+  }
+}
+```
+
+`Object`가 리턴타입이므로, 우리는 좀 더 구체적인 타입을 서브클래스에서 지정할 수 있습니다. 이를 공변 반환 타입이라고 합니다.
+
+```java
+public class IntegerProducer extends Producer {
+  @Override
+  public Integer produce(String input) {
+    return Integer.parseInt(input);
+  }
+}
+```
+
 ### `static` 메소드
 
 ### 인터페이스 메소드
@@ -142,6 +180,7 @@ super(parameter list);
 ### 참고
 
 [오라클 자바 튜토리얼(메소드 오버라이딩)](https://docs.oracle.com/javase/tutorial/java/IandI/override.html)
+[밸덩 java covariant return type](https://www.baeldung.com/java-covariant-return-type)
 
 ## 다이나믹 메소드 디스패치(Dynamic Method Dispatch)
 
