@@ -226,6 +226,50 @@ class ProducerTest {
 
 ### `static` 메소드
 
+슈퍼클래스의 `static` 메서드와 동일한 메서드 시그니처를 사용하여 서브클래스의 `static` 메서드를 정의하는 경우, 슈퍼클래스의 `static` 메서드는 숨겨집니다.
+
+숨겨진다는 의미는 어디에서 호출되는지에 따라 동작이 달라진다고 이해하면 좋습니다. 이는 예제 코드를 통하면 쉽게 이해할 수 있습니다.
+
+```java
+public class Animal {
+  public static void testClassMethod() {
+    System.out.println("The static method in Animal");
+  }
+
+  public void testInstanceMethod() {
+    System.out.println("The instance method in Animal");
+  }
+}
+```
+
+```java
+public class Cat extends Animal {
+  public static void testClassMethod() {
+    System.out.println("The static method in Cat");
+  }
+
+  @Override
+  public void testInstanceMethod() {
+    System.out.println("The instance method in Cat");
+  }
+
+  public static void main(String[] args) {
+    Animal animal = new Cat();
+    Animal.testClassMethod();
+    animal.testInstanceMethod();
+  }
+}
+```
+
+출력이 어떻게 나올까요?
+
+```text
+The static method in Animal
+The instance method in Cat
+```
+
+위와같이 출력됩니다.
+
 ### 인터페이스 메소드
 
 ### 제어자
