@@ -139,7 +139,7 @@ super(parameter list);
 
 #### Covariance
 
-공변으로 번역할 수 있는 Covariance는 쉽게 말해서 슈퍼타입이 정의되었을 때, 서브타입을 허용한다고 약속하는 것입니다. 이는 리스코프 치환원칙과도 관계가 있다고 합니다.
+공변으로 번역할 수 있는 Covariance는 쉽게 말해서 슈퍼타입이 정의되었을 때, 서브타입을 허용한다고 약속하는 것입니다. 이는 리스코프 치환 원칙과도 관계가 있다고 합니다.
 
 즉 상위 타입으로 정의된 요소에 하위 타입을 사용해도 괜찮다는 것입니다.
 
@@ -168,6 +168,61 @@ public class IntegerProducer extends Producer {
   }
 }
 ```
+
+#### 이를 검증하기 위한 테스트 코드 작성
+
+공변 반환 타입의 기본적인 아이디어는 리스코프 치환 원칙을 지원하기 위함입니다.
+
+당연하게도 리턴타입은 슈퍼클래스의 메서드의 리턴타입과 호환되는 타입만 지정가능합니다.(혹시 몰라서 해봤는데 안되더라고요.)
+
+먼저 우리는 간단히 `Producer` 인스턴스를 생성하는 코드를 `IntegerProducer`로 교체할겁니다. 결과는 `Object` 타입으로 반환된다고 했으므로 호환이 됩니다. `Integer` 타입을 리턴한다고 해도 말이죠. 물론 위의 코드는 예제 코드이기 때문에 엄밀히 말하면 리스코프 치환 원칙의 행동이 호환되어야 함을 지키지는 않습니다.
+
+아래의 테스트 코드를 보면, Object 타입으로 반환하지만 실제 리턴되는 인스턴스의 타입이 다르고 그 결과도 상이함을 알 수 있습니다. 하지만, 어쨌든 동작합니다.
+
+만약, 좀 더 명시적인 타입의 반환을 원한다면, 명시적으로 `IntegerProducer`로 교체하면 됩니다.
+
+```java
+import static org.assertj.core.api.Assertions.assertThat;
+
+import org.junit.jupiter.api.Test;
+
+class ProducerTest {
+
+  @Test
+  void whenInputIsArbitrary_thenProducerProducesString() {
+    String arbitraryInput = "just a random text";
+    Producer producer = new Producer();
+
+    Object objectOutput = producer.produce(arbitraryInput);
+
+    assertThat(objectOutput).isEqualTo(arbitraryInput).isInstanceOf(String.class);
+  }
+
+  @Test
+  void whenInputIsSupported_thenProducerCreatesInteger() {
+    String integerAsString = "42";
+    IntegerProducer producer = new IntegerProducer();
+
+    Object result = producer.produce(integerAsString);
+
+    assertThat(result).isInstanceOf(Integer.class).isEqualTo(Integer.parseInt(integerAsString));
+  }
+
+  @Test
+  void whenInputIsSupported_thenIntegerProducerCreatesIntegerWithoutCasting() {
+    String integerAsString = "42";
+    IntegerProducer producer = new IntegerProducer();
+
+    Integer result = producer.produce(integerAsString);
+
+    assertThat(result).isEqualTo(Integer.parseInt(integerAsString));
+  }
+}
+```
+
+이 부분은 자바를 1년 넘게 알고 있었는데, 새롭게 배운 부분이라 신기했습니다.
+
+언젠가 써먹을 일이 있었으면 좋겠습니다.
 
 ### `static` 메소드
 
