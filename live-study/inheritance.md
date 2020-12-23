@@ -272,6 +272,109 @@ The instance method in Cat
 
 ### 인터페이스 메소드
 
+인터페이스에 있는 디폴트 메서드와 추상 메서드는 인스턴스 메소드 처럼 상속될 수 있습니다. 하지만, 클래스나 인터페이스의 상위 타입이 동일한 시그니처를 가진 여러 디폴트 메서드를 제공하는 경우, 자바 컴파일러는 이름 충돌을 피하기 위해 상속 규칙을 따릅니다. 이 규칙은 두가지 원칙을 따릅니다.
+
+- 인스턴스 메서드는 인터페이스의 디폴트 메서드보다 선호됩니다.  
+  코드를 통해 알아봅니다.
+
+  ```java
+  public class Horse {
+    public String identityMyself() {
+      return "I am a horse";
+    }
+  }
+  public Interface Flyer {
+    default public String identityMyself() {
+      return "I am able to fly.";
+    }
+  }
+  public Interface Mythical {
+    default public String identityMyself() {
+      return "I am a mythical creature.";
+    }
+  }
+  public class Pegasus extends Horse implements Flyer, Mythical {
+    public static void main(String[] args) {
+      Pegasus pegasus = new Pegasus();
+      System.out.println(pegasus.identityMyself());
+    }
+  }
+  ```
+
+  위 코드의 출력은 어떻게 될까요?
+
+  ```text
+  I am a horse
+  ```
+
+  가 출력됩니다.
+- 다른 후보가 오버라이딩한 메서드는 무시됩니다. 상위 타입이 공통 조상을 가지는 경우 이러한 문제가 발생할 수 있습니다.  
+  다음 코드를 통해 알아봅시다.
+
+  ```java
+  public interface Animal {
+    default public String identityMyself() {
+      return "I am an animal.";
+    }
+  }
+  public interface EggLayer extends Animal {
+    default public String identityMyself() {
+      return "I am able to lay eggs.";
+    }
+  }
+  public interface FireBreather extends Animal { }
+  public class Dragon implements EggLayer, FireBreather {
+    public static void main(String[] args) {
+      Dragon dragon = new Dragon();
+      System.out.println(dragon.identityMyself());
+    }
+  }
+  ```
+
+  위 코드의 출력은 어떻게 될까요?
+
+  ```text
+  I am able to lay eggs.
+  ```
+
+  가 나옵니다.  
+
+두 개 이상의 독립적으로 정의된 디폴트 메서드가 충돌하거나, 디폴트 메서드와 추상 메서드가 충돌되는 경우에는 컴파일러 에러가 발생합니다. 이 경우 상위 타입의 메서드를 명시적으로 재정의 해주어야 합니다.
+
+이 역시 예제 코드를 보면 이해하기 쉽습니다.
+
+```java
+public interface OperateCar {
+  default public int startEngine(EncryptedKey key) {
+    // 구현부
+  }
+}
+public interface FlyCar {
+  default public int startEngine(EncryptedKey key) {
+    // 구현부
+  }
+}
+```
+
+위의 두 인터페이스는 동일한 시그니처를 가지는 메서드 `startEngine`을 가지고 있습니다. 이를 사용하기 위해서는 `super` 키워드와 함께 기본 구현을 실행해주어야 합니다.
+
+예를 들어서
+
+```java
+public class FlyingCar implements OperateCar, FlyCar {
+  public int startEngine(EncryptedKey key) {
+    FlyCar.super.startEngine(key);
+    OperateCar.super.startEngine(key);
+  }
+}
+```
+
+`super`는 기본값을 정의하거나 상속을 수행하는 슈퍼인터페이스를 참조합니다. 이렇게 호출한다면 같은 시그니처를 사용하는 여러 인터페이스를 구별하는데 문제가 되지 않습니다. `super` 키워드를 사용해서 클래스, 인스턴스 모두에서 기본 메서드를 호출할 수도 있습니다.
+
+상속된 메서드가 인터페이스의 추상 메서드를 오버라이딩 할 수 있습니다.
+
+참고로 인터페이스의 `static` 메서드는 상속되지 않습니다.
+
 ### 제어자
 
 ### 요약
