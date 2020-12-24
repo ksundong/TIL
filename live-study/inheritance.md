@@ -395,6 +395,49 @@ public class FlyingCar implements OperateCar, FlyCar {
 
 ## 다이나믹 메소드 디스패치(Dynamic Method Dispatch)
 
+다이나믹 메소드 디스패치는 자바의 테크닉 중 하나로, 런타임에 오버라이딩 된 메서드가 실행되는 것을 의미합니다.
+
+이는 참조 타입이 부모 타입인 경우에도 동작하므로 런타임 시점에 다형성을 만족하도록 할 수 있습니다.
+
+```java
+public class Animal {
+  public void move() {
+    System.out.println("Animals can move");
+  }
+}
+
+public class Dog extends Animal {
+  @Override
+  public void move() {
+    System.out.println("Dogs can walk and run");
+  }
+}
+
+public class Main {
+
+  public static void main(String[] args) {
+    Animal a = new Animal(); // Animal 참조, Animal 객체
+    Animal b = new Dog(); // Animal 참조, Dog 객체
+
+    a.move(); // Animal 클래스에 정의된 메서드 실행
+    b.move(); // Dog 클래스에 정의된 메서드가 실행됨(다이나믹 메소드 디스패치)
+  }
+}
+```
+
+이 결과는 다음과 같이 출력됩니다.
+
+```text
+Animals can move
+Dogs can walk and run
+```
+
+위 예제에서 b는 `Animal` 타입을 참조하지만 `Dog` 클래스에 정의된 `move` 메서드가 실행되는 것을 확인할 수 있습니다. 이 이유는 컴파일 타임에는 참조 타입만 확인하지만, 런타임에는 JVM이 객체의 타입을 파악하고 그 객체에 정의된 메서드를 실행합니다.
+
+### 참고
+
+[tutorialspoint(Dynamic method dispatch)](https://www.tutorialspoint.com/Dynamic-method-dispatch-or-Runtime-polymorphism-in-Java)
+
 ## 추상 클래스
 
 ## final 키워드
