@@ -130,7 +130,93 @@ public class Line extends Graphic implements Draggable {
 
 자바 언어에서 사용하는 패키지는 java, javax 입니다.
 
-인터넷 도메인이 올바르지 않은 경우도 있습니다. 예를 들어, 하이픈이 들어간 경우, 특수문자가 포함된 경우, 패키지명으로 시작할 수 없는 문자인 경우, 예약어인 경우 등이 있습니다. 이럴 경우 underscore(_)로 대체하는 것을 권장합니다.
+인터넷 도메인이 올바르지 않은 경우도 있습니다. 예를 들어, 하이픈이 들어간 경우, 특수문자가 포함된 경우, 패키지명으로 시작할 수 없는 문자인 경우, 예약어인 경우 등이 있습니다. 이럴 경우 underscore(\_)로 대체하는 것을 권장합니다.
+
+### 패키지 멤버의 사용
+
+패키지를 구성하는 타입들을 통틀어서 패키지 멤버라고 합니다.
+
+`public` 패키지 멤버를 외부에서 사용하는 방법은 다음과 같습니다.
+
+- 풀패키지 경로로 멤버를 참조합니다.
+- 특정 패키지 멤버를 import합니다.
+- 패키지 멤버의 전체 패키지를 import합니다.
+
+위 세 방식은 모두 다른 상황에서 사용합니다.
+
+### 풀패키지 경로로 멤버 참조하기
+
+풀패키지 경로로 멤버를 import하는 방법입니다. 이는 자주 사용되지 않습니다. 왜냐하면, 이를 읽기도 힘들뿐더러 보기에 안좋기 때문입니다.
+
+그래서 아래에서 설명할 import문을 사용합니다. 다만, 중복되는 이름이 존재하는 경우에는 둘 중 하나는 풀패키지 경로로 참조해야합니다.
+
+```java
+graphics.Line line = new graphics.Line();
+```
+
+### 패키지 멤버 import 하기
+
+특정 멤버를 현재 파일에 import하고 싶은 경우 `import` 문을 `package` 문 다음의 파일 시작부분에 넣는 방법이 있습니다.
+
+```java
+import graphics.Rectangle;
+
+Rectangle rectangle = new Rectangle();
+```
+
+이것도 잘 동작하지만, 엄청 많은 멤버들을 한 패키지에 넣고자 한다면 무리가 있을겁니다.
+
+### 전체 패키지 import하기
+
+그래서 나온것이 바로 전체 패키지 import 방식입니다. 애스터리스크(\*)를 사용해서 와일드카드로 사용할 수 있습니다.
+
+```java
+import grahpics.*;
+
+Circle circle = new Circle();
+Rectangle rectangle = new Rectangle();
+```
+
+위와 같은 방식으로 사용할 수 있지만 패턴 매칭은 되지 않습니다. 예를들면, `graphics.C*`은 지원되지 않습니다.
+
+우리의 편의를 위해서 Java 컴파일러는 `java.lang`패키지와, 현재 패키지를 자동으로 import 해줍니다.
+
+### static import 문
+
+static final 필드나 static method에 자주 액세스 해야하는 경우, static import 문을 활용해서 코드를 보다 깔끔하게 정리할 수 있습니다.
+
+불필요한 접두사를 제거하고 사용할 수 있도록 해줍니다.
+
+`java.lang.Math` 클래스를 예로 들어보겠습니다.
+
+```java
+public static final double PI = 3.11592653589793;
+
+public static double cos(double a) {
+  ...
+}
+```
+
+일반적으로 Math 클래스의 static 멤버를 사용하려면 다음과 같이 사용할 겁니다.
+
+`double r = Math.cos(Math.PI * theta);`
+
+하지만 다음과 같은 문장을 사용해서 줄여서 사용할 수 있습니다.
+
+`import static java.lang.Math.PI;` or `import static java.lang.Math.*`
+
+그렇게 하면 이런식으로 사용할 수 있습니다.
+
+```java
+import static java.lang.Math.*;
+
+...
+double r = cos(PI * theta);
+```
+
+자주 사용하는 상수나 메서드들은 이를 포함하는 고유한 클래스를 만들어 사용하는 편이 좋습니다.
+
+하지만, 이를 너무 과도하게 사용하는 경우 코드를 읽는 사람 입장에서 굉장히 어렵게 느껴질 수 있습니다. 코드를 쉽게 읽을 수 있도록 하는 것에 초점을 맞추는게 좋습니다.
 
 ### 참고
 
