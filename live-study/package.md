@@ -218,6 +218,63 @@ double r = cos(PI * theta);
 
 하지만, 이를 너무 과도하게 사용하는 경우 코드를 읽는 사람 입장에서 굉장히 어렵게 느껴질 수 있습니다. 코드를 쉽게 읽을 수 있도록 하는 것에 초점을 맞추는게 좋습니다.
 
+### 소스와 클래스파일 관리하기
+
+자바 플랫폼의 많은 구현들은 소스와 클래스 파일을 관리하기 위해 계층적인 파일 시스템에 의존합니다. 하지만 자바 언어 스펙상으로는 이를 필요로 하지 않습니다.
+
+하지만 우리는 계층적인 파일 시스템에서 작업을 하므로 다음과 같은 전략을 취합니다.
+
+클래스, 인터페이스, Enum, 애노테이션 타입에 대한 소스코드는 `타입의 이름.java`와 같은 텍스트 파일에 기록합니다.
+
+```java
+// Rectangle.java
+package graphic;
+
+public class Rectangle {
+  ...
+}
+```
+
+위와 같은 식으로 파일을 작성합니다. 그런 다음 다음과 같이 디렉토리에 파일을 넣습니다.
+
+`...../grahpics/Rectangle.java`
+
+윈도우즈에선 `\`를 사용하지만 UNIX Like 운영체제의 경우 `/`를 사용합니다.
+
+이렇게 하면 다음과 같이 표현할 수 있습니다.
+
+- 클래스 이름 - graphics.Rectangle
+- 파일 경로 이름 - grahpics/Rectangle.java
+
+그리고 우리는 보통 앞에 도메인을 붙여서 패키지를 만듭니다. 예를들어 `com.example.graphics.Rectangle` 과 같은 식으로 관리합니다.
+
+`...../com/example/graphics/Rectangle.java` 와 같은 경로로 표현될 수 있습니다.
+
+이런 소스 파일들은 자바 컴파일러를 이용해 컴파일 하면 동일한 이름의 `.class` 확장자 파일이 생성됩니다.  
+그리고 또 한가지 사실은 각각의 클래스마다 클래스 파일이 생성된다는 것입니다.
+
+```java
+package com.example.graphics;
+
+public class Rectangle {
+  ...
+}
+
+class Helper {
+  ...
+}
+```
+
+위와 같은 파일을 컴파일 하는 경우 `com/example/grahpics/Rectangle.class`, `com/example/grahpics/Helper.class` 파일이 생성됩니다.
+
+클래스 파일 경로가 꼭 자바 파일과 같은 경로에 있을 필요는 없습니다. 소스를 공개하지 않고 컴파일 된 코드만 제공할 수 있다는 의미지요.
+
+이를 `classes` 디렉토리에 넣어서 관리하는 방식을 사용하면 컴파일러나 JVM이 프로그램에서 사용하는 모든 타입을 찾을 수 있고, 이렇게 할 수 있도록 소스와 클래스파일을 관리해야합니다.
+
+`classes` 디렉토리의 경로를 시스템 변수 CLASSPATH에 설정하는데 이를 `classpath` 라고 합니다. 컴파일러와 JVM은 `.class` 파일을 패키지 이름과 함께 클래스 패스에 생성합니다.
+
+그리고 이 클래스 패스는 세미콜론(windows), 콜론(UNIX)로 구분된 여러 경로가 포함될 수 있습니다.
+
 ### 참고
 
 - [오라클 자바 튜토리얼(패키지)](https://docs.oracle.com/javase/tutorial/java/package/index.html)
