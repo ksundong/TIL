@@ -275,6 +275,20 @@ class Helper {
 
 그리고 이 클래스 패스는 세미콜론(windows), 콜론(UNIX)로 구분된 여러 경로가 포함될 수 있습니다.
 
+### CLASSPATH 시스템 변수 설정하기
+
+CLASSPATH 변수를 표시하려면, 아래의 명령어를 입력하세요. 유닉스 환경만 정리합니다.
+
+`% echo $CLASSPATH`
+
+CLASSPATH 변수를 지우려면 다음과 같이 입력하세요.
+
+`% unset CLASSPAth; export CLASSPATH`
+
+CLASSPATH를 설정하려면 다음과 같이 입력하시면 됩니다.
+
+`% CLASSPATH=/home/george/java/classes; export CLASSPATH`
+
 ### 참고
 
 - [오라클 자바 튜토리얼(패키지)](https://docs.oracle.com/javase/tutorial/java/package/index.html)
