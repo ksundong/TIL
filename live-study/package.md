@@ -295,6 +295,16 @@ CLASSPATH를 설정하려면 다음과 같이 입력하시면 됩니다.
 
 ## -classpath 옵션
 
+JDK 도구들에는 `-classpath` 라는 옵션을 줄 수 있습니다. `java`, `jdb`, `javac`, `javah` 라는 도구들이 이 옵션을 사용할 수 있는 도구들입니다.
+
+이 옵션을 사용하면 도구들이 실행되는 동안 입력한 경로가 CLASSPATH 환경변수를 대체하게 됩니다.
+
+약어로 `-cp`를 쓸 수도 있습니다.
+
+### 참고
+
+- [오라클 공식 문서(Classpath)](https://docs.oracle.com/javase/7/docs/technotes/tools/windows/classpath.html)
+
 ## 접근지시자
 
 접근 제어자는 우리가 해당 필드가 접근할 수 있는 클래스들을 제어할 수 있도록 해줍니다.
