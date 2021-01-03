@@ -165,6 +165,7 @@
 - [HTTP Method의 멱등성](Network/http-method-idempotent.md)
 - [브라우저에서 DNS Lookup은 어떤과정으로 진행되는가](Network/browser-dnslookup-process.md)
 - [TCP 프로토콜](Network/tcp-protocol.md)
+- [HTTPS의 동작 원리](Network/https-principle-of-operation.md)
 
 ### Books
 
