@@ -77,6 +77,7 @@
 - [5주차: 클래스](live-study/class.md)
 - [6주차: 상속](live-study/inheritance.md)
 - [7주차: 패키지](live-study/package.md)
+- [8주차: 인터페이스](live-study/interface.md)
 
 ### Kotlin
 
