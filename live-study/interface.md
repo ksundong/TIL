@@ -31,7 +31,7 @@ public interface Car {
   // 메서드 시그니처 정의
   boolean drive();
 
-  // 이넘 값 정의
+  // 열거형 값 정의
 
   // 기타 default 메서드, static 메서드, 중첩 타입 정의
 }
