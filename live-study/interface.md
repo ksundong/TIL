@@ -74,6 +74,47 @@ public class ToyCar implements Car {
 
 ## 인터페이스 레퍼런스를 통해 구현체를 사용하는 방법
 
+인터페이스는 인스턴스화가 불가능합니다. 그렇다면 어떻게 사용해야 할까요?
+
+인터페이스를 구현한 클래스를 인스턴스화해서 사용할 수 있습니다.
+
+```java
+public static void main(String[] args) {
+  Car car = new ToyCar();
+
+  car.drive(); // 이건 됩니다.
+  car.play(); // 이건 안됩니다.
+}
+```
+
+위 코드는 컴파일 되지 않습니다. 왜일까요? `play`라는 메서드는 `ToyCar`에 분명히 정의되어 있습니다. 하지만 `Car`에서는 해당 메서드에 대해서 모르고 있는 상태입니다.
+
+따라서, 해당 코드는 `play` 메서드를 호출하는 부분을 제거해야 컴파일 됩니다.
+
+```java
+public static void main(String[] args) {
+  Car car = new ToyCar();
+
+  car.drive(); // 이건 됩니다.
+}
+```
+
+이렇게 된다면 장점은 바로, `ToyCar`를 다른 것으로 대체해도 인터페이스의 약속만 지킨다면 코드의 동작에 문제가 없다고 추측할 수 있다는 것입니다.  
+다시말해 변경에 유연해집니다.
+
+이것이 바로 추상화가 가져다 주는 변경에 유연해지는 코드입니다.
+
+실제 인스턴스는 `ToyCar`의 인스턴스기 때문에 다음과 같이 사용이 가능합니다.
+
+```java
+public static void main(String[] args) {
+  Car car = new ToyCar();
+
+  car.drive(); // 이건 됩니다.
+  ((ToyCar) car).play(); // 이건 됩니다.
+}
+```
+
 ## 인터페이스 상속
 
 ### 인터페이스 상속과 클래스 상속
