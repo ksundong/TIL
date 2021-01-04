@@ -24,17 +24,26 @@
 인터페이스를 정의하는 것은 클래스 정의와 비슷합니다.
 
 ```java
-public interface OperateCar {
+public interface Car {
 
   // 상수 정의(가급적이면 사용하는 것을 권장 X, Effective Java 참조)
 
   // 메서드 시그니처 정의
+  boolean drive();
 
   // 이넘 값 정의
 
   // 기타 default 메서드, static 메서드, 중첩 타입 정의
 }
 ```
+
+메서드 시그니처는 중괄호를 입력하지 않고 세미콜론으로 끝냅니다.
+
+인터페이스를 사용하기 위해서는 인터페이스를 `implements`하는 클래스를 작성해야 합니다.
+
+### 참고
+
+- [오라클 자바 튜토리얼(인터페이스)](https://docs.oracle.com/javase/tutorial/java/IandI/createinterface.html)
 
 ## 인터페이스 구현하는 방법
 
