@@ -171,6 +171,77 @@ public interface DoItPlus extends DoIt {
 
 ## 인터페이스의 기본 메소드(Default Method), 자바 8
 
+default 메서드가 추가된 이유는 다음과 같습니다. 우리의 인터페이스는 최대한 수정이 되지 않도록 설계하는게 좋지만, 언제나 변화는 있기 마련입니다.
+
+인터페이스에 메서드를 추가하면 기존에 인터페이스를 구현하던 클래스는 결국 컴파일 되지 않게됩니다. 그렇다면, 외부에 공개된 API의 경우 인터페이스 사용자의 불편이 많아질 것입니다.
+
+하지만 default 메서드가 추가됨으로 인해 인터페이스를 유연하게 변경하면서, 인터페이스의 장점까지도 챙길 수 있게 되었습니다.
+
+예제 코드를 통해 이해해봅시다.
+
+```java
+public interface Movable {
+  void move();
+}
+```
+
+```java
+public class SimpleMove implements Movable {
+
+  @Override
+  public void move() {
+    System.out.println("Simple Move");
+  }
+}
+```
+
+`Movable` 을 구현하는 `SimpleMove` 클래스를 정의했습니다. 이는 일반적인 인터페이스의 사용에 해당합니다.
+
+그런데, Movable의 사양이 변경되었습니다. 멈출수도 있어야 합니다. 기존이라면 SimpleMove까지 같이 고쳐주어야 합니다. (물론, 우리 눈에 보이지 않는 구현체들도 모두 신경써줘야 하고, 인터페이스를 사용하는 쪽의 코드는 전부 깨질것입니다.)
+
+아래와 같이 default 메서드를 적용해주면 구현체 전반에 걸쳐서 아래의 메서드가 구현됩니다. 따라서 컴파일 에러가 발생하지 않게됩니다.
+
+```java
+public interface Movable {
+  void move();
+
+  default void stop() {
+    System.out.println("Stop");
+  }
+}
+```
+
+default 메서드가 포함된 인터페이스를 상속할 때 다음의 항목들을 수행할 수 있습니다.
+
+- default 메서드는 상속을 하는 인터페이스는 default 메서드에 대해서 다시 알려주지 않아도 됩니다.
+- default 메서드를 abstract 메서드로 다시 선언할 수 있습니다.
+- default 메서드를 다시 재정의 할 수 있습니다.
+
+```java
+public interface SuperMovable extends Movable {
+
+  @Override
+  default void stop() {
+    System.out.println("Super Stop");
+  }
+}
+```
+
+```java
+public interface SuperMovable extends Movable {
+
+  @Override
+  void stop();
+}
+```
+
+default 메서드가 등장함으로 다중 상속을 흉내낼 수 있게 되었습니다.
+
+여러 메서드가 같은 시그니처를 가지면 충돌을 하게되고, 이를 해결하는 규칙이 있습니다.
+
+- 클래스나, 슈퍼클래스에 정의된 메서드가 default 메서드보다 우선합니다. 이외의 상황에서는 default 메서드가 선택됩니다.
+- default 메서드의 시그니처가 같고, 상속관계로도 충돌을 해결할 수 없는 경우, default 메서드를 사용하는 클래스에서 오버라이드해서 어떤 쪽의 디폴트 메서드를 호출할지 명시적으로 결정해주어야 합니다.
+
 ## 인터페이스의 static 메소드, 자바 8
 
 ## 인터페이스의 private 메소드, 자바 9
