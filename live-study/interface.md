@@ -267,7 +267,58 @@ private 메서드를 사용하기 위한 4가지 규칙
 - private static 메서드는 다른 static, non-static 인터페이스 메서드에서 사용될 수 있습니다.
 - private non-static 메서드는 private static 메서드 내부에서 사용될 수 없습니다.
 
-예제는 내일 작성해야겠습니다.
+```java
+public interface CustomInterface {
+
+  void method1();
+
+  default void method2() {
+    method4(); // 디폴트 메서드 안의 private 메서드
+    method5(); // non-static 메서드 안의 static 메서드
+    System.out.println("default method 2");
+  }
+
+  static void method3() {
+    method5(); // static 메서드 안의 private static 메서드
+    System.out.println("static method");
+  }
+
+  private void method4() {
+    System.out.println("private method 4");
+  }
+
+  private static void method5() {
+    System.out.println("private staic method");
+  }
+}
+
+public class CustomClass implements CustomInterface {
+
+  @Override
+  public void method1() {
+    System.out.println("abstract method");
+  }
+
+  public static void main(String[] args) {
+    CustomInterface instance = new CustomClass();
+    instance.method1();
+    instance.method2();
+    CustomInterface.method3();
+  }
+}
+
+```
+
+결과
+
+```text
+abstract method
+private method 4
+private staic method
+default method 2
+private staic method
+static method
+```
 
 ### 참고
 
