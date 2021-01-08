@@ -320,6 +320,75 @@ private staic method
 static method
 ```
 
+### private 인터페이스 메서드 예제
+
+```java
+import java.util.function.IntPredicate;
+import java.util.stream.IntStream;
+
+public interface CustomCalculator {
+
+  default int addEvenNumbers(int... nums) {
+    return add(n -> n % 2 == 0, nums);
+  }
+
+  default int addOddNumbers(int... nums) {
+    return add(n -> n % 2 != 0, nums);
+  }
+
+  private int add(IntPredicate predicate, int... nums) {
+    return IntStream.of(nums)
+        .filter(predicate)
+        .sum();
+  }
+}
+
+public class Main implements CustomCalculator {
+
+  public static void main(String[] args) {
+    CustomCalculator demo = new Main();
+
+    int[] nums = {1, 2, 3, 4, 5, 6, 7, 8, 9};
+    int sumOfEvens = demo.addEvenNumbers(nums);
+    System.out.println(sumOfEvens);
+
+    int sumOfOdds = demo.addOddNumbers(nums);
+    System.out.println(sumOfOdds);
+  }
+}
+```
+
+```text
+20
+25
+```
+
+참고로 Odd라는 조건은 결국 Even의 논리적인 부정이므로 `IntPredicate`의 `negate()` 메서드를 사용해도 됩니다.
+
+이 역시 IntPredicate의 default 메서드로 구현되어있습니다. (Functional Interface지만, default 메서드는 람다식을 만드는데 문제가 되지 않음을 알 수 있습니다.)
+
+```java
+public interface CustomCalculator {
+
+  IntPredicate isEven = n -> n % 2 == 0;
+
+  default int addEvenNumbers(int... nums) {
+    return add(isEven, nums);
+  }
+
+  default int addOddNumbers(int... nums) {
+    return add(isEven.negate(), nums);
+  }
+
+  private int add(IntPredicate predicate, int... nums) {
+    return IntStream.of(nums)
+        .filter(predicate)
+        .sum();
+  }
+}
+
+```
+
 ### 참고
 
 - [How to Do in Java(Java9)](https://howtodoinjava.com/java9/java9-private-interface-methods/)
