@@ -78,6 +78,7 @@
 - [6주차: 상속](live-study/inheritance.md)
 - [7주차: 패키지](live-study/package.md)
 - [8주차: 인터페이스](live-study/interface.md)
+- [9주차: 예외 처리](live-study/exception-handling.md)
 
 ### Kotlin
 
