@@ -22,6 +22,24 @@
 
 메서드가 예외를 던지면, 런타임 시스템은 해결할 수 있는 '무엇'을 찾기위해 시도합니다. 예외를 처리할 수 있는 '무엇'의 집합은 오류가 발생한 메서드를 사용하기 위해 불려진 메서드의 순서가 있는 리스트입니다. 메서드의 리스트는 `콜 스택`이라고 알려져 있습니다.
 
+![콜 스택](https://docs.oracle.com/javase/tutorial/figures/essential/exceptions-callstack.gif)
+
+**콜 스택**
+
+이미지 출처: <https://docs.oracle.com/javase/tutorial/essential/exceptions/definition.html>
+
+런타임 시스템은 예외를 제어할 수 있는 코드 블럭을 가지고 있는 메서드를 찾기위해 콜스택에서 검색합니다. 이 코드 블럭을 `exception handler`라고 부릅니다. 검색은 오류가 발생한 메서드로부터 시작하여 메서드가 호출된 역순으로 콜 스택을 통해서 진행됩니다. 적절한 핸들러가 발견되면, 런타임 시스템은 예외를 핸들러로 전달합니다. `exception handler`는 던져진 예외 오브젝트의 타입이 핸들러가 제어할 수 있는 타입과 일치하는 경우 적절하다고 간주됩니다.
+
+선택된 `exception handler`는 예외를 잡았다고 말합니다. 만약에 런타임 시스템이 적절한 `exception handler`를 찾지 못하고 콜 스택의 모든 메서드를 철저하게 검색하면, 런타임 시스템(결과적으로 프로그램)은 종료됩니다. (이는 비정상 종료로 볼 수 있습니다.)
+
+![예외 처리기를 찾기 위해 콜 스택을 찾는 과정](https://docs.oracle.com/javase/tutorial/figures/essential/exceptions-errorOccurs.gif)
+
+**`exception handler`를 찾기 위해 콜 스택을 찾는 과정**
+
+이미지 출처: <https://docs.oracle.com/javase/tutorial/essential/exceptions/definition.html>
+
+예외를 사용하여 에러를 관리하면 기존 에러관리 기술에 비해 몇 가지 장점이 있습니다.
+
 ## 자바에서 예외 처리 방법 (try, catch, throw, throws, finally)
 
 ## try-with-resources
