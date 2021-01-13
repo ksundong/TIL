@@ -72,18 +72,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ListOfNumbers {
-  
+
   private static final int SIZE = 10;
 
   private List<Integer> list;
-  
+
   public ListOfNumbers() {
     list = new ArrayList<>(SIZE);
     for (int i = 0; i < SIZE; i++) {
       list.add(i); // 예제 코드에선 new Integer(i)로 되어있으나, deprecated 되었고, 차라리 Integer.valueOf(i);를 쓰는 것이 좋습니다.
     }
   }
-  
+
   public void writeList() {
     // FileWriter 생성자는 IOException을 던지고, 이는 반드시 잡혀야합니다.
     PrintWriter out = new PrintWriter(new FileWriter("OutFile.txt"));
@@ -142,6 +142,54 @@ public void writeList() {
 [오라클 자바 튜토리얼(try 문)](https://docs.oracle.com/javase/tutorial/essential/exceptions/try.html)
 
 ### `catch` 블럭
+
+`try` 블럭의 예외를 처리하기 위해선 `catch` 블럭이 반드시 하나이상 필요합니다. `try` 블럭 바로 다음에 `catch` 블럭이 위치해야 합니다.
+
+```java
+try {
+
+} catch (ExceptionType name) {
+
+} catch (ExceptionType name) {
+
+}
+```
+
+각 `catch` 블럭은 인자가 나타내는 예외 타입을 처리하는 핸들러입니다. 인자의 타입은 `ExceptionType` 으로 적었는데, 이는 `Throwable` 클래스를 상속하는 예외를 처리하기 원하는 타입의 클래스의 이름을 적는 것을 의미합니다. 핸들러는 `name`을 사용해서 예외를 참조할 수 있습니다.
+
+`catch` 블럭에는 예외 처리를 위한 코드를 작성해주면 됩니다. 런타임 시스템은 던져진 예외가 `ExceptionType`과 일치하는 콜 스택에서 핸들러가 첫 번째 핸들러일 때 예외 처리기를 실행합니다. 시스템은 던져진 객체가 핸들러의 인수에 합법적으로 할당될 수 있는 경우에 일치한다고 판단합니다.
+
+예제 코드를 통해 알아봅시다.
+
+```java
+public void writeList() {
+  PrintWriter out = null;
+  try {
+    System.out.println("try문에 들어왔습니다.")
+    new PrintWriter(new FileWriter("OutFile.txt"));
+    for (int i = 0; i < SIZE; i++) {
+      out.println("Value at: " + 1 + " = " + list.get(i));
+    }
+  } catch (IndexOutOfBoundsException e) {
+    System.err.println("IndexOutOfBoundsException: " + e.getMessage());
+  } catch (IOException e) {
+    System.err.println("Caught IOException: " + e.getMessage());
+  }
+}
+```
+
+물론 위와 같은 예외처리는 매우 안좋은 예외처리입니다. 예외에 대한 정보를 출력하는 것이나 프로그램을 중지시키는 것보다, 복구 할 수 있다면 복구를 하거나, 사용자에게 결정을 하도록 하거나, 예외 체이닝(포장)을 이용하여 더 높은 수준의 핸들러로 전파할 수 있습니다.
+
+Java 7이후 버전에서는 `catch` 블럭에 여러 개의 예외를 처리할 수 있는 핸들러를 등록할 수 있습니다. 이를 통해서 중복된 코드를 제거하고, 지나치게 광범위한 예외를 포착하려는(Exception과 같은) 유혹을 줄일 수 있습니다.
+
+```java
+catch (IOException | SQLException ex) {
+  logger.log(ex);
+  throw ex;
+}
+```
+
+`catch` 블럭은 하나 이상의 예외 타입을 처리할 수 있으며, `catch` 의 파라미터는 암묵적으로 `final` 입니다. 이 예제에서 `ex`는 `final`이고, `catch` 블록 내에서 값을 할당할 수 없습니다.
 
 ### `finally` 블럭
 
