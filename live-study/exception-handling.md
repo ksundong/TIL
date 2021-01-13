@@ -106,6 +106,45 @@ public class ListOfNumbers {
 
 그럼 이제 예외가 발생할 수 있는 위치에 대해서 익숙해졌으므로, 예외를 처리하는 방법을 작성할 준비가 되었습니다.
 
+### `try` 블럭
+
+예외 처리를 만드는 가장 첫 걸음은 예외를 던질 수 있는 코드를 `try` 블럭 안에 두는 것입니다. `try`블럭은 일반적으로 다음과 같이 생겼습니다.
+
+```java
+try {
+  code
+}
+catch and finally blocks ...
+```
+
+code라고 적혀있는 부분은 하나 이상의 예외를 던질 수 있는 코드 라인입니다.
+
+예제 코드를 통해 알아봅시다.
+
+```java
+public void writeList() {
+  PrintWriter out = null;
+  try {
+    System.out.println("try문에 들어왔습니다.")
+    new PrintWriter(new FileWriter("OutFile.txt"));
+    for (int i = 0; i < SIZE; i++) {
+      out.println("Value at: " + 1 + " = " + list.get(i));
+    }
+  }
+  catch and finally
+}
+```
+
+만약에 `try` 안의 코드가 실행중 예외가 발생한다면, 예외는 연관된 예외 처리코드에 의해 처리됩니다. `try` 블럭과 연관된 예외 처리 코드를 선언하는 방법은 `catch` 블럭에 선언하는 것입니다.
+
+#### 참고
+
+[오라클 자바 튜토리얼(try 문)](https://docs.oracle.com/javase/tutorial/essential/exceptions/try.html)
+
+### `catch` 블럭
+
+### `finally` 블럭
+
 ### 참고
 
 [오라클 자바 튜토리얼(예외 처리)](https://docs.oracle.com/javase/tutorial/essential/exceptions/handling.html)
