@@ -46,6 +46,11 @@
 2. 콜 스택을 따라 에러 전파가 가능해 실질적으로 처리가 될 수 있는 지점에서 처리를 해줄 수 있습니다.
 3. 오류를 그룹화 할 수 있고, 분류할 수 있습니다.
 
+### 참고
+
+[오라클 튜토리얼(예외란 무엇인가?)](https://docs.oracle.com/javase/tutorial/essential/exceptions/definition.html)
+[오라클 튜토리얼(예외의 장점)](https://docs.oracle.com/javase/tutorial/essential/exceptions/advantages.html)
+
 ## 자바에서 예외 처리 방법 (try, catch, throw, throws, finally)
 
 ## try-with-resources
