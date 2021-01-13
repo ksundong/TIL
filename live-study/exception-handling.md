@@ -53,6 +53,63 @@
 
 ## 자바에서 예외 처리 방법 (try, catch, throw, throws, finally)
 
+자바에서는 `try`, `catch`, `finally` 블록으로 예외 처리를 수행할 수 있습니다.
+
+우리는 자바 튜토리얼에서 나오는 예제코드를 바탕으로 다양한 시나리오에서 발생하는 예외 처리 방법을 학습해보겠습니다.
+
+먼저 코드의 구현 요구사항은 다음과 같습니다.
+
+> `ListOfNumbers` 라는 클래스가 있습니다. 이 클래스가 생성되면 0부터 9까지 10개의 `Integer`타입 요소를 포함하는 `ArrayList`가 생성됩니다.  
+> `ListOfNumbers` 클래스는 `writeList`라는 숫자 리스트를 `OutFile.txt`라는 파일에 쓰는 메서드 또한 정의합니다.  
+> 이 예제는 `java.io` 패키지에 정의된 아웃풋을 사용합니다.
+
+**주의 사항: 이 예제 클래스는 아직 컴파일 되지 않습니다.**
+
+```java
+import java.io.FileWriter;
+import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
+
+public class ListOfNumbers {
+  
+  private static final int SIZE = 10;
+
+  private List<Integer> list;
+  
+  public ListOfNumbers() {
+    list = new ArrayList<>(SIZE);
+    for (int i = 0; i < SIZE; i++) {
+      list.add(i); // 예제 코드에선 new Integer(i)로 되어있으나, deprecated 되었고, 차라리 Integer.valueOf(i);를 쓰는 것이 좋습니다.
+    }
+  }
+  
+  public void writeList() {
+    // FileWriter 생성자는 IOException을 던지고, 이는 반드시 잡혀야합니다.
+    PrintWriter out = new PrintWriter(new FileWriter("OutFile.txt"));
+
+    for (int i = 0; i < SIZE; i++) {
+      // get(int) 메서드는 IndexOutOfBoundsException을 던지고, 이는 반드시 처리되어야 합니다.
+      out.println("Value at: " + 1 + " = " + list.get(i));
+    }
+    out.close();
+  }
+}
+```
+
+`new FileWriter("OutFile.txt")`는 생성자로, 이 생성자는 file의 아웃풋 스트림을 초기화합니다. 파일이 열릴 수 없다면, 생성자는 `IOException`을 던집니다.
+
+`list.get(i)`는 `ArrayList`의 `get` 메서드로, `ArrayList`의 index 범위를 벗어나는 요청이 들어오는 경우 `IndexOutOfBoundsException을 던지게됩니다.
+
+`ListOfNumbers` 클래스를 컴파일 하려고 하면, 컴파일러가 `FileWriter` 생성자에서 예외를 던진다는 메시지를 출력합니다. 하지만, `get`에 대해서는 에러메시지를 표시하지 않습니다.  
+그 이유는 `FileWriter` 생성자에서 던지는 `IOException`은 Checked Exception이고, `get` 메서드에서 던지는 `IndexOutOfBoundsException`은 Unchecked Exception이기 때문입니다.
+
+그럼 이제 예외가 발생할 수 있는 위치에 대해서 익숙해졌으므로, 예외를 처리하는 방법을 작성할 준비가 되었습니다.
+
+### 참고
+
+[오라클 자바 튜토리얼(예외 처리)](https://docs.oracle.com/javase/tutorial/essential/exceptions/handling.html)
+
 ## try-with-resources
 
 ## 자바에서 예외를 발생시키는 방법
