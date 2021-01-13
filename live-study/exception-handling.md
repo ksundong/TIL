@@ -193,6 +193,48 @@ catch (IOException | SQLException ex) {
 
 ### `finally` 블럭
 
+`finally` 블럭은 `try` 블럭을 벗어날 때 항상 실행됩니다. 이런 방식은 예기치 못한 예외가 발생하더라도 `finally` 블럭의 코드는 동작한다는 것을 의미합니다. 그러나 `finally`는 예외 처리 이상의 용도로도 유용합니다. 프로그래머가 `return`, `continue`, `break`를 사용해서 정리하는 코드를 피하는 것을 방지할 수 있습니다. 정리하는 코드를 `finally` 블럭에 두는 것은 좋은 습관입니다.
+
+참고: try 또는 catch 코드가 실행되는 동안 JVM이 종료되면 finally 블럭이 실행되지 않을 수 있습니다. 마찬가지로, try 또는 catch 코드를 실행하는 동안 스레드가 중단되거나, 종료되면 애플리케이션이 동작중이더라도, finally 블럭이 실행되지 않을 수 있습니다.
+
+`writeList` 메서드의 `try` 블럭에서는 `PrintWriter`를 엽니다. 프로그램은 `writeList` 메서드를 종료하기 전에 해당 스트림을 닫아야 합니다. 이것은 `writeList`의 `try` 블럭이 세 가지 방법 중 하나로 종료될 수 있기 때문에 복잡한 문제가 될 수 있습니다.
+
+1. `FileWriter` 문은 실패하면 `IOException`을 던집니다.
+2. `list.get(i)` 문이 실패하면 `IndexOutOfBoundsException`을 던집니다.
+3. 모두 성공하면 `try` 블럭은 평범하게 종료됩니다.
+
+런타임 시스템은 `try` 블럭 안에서 어떤 일이 일어나는지와 상관없이 항상 `finally` 블럭을 실행합니다. 따라서 정리 코드를 두기에 최고의 위치입니다.
+
+예제 코드를 통해 알아봅니다.
+
+```java
+public void writeList() {
+  PrintWriter out = null;
+  try {
+    System.out.println("try문에 들어왔습니다.")
+    new PrintWriter(new FileWriter("OutFile.txt"));
+    for (int i = 0; i < SIZE; i++) {
+      out.println("Value at: " + 1 + " = " + list.get(i));
+    }
+  } catch (IndexOutOfBoundsException e) {
+    System.err.println("IndexOutOfBoundsException: " + e.getMessage());
+  } catch (IOException e) {
+    System.err.println("Caught IOException: " + e.getMessage());
+  } finally {
+    if (out != null) {
+      System.out.println("Closing PrintWriter");
+      out.close();
+    } else {
+      System.out.println("PrintWriter not open");
+    }
+  }
+}
+```
+
+중요: `finally` 블럭은 리소스 누수를 막기위한 중요 도구입니다. 파일을 닫거나 리소스를 복구할 때, 코드를 `finally` 블럭에 넣어 리소스가 _항상_ 복구되도록 합니다.
+
+혹은 이런 상황에 `try-with-resources` 문을 사용해서 자동으로 시스템 리소스가 필요없는 시점에 릴리즈하도록 하는 것을 고려하십시오.
+
 ### 참고
 
 [오라클 자바 튜토리얼(예외 처리)](https://docs.oracle.com/javase/tutorial/essential/exceptions/handling.html)
