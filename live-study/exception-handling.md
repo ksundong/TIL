@@ -288,6 +288,52 @@ try-with-resources 문과 연결된 코드 블럭에서 예외가 발생할 수 
 
 위의 두 인터페이스에 대한 자세한 정보는 JavaDoc을 참고하세요. `Closeable` 인터페이스는 `AutoCloseable` 인터페이스를 상속합니다. `Closeable` 인터페이스의 `close` 메서드는 `IOException` 타입의 예외를 던지는 반면, `AutoCLoseable` 인터페이스의 `close` 메서드는 `Exception` 타입의 예외를 던집니다. 결과적으로 `AutoCloseable` 인터페이스의 하위 클래스는 `close` 메서드를 오버라이딩 할 때, `IOException`과 같은 좀 더 상세한 예외로 던지거나, 예외를 전혀 발생시키지 않을 수 있습니다.
 
+### 예외 처리 시나리오
+
+합쳐진 `writeList` 메서드
+
+```java
+public void writeList() {
+  // FileWriter 생성자는 IOException을 던지고, 이는 반드시 잡혀야합니다.
+  PrintWriter out = null;
+  
+  try {
+    System.out.println("try문 진입");
+    
+    out = new PrintWriter(new FileWriter("OutFile.txt"));
+    for (int i = 0; i < SIZE; i++) {
+      // get(int) 메서드는 IndexOutOfBoundsException을 던지고, 이는 반드시 처리되어야 합니다.
+      out.println("Value at: " + 1 + " = " + list.get(i));
+    }
+  } catch (IndexOutOfBoundsException e) {
+    System.err.println("IndexOutOfBoundsException 잡힘" + e.getMessage());
+  } catch (IOException e) {
+    System.err.println("IOException 잡힘: " + e.getMessage());
+  } finally {
+    if (out != null) {
+      System.out.println("PrintWriter 닫는중");
+      out.close();
+    } else {
+      System.out.println("PrintWriter는 안열려있습니다.");
+    }
+  }
+}
+```
+
+코드는 3가지 종료 가능성이 있고, 이는 두 종류로 구분할 수 있습니다.
+
+1. 비정상 종료: `try` 블럭을 실행중에 예외가 발생하여 실패하는 경우 `IOException` 혹은 `IndexOutOfBoundsException`이 발생할 수 있습니다.
+2. 정상 종료
+
+#### 비정상 종료 발생시
+
+`IOException`은 `FileWriter`가 여러가지 이유로 던지는 예외로, 이 예외가 던져지면 `try` 블록의 실행은 중지되고, 적합한 예외 처리기를 발견할 때까지 검색합니다. 검색이 되면 매칭되는 예외 처리기로 예외가 전달되며 실행 후 `finally` 블록이 실행됩니다.  
+마찬가지로 `IndexOutOfBoundsException`도 동일한 동작을 수행합니다.
+
+#### 정상 종료 상황
+
+정상종료 상황에서는 `catch` 블럭의 코드는 실행되지 않고 `try` 블럭의 코드만 전부 실행된 다음 `finally` 블럭의 코드가 실행됩니다.
+
 ## 자바에서 예외를 발생시키는 방법
 
 ## 자바가 제공하는 예외 계층 구조
