@@ -279,6 +279,10 @@ static String readFirstLineFromFileWithFinallyBlock(String path) throws IOExcept
 우리는 하나 이상의 리소스를 try-with-resource에 정의할 수 있습니다. 이 때, 유의할 점은 리소스 선언과 반대의 순서로 리소스가 닫힌다는 점입니다.  
 또한 try-with-resource는 일반적인 `try`문 처럼 사용될 수 있고, `catch`, `finally`는 리소스가 닫힌 후에 실행됩니다.
 
+### 참고
+
+[오라클 자바 튜토리얼(try-with-resources)](https://docs.oracle.com/javase/tutorial/essential/exceptions/tryResourceClose.html)
+
 ### 억제된 예외
 
 try-with-resources 문과 연결된 코드 블럭에서 예외가 발생할 수 있습니다. 이 예외는 여러개 발생할 수 있으며, 위에서 설명한 것과 같이 `try` 블록에서 던져진 예외에 의해 try-with-resource에서 발생한 예외는 억제됩니다.  
@@ -333,6 +337,23 @@ public void writeList() {
 #### 정상 종료 상황
 
 정상종료 상황에서는 `catch` 블럭의 코드는 실행되지 않고 `try` 블럭의 코드만 전부 실행된 다음 `finally` 블럭의 코드가 실행됩니다.
+
+### 예외를 메서드 내에서 처리할 수 없는 경우
+
+예외를 메서드 내에서 처리할 수 없는 경우엔, 더 높은 위치의 메서드가 처리할 수 있도록 예외를 다시 던져주는 것이 좋습니다.  
+이런 메서드 상위로 예외를 던지는 것은 메서드 선언부에 `throws` 키워드를 입력하고, `throw`될 모든 예외를 쉼표로 구분된 목록으로 구성하면 됩니다.
+
+예를 들어 `writeList` 메서드의 경우에는
+
+```java
+public void writeList() throws IOException, IndexOutOfBoundsException {
+```
+
+과 같이 표현할 수 있습니다. 하지만 `IndexOutOfBoundsException`은 Unchecked Exception이므로 생략할 수 있습니다.
+
+```java
+public void writeList() throws IOException {
+```
 
 ## 자바에서 예외를 발생시키는 방법
 
