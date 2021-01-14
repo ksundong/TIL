@@ -300,10 +300,10 @@ try-with-resources 문과 연결된 코드 블럭에서 예외가 발생할 수 
 public void writeList() {
   // FileWriter 생성자는 IOException을 던지고, 이는 반드시 잡혀야합니다.
   PrintWriter out = null;
-  
+
   try {
     System.out.println("try문 진입");
-    
+
     out = new PrintWriter(new FileWriter("OutFile.txt"));
     for (int i = 0; i < SIZE; i++) {
       // get(int) 메서드는 IndexOutOfBoundsException을 던지고, 이는 반드시 처리되어야 합니다.
@@ -356,6 +356,33 @@ public void writeList() throws IOException {
 ```
 
 ## 자바에서 예외를 발생시키는 방법
+
+자바에서 예외를 던지는 방법은 `throw` 문을 이용하는 것입니다. `throw` 문은 인자로 하나를 요구합니다. `throwable` 객체입니다. `Throwable` 객체는 `Throwable` 클래스의 아무 서브 클래스의 인스턴스일 수 있습니다.
+
+여기 `throw` 문의 예제가 있습니다.
+
+```java
+throw someThrowableObject;
+```
+
+문맥과 함께 `throw` 문을 봅시다. 다음 `pop` 메서드는 일반적인 스택 객체의 것을 구현합니다. 이 메서드는 가장 위의 요소를 스택에서 제거하고 해당 객체를 반환합니다.
+
+```java
+public Object pop() {
+  Object obj;
+
+  if (size == 0) {
+    throw new EmptyStackException();
+  }
+
+  obj = ojbectAt(size - 1);
+  setObjectAt(size - 1, null);
+  size--;
+  return obj;
+}
+```
+
+`pop` 메서드는 요소가 존재하는지 확인합니다. 스택이 비어있다면, 사이즈가 0이고 `pop`메서드는 새로운 `EmptyStackException` 객체를 만들고 던집니다.
 
 ## 자바가 제공하는 예외 계층 구조
 
