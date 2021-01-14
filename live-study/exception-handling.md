@@ -241,6 +241,53 @@ public void writeList() {
 
 ## try-with-resources
 
+try-with-resource는 하나 이상의 리소스를 정의하는 try와 관련된 문법입니다. 리소스는 프로그램이 끝나기 전에 반드시 종료되어야 하는 객체를 의미합니다. try-with-resource문은 마지막에 리소스를 닫도록 합니다.  
+try-with-resource를 사용할 수 있는 리소스는 `java.lang.AutoCloseable`, `java.io.Closeable`을 구현해야 합니다.
+
+아래의 예제는 파일의 첫번째 라인을 읽습니다. `BufferedReader`를 이용하여 읽습니다. `BufferedReader`는 프로그램이 종료될 때, 반드시 닫혀야하는 리소스입니다.
+
+```java
+static String readFirstLineFromFile(String path) throws IOException {
+  try (BufferedReader br = new BufferedReader(new FileReader(path))) {
+    return br.readLine();
+  }
+}
+```
+
+위 예제에서, 리소스는 try-with-resources 문에 정의된 `BufferedReader`입니다. 선언문은 `try` 키워드 바로 뒤의 괄호 안에 표시됩니다. `BufferedReader` 클래스는 자바7 이후로 `java.lang.AutoCloseable` 인터페이스를 구현합니다.  
+`BufferedReader` 인스턴스는 try-with-resource문에서 선언되기 때문에 try 문이 정상적으로 완료되거나 갑작스럽게 종료되는 것과 관계없이 닫힙니다. (`IOException`을 던지는 `BufferedReader.readLine` 메서드의 결과 때문입니다.)
+
+자바7 이전에는 `finally` 블록을 사용해서 리소스가 닫히도록 할 수 있었습니다.
+
+```java
+static String readFirstLineFromFileWithFinallyBlock(String path) throws IOException {
+  BufferedReader br = new BufferedReader(new FileReader(path));
+  try {
+    return br.readLine();
+  } finally {
+    if (br != null) {
+      br.close();
+    }
+  }
+}
+```
+
+그러나, 이 예제에서 `readLine` 메서드와 `close` 모두 예외를 던질 수 있습니다. 따라서 `readFirstLineFromFileWithFinallyBlock` 메서드는 `finally` 블록에서 던져진 예외를 던집니다. 이 때, try의 예외는 억제됩니다.  
+이와는 반대로 `readFirstLineFromFile`메서드 예제는 `try` 블록과 try-with-resource 문 모두에서 예외가 던져지면, `try` 블록에서 던져진 예외를 던집니다. try-with-resource의 예외는 억제됩니다. 자바7부터는 억제된 예외를 찾아올 수 있습니다.  
+이는 다음 섹션에서 설명하겠습니다.
+
+우리는 하나 이상의 리소스를 try-with-resource에 정의할 수 있습니다. 이 때, 유의할 점은 리소스 선언과 반대의 순서로 리소스가 닫힌다는 점입니다.  
+또한 try-with-resource는 일반적인 `try`문 처럼 사용될 수 있고, `catch`, `finally`는 리소스가 닫힌 후에 실행됩니다.
+
+### 억제된 예외
+
+try-with-resources 문과 연결된 코드 블럭에서 예외가 발생할 수 있습니다. 이 예외는 여러개 발생할 수 있으며, 위에서 설명한 것과 같이 `try` 블록에서 던져진 예외에 의해 try-with-resource에서 발생한 예외는 억제됩니다.  
+억제된 예외를 가져오는 방법은 `Throwable.getSuppressed` 메서드를 호출해서 억제된 예외를 찾아올 수 있습니다.
+
+### `AutoCloseable`과 `Closeable` 인터페이스 구현
+
+위의 두 인터페이스에 대한 자세한 정보는 JavaDoc을 참고하세요. `Closeable` 인터페이스는 `AutoCloseable` 인터페이스를 상속합니다. `Closeable` 인터페이스의 `close` 메서드는 `IOException` 타입의 예외를 던지는 반면, `AutoCLoseable` 인터페이스의 `close` 메서드는 `Exception` 타입의 예외를 던집니다. 결과적으로 `AutoCloseable` 인터페이스의 하위 클래스는 `close` 메서드를 오버라이딩 할 때, `IOException`과 같은 좀 더 상세한 예외로 던지거나, 예외를 전혀 발생시키지 않을 수 있습니다.
+
 ## 자바에서 예외를 발생시키는 방법
 
 ## 자바가 제공하는 예외 계층 구조
