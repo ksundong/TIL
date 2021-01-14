@@ -386,7 +386,33 @@ public Object pop() {
 
 ## 자바가 제공하는 예외 계층 구조
 
-## Exception과 Error의 차이는?
+자바의 예외 계층 구조는 다음과 같습니다.
+
+![자바 예외 계층 구조](https://docs.oracle.com/javase/tutorial/figures/essential/exceptions-throwable.gif)
+
+이미지 출처: [오라클 자바 튜토리얼](https://docs.oracle.com/javase/tutorial/essential/exceptions/throwing.html)
+
+`Throwable`은 `Object`를 상속하는 예외와 관련된 최상위 클래스 입니다. 이 클래스의 후손 클래스들이 모두 예외 관련 클래스들이 됩니다.  
+보시다시피 `Throwable`은 2개의 직계 후손인 `Error`와 `Exception`를 가지고 있습니다.
+
+### Error 클래스
+
+JVM에서 dynamic linking 실패 또는 다른 hard 실패가 JVM에서 발생하면, JVM은 `Error`를 던집니다. 단순한 프로그램은 일반적으로 이를 `catch`하거나 던지지 않습니다.
+
+### Exception 클래스
+
+대부분의 프로그램은 `Exception` 클래스에서 파생된 객체를 던지고 받습니다. `Exception`은 문제가 발생했음을 나타내지만, 심각한 시스템 문제는 아닙니다. 작성하는 대부분의 프로그램은 `Error`가 아닌 `Exception`을 던지고 받습니다.
+
+자바 플랫폼은 `Exception` 클래스의 많은 후손을 정의해두었습니다. 이 후손들은 발생할 수 있는 다양한 유형의 예외를 나타냅니다. 예를 들어 `IllegalAccessException`의 신호는 일부 메서드가 찾을 수 없음을 나타내고, `NegativeArraySizeException`은 배열을 음수 사이즈로 생성하려고 할 때 발생합니다.
+
+`Exception`의 서브클래스 중 `RuntimeException`이라는 특별한 예외 클래스가 있습니다. 이는 API의 잘못된 사용을 나타내는 예외를 위해 예약되어 있습니다.  
+예를 들어 우리가 가장 자주 보는 `NullPointerException`은 메서드가 `null` 참조인 객체의 멤버에 액세스하려고 할 때 발생하게 됩니다.
+
+흥미로운 내용이 있는데, [이 글](https://docs.oracle.com/javase/tutorial/essential/exceptions/runtime.html)입니다. 왜 대부분의 애플리케이션이 runtime exception이나 `RuntimeException`의 서브클래스를 던지면 안되는지 설명합니다.
+
+결론을 요약하자면, 클라이언트가 예외를 복구 할 수 있을 것으로 보이면 `CheckedException`, 아니라면 `UncheckedException`으로 만들라고 조언하고 있습니다.
+
+그리고 이 글과 관련된 책으로는 토비의 스프링을 추천합니다. 스프링의 예외처리 전략에 대해서 다루고 있습니다.
 
 ## RuntimeException과 RE가 아닌 것의 차이는?
 
