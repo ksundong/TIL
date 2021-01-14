@@ -416,7 +416,15 @@ JVM에서 dynamic linking 실패 또는 다른 hard 실패가 JVM에서 발생�
 
 ## RuntimeException과 RE가 아닌 것의 차이는?
 
+`RumtimeException`을 보통 Uncheckted Exception, 그 외의 모든 예외를 Unchecked Exception이라고 부릅니다.
+
 ### Checked Exception, Unchecked Exception
+
+UncheckedException은 개발자가 해당 오류를 처리하거나 던질 필요가 없는 예외입니다. 명시적으로 예외가 처리되지 않는다면, 기본 예외 처리기에 의해 처리됩니다.
+
+CheckedException은 코드에서 반드시 처리가 되어야 하는 예외입니다.
+
+기본 예외 처리기에 대해서 찾아보았는데, Thread에 적용되는 기본 예외 처리기가 검색되어 관련 내용을 공유합니다. <https://www.baeldung.com/java-global-exception-handler>
 
 ## 커스텀한 예외 만드는 방법
 
