@@ -426,4 +426,50 @@ CheckedException은 코드에서 반드시 처리가 되어야 하는 예외입�
 
 ## 커스텀한 예외 만드는 방법
 
+`throw`를 할 때, 다른 사람이나 언어가 제공한 예외를 사용할 수 있습니다. Java는 사용할 수 있는 많은 예외 클래스를 제공하지만, 직접 작성할 수도 있습니다.
+
+다음 질문에 예라고 대답한 경우, 고유한 예외 클래스를 작성하는 것이 좋습니다.
+
+- Java에서 지원하지 않는 예외가 필요한가요?
+- 다른 벤더가 작성한 클래스에서 발생한 예외와, 당신이 작성한 예외를 구별할 수 있다면 사용자에게 도움이 될까요?
+- 코드에서 관련 예외가 두 개 이상 발생하나요?
+- 다른 사람의 예외를 사용하는 경우 사용자가 해당 예외에 액세스 할 수 있나요? 비슷한 질문으로는 당신의 패키지는 독립적이고, 스스로 관리되고 있나요?
+
+예외 클래스는 집합 구조를 만들 수 있습니다.
+
+이는, 부모 예외 클래스를 상속하는 구조로 만들 수 있습니다. 작성하는 대부분의 프로그램은 `Exception`의 하위면 충분합니다.
+
+### 참고
+
+[오라클 자바 튜토리얼(예외 클래스 만들기)](https://docs.oracle.com/javase/tutorial/essential/exceptions/creating.html)
+
 ## 예외 포장
+
+애플리케이션은 종종 다른 예외를 던지는 것으로 예외에 대한 응답을 합니다. 한 예외가 다른 예외를 발생시키는 아는 것은 매우 유용할 수 있습니다. 예외 포장은 프로그래머가 이를 수행하는데 도움이됩니다.
+
+`Throwable`의 다음 메서드와 생성자는 예외 포장을 지원합니다.
+
+```java
+Throwable getCause()
+Throwable initCause(Throwable)
+Throwable(String, Throwable)
+Throwable(Throwable)
+```
+
+`initCause`의 `Throwable` 인자와 `Throwable` 생성자의 인자는 현재 예외가 어떤 예외에 의해 발생했는지 알려줍니다. `getCause()`는 현재 예외의 원인인 예외를 반환합니다. 그리고 `initCause()`는 현재 예외의 원인을 설정합니다.
+
+```java
+try {
+
+} catch (IOException e) {
+  throw new SampleException("Other IOException", e);
+}
+```
+
+위의 예제는 예외 포장의 예입니다. 이 예는 `IOException`이 발생한 경우 새로운 `SampleException` 예외가 생성이 되며, 원인이 되는 예외를 포장하게 됩니다. 그리고 해당 예외는 다음 상위 레벨의 예외 처리기로 던져집니다.
+
+이를 좀 더 활용하면 CheckedException을 UncheckedException으로 포장하여 코드를 보다 깔끔하게 관리할 수 있게됩니다.(단, 반드시 처리하기 어려운 예외여야 합니다.)
+
+### 참고
+
+[오라클 자바 튜토리얼(예외 체인)](https://docs.oracle.com/javase/tutorial/essential/exceptions/chained.html)
