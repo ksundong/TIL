@@ -67,6 +67,7 @@
 - [JUnit5 문서 기초부분 번역](Java/junit5-basic-document.md)
 - [atomic vs volatile vs synchronized 차이](Java/atomic-vs-volatile-vs-synchronized.md)
 - [Java8 이후 추가된 유용한 기능들](Java/java8-after-useful-features.md)
+- [DTO, DAO, VO](Java/dto-dao-vo.md)
 
 ### Live-Study
 
