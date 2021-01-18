@@ -18,6 +18,10 @@
 
 우리는 이 중 위의 방식만 학습할 것입니다. 하지만 두 가지 방식이 있다는 점은 기억해둡시다.
 
+### Thread 정의하고 실행하기
+
+Thread 인스턴스를 생성하는 애플리케이션은 반드시 스레드에서 실행될 코드를 제공해야합니다. 자바에서는 이를 위한 두 가지 방법을 제공하는데 `Thread` 클래스를 상속한 클래스를 정의하는 것과 `Runnable` 인터페이스를 구현하는 방법이 있습니다.
+
 ### 참고
 
 [오라클 자바 튜토리얼(스레드 객체)](https://docs.oracle.com/javase/tutorial/essential/concurrency/threads.html)
