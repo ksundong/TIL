@@ -81,6 +81,37 @@ Thread 인스턴스를 생성하는 애플리케이션은 반드시 스레드에
 
 [오라클 자바 튜토리얼(스레드 객체)](https://docs.oracle.com/javase/tutorial/essential/concurrency/threads.html)
 
+### Sleep으로 실행 일시중지 시키기
+
+`Thread.sleep` 메서드는 현재 스레드의 실행을 일정시간동안 중단시킵니다. 이는 컴퓨터 시스템에서 실행될 수 있는 다른 애플리케이션이나 애플리케이션의 다른 스레드에서 프로세서의 시간을 사용할 수 있도록 하는 효율적인 방법입니다. `sleep` 메서드는 지연을 위해서 사용될 수 있으며, 시간 요구사항이 있는 다른 스레드를 기다릴 수 있습니다.
+
+`sleep`에는 두 가지 오버로드 된 버전이 존재합니다. 하나는 밀리초 단위고, 하나는 밀리초, 나노초 단위입니다.
+
+주의할 점으로는 이 `sleep`의 시간은 OS에 의존적이기 때문에 정확하지 않을 수 있다는 점입니다. 또한 `sleep` 기간은 인터럽트에 의해 종료될 수 있기 때문에, 어떤 경우라도 `sleep`을 호출하면 지정된 시간동안 스레드가 일시 중단된다고 가정하면 안됩니다.
+
+```java
+public class SleepMessages {
+
+  public static void main(String[] args) throws InterruptedException {
+    String[] importantInfo = {
+        "자바",
+        "스프링",
+        "백기선",
+        "스터디 할래"
+    };
+
+    for (String s : importantInfo) {
+      // 4초 일시 중지
+      Thread.sleep(4000);
+      // 메시지 출력
+      System.out.println(s);
+    }
+  }
+}
+```
+
+`main` 메서드에서 `throws InterruptedException`을 던지는 것을 볼 수 있습니다. 이는 슬립하고 있는 도중에 다른 스레드가 현재의 스레드를 인터럽트 하는 경우 발생합니다. 우리가 작성한 애플리케이션은 인터럽트를 발생시키는 다른 스레드를 정의하지 않았기 떄문에 `InterruptedException`이 발생하지 않았습니다.
+
 ## 스레드의 상태
 
 ## 스레드의 우선순위
