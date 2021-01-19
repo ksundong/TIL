@@ -116,6 +116,62 @@ public class SleepMessages {
 
 [오라클 자바 튜토리얼(sleep)](https://docs.oracle.com/javase/tutorial/essential/concurrency/sleep.html)
 
+### 인터럽트
+
+인터럽트는 스레드가 수행중인 작업을 중지하고 다른 작업을 수행해야 함을 나타냅니다. 스레드가 인터럽트에 반응하는 것을 정확히 결정하는 것은 프로그래머에게 달려있지만, 스레드가 종료되는 것은 매우 일반적입니다.
+
+스레드는 스레드가 인터럽트 될 `Thread` 객체에 대해 `interrupt`를 호출하여 인터럽트를 보냅니다. 인터럽트 메커니즘이 올바르게 작동하려면 인터럽트 된 스레드가 자체적으로 인터럽트를 지원해야합니다.
+
+#### 인터럽트 지원
+
+어떻게 자체적으로 인터럽트를 지원하도록 하게 할 수 있을까요? 이는 현재 무엇을 하고 있는지에 달려있습니다. 스레드가 자주 메서드에서 `InterruptedException`을 던진다면, 간단하게 `run` 메서드에서 이를 잡은 다음 반환하면 됩니다. `SleepMessages` 예제의 코드를 조금 수정해보자면, 인터럽트가 발생했을 때, 이를 자체적으로 처리하는 방법을 구현할 수 있습니다.
+
+```java
+public static void main(String[] args) {
+  String[] importantInfo = {
+      "자바",
+      "스프링",
+      "백기선",
+      "스터디 할래"
+  };
+
+  for (String s : importantInfo) {
+    // 4초 일시 중지
+    try {
+      Thread.sleep(4000);
+    } catch (InterruptedException e) {
+      return;
+    }
+    // 메시지 출력
+    System.out.println(s);
+  }
+}
+```
+
+`sleep`과 같이 `InterruptedException`을 던지는 많은 메서드는 현재 작업을 취소하고 인터럽트가 수신될 때 즉시 반환하도록 설계되었습니다.
+
+`InterruptedException`을 던지는 메서드를 호출하지 않고 스레드가 오랫동안 지속되면 어떻게 될까요? 그럴 때는 반드시 `Thread.interrupted`를 주기적으로 호출해야합니다. 이는 인터럽트가 수신되면 `true`를 반환합니다.
+
+간단한 경우에는 그냥 `return`으로 스레드를 종료시켜도 되지만, 복잡한 경우에는 `InterruptedException`을 던져주는 것이 더 합리적 일 수 있습니다.
+
+```java
+if (Thread.interrupted()) {
+  throw new InterruptedException();
+}
+```
+
+이렇게 하면 중앙에서 `catch` 절로 핸들링을 해줄 수 있습니다.
+
+#### 인터럽트 상태 플래그
+
+인터럽트 메커니즘은 `interrupt status`로 알려진 내부 플래그를 사용해 구현됩니다. `Thread.interrupt`는 이 플래그를 설정합니다. 스레드가 static 메서드 `Thread.interrupted`를 호출하여 인터럽트를 확인하면 인터럽트 상태는 지워집니다. `isInterrupted`라는 non-static 메서드는 한 스레드가 다른 스레드의 인터럽트 상태를 묻는 데 사용하고, 이는 인터럽트 상태 플래그를 변경하지 않습니다.
+
+관례적으로, `InterruptedException`을 던져서 종료되는 모든 메서드는 종료될 때, 인터럽트 상태를 비웁니다. 그러나, 다른 스레드가 인터럽트를 호출해서 인터럽트 상태가 즉시 다시 설정되는 것은 가능합니다.
+
+#### 참고
+
+[오라클 자바 튜토리얼(인터럽트)](https://docs.oracle.com/javase/tutorial/essential/concurrency/interrupt.html)
+
 ## 스레드의 상태
 
 ## 스레드의 우선순위
