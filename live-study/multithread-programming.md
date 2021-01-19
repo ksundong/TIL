@@ -22,6 +22,61 @@
 
 Thread 인스턴스를 생성하는 애플리케이션은 반드시 스레드에서 실행될 코드를 제공해야합니다. 자바에서는 이를 위한 두 가지 방법을 제공하는데 `Thread` 클래스를 상속한 클래스를 정의하는 것과 `Runnable` 인터페이스를 구현하는 방법이 있습니다.
 
+- `Runnable` 객체 제공. `Runnable` 인터페이스는 스레드에서 실행되는 코드를 포함한다는 의미의 `run` 메서드를 정의합니다. `Runnable` 객체는 `Thread` 생성자로 전달될 수 있습니다.  
+   아래의 예제 코드는 기본적인 방식으로 `Runnable` 인터페이스를 구현하는 클래스를 선언하는 방식과 람다식을 사용해서 선언하는 방식을 사용합니다.
+
+  ```java
+  public class HelloRunnable implements Runnable {
+
+    @Override
+    public void run() {
+      System.out.println("Hello World! This is Runnable Thread!");
+    }
+
+    public static void main(String[] args) {
+      (new Thread(new HelloRunnable())).start();
+
+      new Thread(() -> System.out.println("Hello, This is Lambda Thread!")).start();
+      }
+  }
+  ```
+
+  결과
+
+  ```text
+  Hello World! This is Runnable Thread!
+  Hello, This is Lambda Thread!
+  ```
+
+- `Thread` 서브클래싱. `Thread` 클래스는 그 자체로 `Runnable` 인터페이스를 구현합니다. 하지만, `run` 메서드가 아무것도 하지 않는다는 특징이 있습니다. 애플리케이션은 `Thread`의 서브클래스가 될 수 있습니다.
+
+  ```java
+  public class HelloThread extends Thread {
+
+    @Override
+    public void run() {
+      super.run();
+      System.out.println("Hello World From Thread!");
+    }
+
+    public static void main(String[] args) {
+      new HelloThread().start();
+    }
+  }
+  ```
+
+  결과
+
+  ```text
+  Hello World From Thread!
+  ```
+
+주목할만한 점은 둘 다 새로운 스레드를 생성시키기 위해서 `Thread`의 `start` 메서드를 실행했다는 점입니다.
+
+일반적으로는 `Runnable` 객체로 스레드를 생성하는 방식을 사용하는데, 그 이유는 `Runnable` 객체가 `Thread` 이외의 클래스의 하위 클래스가 될 수 있기 때문입니다. `Thread`를 사용하는 방식은 간단한 애플리케이션에서는 사용하기 쉽지만, 작업 클래스가 `Thread`의 자손 클래스여야만 한다는 것이 한계점입니다. 그러므로 `Thread`를 사용했다면 `Runnable`로 분리를 하는것도 염두에 두어야 합니다. 왜냐하면, 이 방식이 더 유연한 것 뿐만아니라 더 높은 수준의 스레드 관리 API에도 적용할 수 있습니다.
+
+`Thread` 클래스는 스레드 관리에 유용한 다수의 메소드를 정의해두고 있습니다. 여기에는 메서드를 실행하는 스레드에 대한 정보를 제공하거나 상태에 영향을 주는 `static` 메서드도 포함되어 있습니다. 그 외의 메서드는 스레드 및 `Thread` 객체를 관리하는 것과 관련된 다른 스레드에서 호출됩니다.
+
 ### 참고
 
 [오라클 자바 튜토리얼(스레드 객체)](https://docs.oracle.com/javase/tutorial/essential/concurrency/threads.html)
