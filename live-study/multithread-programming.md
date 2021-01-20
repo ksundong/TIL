@@ -172,6 +172,18 @@ if (Thread.interrupted()) {
 
 [오라클 자바 튜토리얼(인터럽트)](https://docs.oracle.com/javase/tutorial/essential/concurrency/interrupt.html)
 
+### 조인
+
+`join` 메서드는 스레드가 다른 스레드가 완료될 때 까지 기다리도록 합니다. `t`라는 `Thread` 객체가 현재 실행중인 스레드인 경우에
+
+```java
+t.join();
+```
+
+이 코드를 사용하면, 현재 스레드는 `t`의 스레드가 종료될 때 까지 실행을 멈추게 합니다. `join`의 오버로딩은 프로그래머로 하여금 얼마나 기다릴지 정하도록 합니다. 그러나 `sleep`과 마찬가지로 `join`도 OS의 시간에 의존하게 됩니다. 따라서 `join`이 우리가 정의한 만큼 정확하게 대기할 것이라고 가정하면 안됩니다.
+
+`sleep`처럼 `join`도 인터럽트가 발생하면 `InterruptedException`과 함께 종료됩니다.
+
 ## 스레드의 상태
 
 ## 스레드의 우선순위
