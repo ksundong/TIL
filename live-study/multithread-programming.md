@@ -184,6 +184,110 @@ t.join();
 
 `sleep`처럼 `join`도 인터럽트가 발생하면 `InterruptedException`과 함께 종료됩니다.
 
+#### 참고
+
+[오라클 자바 튜토리얼(조인)](https://docs.oracle.com/javase/tutorial/essential/concurrency/join.html)
+
+### 예제 코드
+
+```java
+public class SimpleThreads {
+
+  static void threadMessage(String message) {
+    String threadName = Thread.currentThread().getName();
+    System.out.format("[%s] %s: %s%n", LocalDateTime.now().format(DateTimeFormatter.ofPattern("YYYY-MM-dd hh:mm:ss.SS")), threadName, message);
+  }
+
+  private static class MessageLoop implements Runnable {
+
+    @Override
+    public void run() {
+      String[] importantInfo = {
+          "감자",
+          "고구마",
+          "닭가슴살",
+          "양상추",
+          "달걀"
+      };
+
+      try {
+        for (String info : importantInfo) {
+          // 4초 쉬기
+          Thread.sleep(1000 * info.length());
+          // 메시지 출력
+          threadMessage(info);
+        }
+      } catch (InterruptedException e) {
+        threadMessage("아직 안끝났어요!");
+      }
+    }
+  }
+
+  public static void main(String[] args) throws InterruptedException {
+    // 딜레이, 1시간
+    long patience = 1000 * 60 * 60;
+
+    // 커맨드라인 인자가 있으면 변경(단위는 초)
+    if (args.length > 0) {
+      try {
+        patience = Long.parseLong(args[0]) * 1000;
+      } catch (NumberFormatException e) {
+        System.err.println("숫자를 입력해주세요.");
+        System.exit(1);
+      }
+    }
+
+    threadMessage("MessageLoop 스레드를 시작합니다.");
+    long start = System.currentTimeMillis();
+    Thread t = new Thread(new MessageLoop());
+    t.start();
+
+    threadMessage("MessageLoop 스레드가 끝나기 까지 기다리고 있습니다.");
+    while (t.isAlive()) {
+      threadMessage("기다리는중.......");
+      t.join(1000);
+      if ((System.currentTimeMillis() - start) > patience && t.isAlive()) {
+        threadMessage("기다리다 지쳐버렸다! 인터럽트다!!!!!!!");
+        t.interrupt();
+        t.join();
+      }
+    }
+    threadMessage("끝났다!!!");
+  }
+}
+```
+
+결과
+
+```text
+[2021-01-20 10:20:16.95] main: MessageLoop 스레드를 시작합니다.
+[2021-01-20 10:20:16.99] main: MessageLoop 스레드가 끝나기 까지 기다리고 있습니다.
+[2021-01-20 10:20:16.99] main: 기다리는중.......
+[2021-01-20 10:20:17.99] main: 기다리는중.......
+[2021-01-20 10:20:19.00] Thread-0: 감자
+[2021-01-20 10:20:19.00] main: 기다리는중.......
+[2021-01-20 10:20:20.00] main: 기다리는중.......
+[2021-01-20 10:20:21.01] main: 기다리는중.......
+[2021-01-20 10:20:22.00] Thread-0: 고구마
+[2021-01-20 10:20:22.01] main: 기다리는중.......
+[2021-01-20 10:20:23.02] main: 기다리는중.......
+[2021-01-20 10:20:24.02] main: 기다리는중.......
+[2021-01-20 10:20:25.02] main: 기다리는중.......
+[2021-01-20 10:20:26.00] Thread-0: 닭가슴살
+[2021-01-20 10:20:26.03] main: 기다리는중.......
+[2021-01-20 10:20:27.03] main: 기다리는중.......
+[2021-01-20 10:20:28.04] main: 기다리는중.......
+[2021-01-20 10:20:29.00] Thread-0: 양상추
+[2021-01-20 10:20:29.04] main: 기다리는중.......
+[2021-01-20 10:20:30.04] main: 기다리는중.......
+[2021-01-20 10:20:31.01] Thread-0: 달걀
+[2021-01-20 10:20:31.01] main: 끝났다!!!
+```
+
+#### 참고
+
+[오라클 자바 튜토리얼(예제)](https://docs.oracle.com/javase/tutorial/essential/concurrency/simple.html)
+
 ## 스레드의 상태
 
 ## 스레드의 우선순위
