@@ -287,6 +287,7 @@ public class SimpleThreads {
 #### 참고
 
 [오라클 자바 튜토리얼(예제)](https://docs.oracle.com/javase/tutorial/essential/concurrency/simple.html)
+[스택오버플로우 - interrupt 뒤에 join을 사용하는 이유](https://stackoverflow.com/questions/27469761/thread-join-and-thread-interrupt-doesnt-stop-the-thread)
 
 ## 스레드의 상태
 
