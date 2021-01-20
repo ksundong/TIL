@@ -180,7 +180,7 @@ if (Thread.interrupted()) {
 t.join();
 ```
 
-이 코드를 사용하면, 현재 스레드는 `t`의 스레드가 종료될 때 까지 실행을 멈추게 합니다. `join`의 오버로딩은 프로그래머로 하여금 얼마나 기다릴지 정하도록 합니다. 그러나 `sleep`과 마찬가지로 `join`도 OS의 시간에 의존하게 됩니다. 따라서 `join`이 우리가 정의한 만큼 정확하게 대기할 것이라고 가정하면 안됩니다.
+이 코드를 사용하면, 현재 스레드는 `t`의 스레드가 종료될 때 까지 실행을 멈추게 됩니다. `join`의 오버로딩은 프로그래머로 하여금 얼마나 기다릴지 정하도록 합니다. 그러나 `sleep`과 마찬가지로 `join`도 OS의 시간에 의존하게 됩니다. 따라서 `join`이 우리가 정의한 만큼 정확하게 대기할 것이라고 가정하면 안됩니다.
 
 `sleep`처럼 `join`도 인터럽트가 발생하면 `InterruptedException`과 함께 종료됩니다.
 
@@ -245,11 +245,11 @@ public class SimpleThreads {
     threadMessage("MessageLoop 스레드가 끝나기 까지 기다리고 있습니다.");
     while (t.isAlive()) {
       threadMessage("기다리는중.......");
-      t.join(1000);
+      t.join(1000); // 1초 기다립니다.
       if ((System.currentTimeMillis() - start) > patience && t.isAlive()) {
         threadMessage("기다리다 지쳐버렸다! 인터럽트다!!!!!!!");
         t.interrupt();
-        t.join();
+        t.join(); // 이 코드가 필요한 이유가 무엇일까요? 스레드가 종료될 때 까지 기다리기 위함입니다.
       }
     }
     threadMessage("끝났다!!!");
