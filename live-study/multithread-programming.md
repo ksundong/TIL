@@ -349,6 +349,88 @@ Java에서 현재 스레드의 상태를 얻는 방법은 `Thread.getState()` �
    - `LockSupport.parkNanos`
    - `LockSupport.parkUntil`
 
+### 예제 코드
+
+```java
+package dev.idion.threadstatus;
+
+public class Test implements Runnable {
+
+  public static Thread thread1;
+  public static Test obj;
+
+  public static void main(String[] args) {
+    obj = new Test();
+    thread1 = new Thread(obj);
+
+    System.out.println("1. thread1을 생성하고 나서의 상태: " + thread1.getState());
+    thread1.start();
+
+    System.out.println("2. start 메서드를 실행하고 thread1의 상태: " + thread1.getState());
+  }
+
+  @Override
+  public void run() {
+    SimpleThread simpleThread = new SimpleThread();
+    Thread thread2 = new Thread(simpleThread);
+
+    System.out.println("3. thread2를 생성하고 나서의 상태: " + thread2.getState());
+    thread2.start();
+
+    System.out.println("4. start 메서드를 실행하고 thread2의 상태:" + thread2.getState());
+
+    try {
+      Thread.sleep(200);
+    } catch (InterruptedException e) {
+      e.printStackTrace();
+    }
+    System.out.println("5. sleep 호출 이후 thread2의 상태:" + thread2.getState());
+
+    try {
+      // thread2가 종료될 때 까지 대기
+      thread2.join();
+    } catch (InterruptedException e) {
+      e.printStackTrace();
+    }
+    System.out.println("7. thread2가 종료되었을 때의 상태: " + thread2.getState());
+    System.out.println("8. thread2가 종료되었을 때의 thread1의 상태: " + thread1.getState());
+  }
+}
+
+class SimpleThread implements Runnable {
+
+  @Override
+  public void run() {
+    try {
+      Thread.sleep(1500);
+    } catch (InterruptedException e) {
+      e.printStackTrace();
+    }
+
+    System.out.println("6. join 했을 때, thread1의 상태" + Test.thread1.getState());
+
+    try {
+      Thread.sleep(200);
+    } catch (InterruptedException e) {
+      e.printStackTrace();
+    }
+  }
+}
+```
+
+출력
+
+```text
+1. thread1을 생성하고 나서의 상태: NEW
+2. start 메서드를 실행하고 thread1의 상태: RUNNABLE
+3. thread2를 생성하고 나서의 상태: NEW
+4. start 메서드를 실행하고 thread2의 상태:RUNNABLE
+5. sleep 호출 이후 thread2의 상태:TIMED_WAITING
+6. join 했을 때, thread1의 상태WAITING
+7. thread2가 종료되었을 때의 상태: TERMINATED
+8. thread2가 종료되었을 때의 thread1의 상태: RUNNABLE
+```
+
 ### 참고
 
 [Geeks for Geeks-자바에서의 스레드의 생명주기와 상태](https://www.geeksforgeeks.org/lifecycle-and-states-of-a-thread-in-java/)
