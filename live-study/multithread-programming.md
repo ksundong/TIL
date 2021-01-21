@@ -437,6 +437,22 @@ class SimpleThread implements Runnable {
 
 ## 스레드의 우선순위
 
+멀티 스레딩 환경에서 스레드 스케쥴러는 스레드의 우선순위에 따라 스레드에 프로세서를 할당합니다. 우리가 Java에서 thread를 만들 때마다, 항상 우선순위가 지정됩니다. 우선순위는 스레드를 만드는 동안 JVM에 의해 제공되거나, 프로그래머가 명시적으로 제공할 수 있습니다.  
+스레드의 우선순위는 1에서 10 사이의 값만 허용됩니다. `Thread` 클래스에는 세 개의 static 변수가 우선순위를 위해 정의되어 있습니다.
+
+- `MIN_PRIORITY`: 스레드가 가질 수 있는 우선순위의 최솟값입니다. 이 값은 1입니다.
+- `NORM_PRIORITY`: 우선순위를 명시적으로 지정하지 않으면 스레드가 가지는 기본 우선순위입니다. 이 값은 5입니다.
+- `MAX_PRIORITY`: 스레드의 가질 수 있는 우선순위의 최댓값입니다. 이 값은 10입니다.
+
+### 스레드 우선순위 가져오거나 설정하기
+
+- `public final int getPriority()`: `java.lang.Thread.getPriority()` 메서드는 해당 스레드의 우선 순위를 반환합니다.
+- `public final void setPriority(int newPriority)`: `java.lang.Thread.setPriority()` 메서드는 새로운 우선순위 값으로 스레드의 우선순위를 바꿉니다. 이 메서드는 새로운 우선순위 값이 1~10 사이에 있지 않을 경우 `IllegalArgumentException`을 던질 수 있습니다.
+
+### 참고
+
+[Geeks for Geeks-자바 멀티스레딩에서의 스레드 우선순위](https://www.geeksforgeeks.org/java-thread-priority-multithreading/)
+
 ## Main 스레드
 
 멀티스레드 실행은 자바 플랫폼의 필수 기능입니다. 모든 애플리케이션에는 적어도 하나의 스레드가 있고 메모리 관리 및 신호 처리와 같은 시스템 스레드를 포함하면 여러개라고 볼 수도 있습니다.
