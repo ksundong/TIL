@@ -664,11 +664,47 @@ System.out.println(counter); // B에서 실행합니다.
 
 참고로 `happens-before` 관계를 만드는 방법의 종류가 궁금하다면, [이 곳](https://docs.oracle.com/javase/8/docs/api/java/util/concurrent/package-summary.html#MemoryVisibility)을 참고하세요.
 
+### 동기화된 메소드
+
+자바에서는 두가지 동기화 관용구를 제공합니다. `synchronized` 메서드와, `synchronized` 문입니다. 이 중 더 복잡한 것이 문입니다.
+
+메서드를 동기화하려면 메서드 선언 부분에 `synchronized` 키워드를 추가하면 됩니다.
+
+```java
+class SynchronizedCounter {
+  private int c = 0;
+
+  public synchronized void increment() {
+    c++;
+  }
+
+  public synchronized  void decrement() {
+    c--;
+  }
+
+  public synchronized int value() {
+    return c;
+  }
+}
+```
+
+`count`가 `SynchronizedCounter`의 인스턴스라면 `synchronized`는 두가지 효과를 가지게 됩니다.
+
+1. 동일한 객체에서 동기화된 메서드를 두 번 호출하면 인터리브 할 수 없습니다. 완료 될 때까지 기다렸다가 다시 실행하게 됩니다.
+2. 동기화된 메서드가 종료되면 동일한 객체에 대한 동기화된 메서드의 후속 호출과 함께 `happens-before` 관계를 자동으로 설정합니다. 이는 객체의 변경사항이 모든 스레드에 보이는 것을 보장합니다.
+
+생성자는 동기화 키워드를 사용할 수 있습니다. 생각해보면 말이 안되는 것이 객체를 생성하는 쪽에서만 접근할 수 있기 떄문입니다.
+
+**주의할 점**: 우리가 생성자에서 `this`를 사용하고 싶을 때가 있을겁니다. 이런 참조는 어떻게 보면 다른 스레드에서 아직 미처 생성되지조차 못한 객체를 참조할 수 있다는 의미입니다. 많은 스레드에서 공유되어 사용되는 것이라면, 심사숙고 후에 결정하기를 권장합니다.(그냥 안하는게 나을 수도 있습니다.)
+
+동기화 된 메서드를 사용하면 스레드 간섭이나 메모리 일관성 오류를 방지하기 위한 간단한 전략을 사용할 수 있습니다. 무조건 동기화된 메서드를 거치게 해서 해당 문제를 예방합니다. 참고로 `final` 필드의 경우에는 동기화 되지 않아도 상관 없습니다. 변경 불가기 때문에 안전하기 떄문입니다. 이 전략은 효과적이지만 문제가 있을 수 있습니다.
+
 ### 참고
 
 - [오라클 자바 튜토리얼(동기화)](https://docs.oracle.com/javase/tutorial/essential/concurrency/sync.html)
 - [오라클 자바 튜토리얼(스레드 간섭)](https://docs.oracle.com/javase/tutorial/essential/concurrency/interfere.html)
 - [오라클 자바 튜토리얼(메모리 일관성 오류)](https://docs.oracle.com/javase/tutorial/essential/concurrency/memconsist.html)
+- [오라클 자바 튜토리얼(동기화된 메서드)](https://docs.oracle.com/javase/tutorial/essential/concurrency/syncmeth.html)
 
 ## 데드락
 
