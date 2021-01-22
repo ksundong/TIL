@@ -590,4 +590,26 @@ Deadlock 만들기
 
 ## 동기화
 
+동기화가 필요한 이유는 스레드 간의 커뮤니케이션을 할 때, 필드와 객체 참조를 공유하는데, 이러한 형태의 통신은 매우 효율적이지만, 스레드 간섭 및 메모리 일관성의 오류를 만들게 됩니다. 이러한 오류들을 방지하는 데 필요한 도구가 바로 동기화입니다.
+
+그러나, 동기화로 인해서 스레드간의 경합이 발생할 수 있습니다. 스레드 경합은 두 개 이상의 스레드가 동시에 동일한 리소스에 액세스하려고 시도하는 것을 의미합니다. 스레드 경합에는 기아 현상 및 livelock이 있습니다.
+
+동기화 문제를 해결하는 방법은 Thread safe하게 만든다는 의미도 됩니다.
+
+제가 알고있는 Thread safe하게 만드는 방법입니다.
+
+- volatile
+- synchronized block
+- Atomic operation, data structure
+- concurrent collections
+- spring과 같은 framework의 도움을 받아 singleton 객체를 사용하는 것(이 때, singleton 객체는 상태가 존재하지 않거나 변경 불가능해야합니다.)
+
+등이 있습니다.
+
+사실 깊게 공부하면 한 주를 이것만 공부해야 할 것 같아서, 라이브 스터디가 끝나면 다시 정리해보려고 합니다.
+
+### 참고
+
+- [오라클 자바 튜토리얼(동기화)](https://docs.oracle.com/javase/tutorial/essential/concurrency/sync.html)
+
 ## 데드락
