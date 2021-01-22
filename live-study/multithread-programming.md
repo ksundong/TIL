@@ -699,12 +699,37 @@ class SynchronizedCounter {
 
 동기화 된 메서드를 사용하면 스레드 간섭이나 메모리 일관성 오류를 방지하기 위한 간단한 전략을 사용할 수 있습니다. 무조건 동기화된 메서드를 거치게 해서 해당 문제를 예방합니다. 참고로 `final` 필드의 경우에는 동기화 되지 않아도 상관 없습니다. 변경 불가기 때문에 안전하기 떄문입니다. 이 전략(동기화된 메서드)은 효과적이지만 문제가 있을 수 있습니다.(데드락과 같은)
 
+### 고유잠금 및 동기화
+
+동기화는 고유 잠금 또는 모니터 잠금이라고 알려진 내부 엔티티를 중심으로 구축됩니다.
+
+모든 객체는 연결된 고유 잠금이 있으며, 관례적으로 객체의 필드에 대한 배타적이고 일관된 액세스가 필요한 스레드는 객체에 액세스하기 전에 객체의 고유 잠금을 획득한 다음 작업이 완료되면 고유 잠금을 해제해야 합니다. 이를 획득한 경우를 소유한다고 말합니다. 한 스레드가 고유 잠금을 소유하고 있는 동안에 다른 스레드는 고유 잠금을 획득할 수 없습니다.
+
+동기화된 메서드는 메서드의 객체에 대해 고유 잠금을 자동으로 획득하고 메서드가 반환되거나 예외가 발생해도 잠금 해제가 됩니다.
+
+동기화된 문(statement)은 고유잠금을 사용하는 객체를 지정해주어야 합니다.
+
+```java
+public void addName(String name) {
+  synchronized(this) {
+    lastName = name;
+    nameCount++;
+  }
+  nameList.add(name);
+}
+```
+
+이 예제에서는 `addName` 메서드는 `lastName`, `nameCount`에 대해 동기화 하면서, 다른 객체의 메서드 호출은 동기화 하지 않도록 했습니다. 이를 통해서 데드락을 피할 수 있습니다.
+
+재진입 동기화는 같은 스레드의 메서드가 이미 소유하고 있는 잠금을 다시 요청했을 때, 잠금을 그냥 획득하도록 하는 것입니다. 이를 통해서 자체 스레드간의 예방조치는 해주지 않아도 됩니다.
+
 ### 참고
 
 - [오라클 자바 튜토리얼(동기화)](https://docs.oracle.com/javase/tutorial/essential/concurrency/sync.html)
 - [오라클 자바 튜토리얼(스레드 간섭)](https://docs.oracle.com/javase/tutorial/essential/concurrency/interfere.html)
 - [오라클 자바 튜토리얼(메모리 일관성 오류)](https://docs.oracle.com/javase/tutorial/essential/concurrency/memconsist.html)
 - [오라클 자바 튜토리얼(동기화된 메서드)](https://docs.oracle.com/javase/tutorial/essential/concurrency/syncmeth.html)
+- [오라클 자바 튜토리얼(고유잠금 및 동기화)](https://docs.oracle.com/javase/tutorial/essential/concurrency/locksync.html)
 
 ## 데드락
 
