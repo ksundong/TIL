@@ -641,10 +641,34 @@ class Counter {
 
 최종적으로 `ThreadA`의 값은 `ThreadB`의 값에 의해 덮어씌워지고 잃어버리게 됩니다. 그리고 이런 경우는 드물게 나올 수 있기 떄문에 더더욱 찾기 힘들고, 버그를 발견하고 수정하기 어려울 수 있습니다. 특히 예측이 불가능하기 때문에 발견조차 못할 수 있습니다.
 
+### 메모리 일관성 오류
+
+메모리 일관성 오류는 서로 다른 스레드가 동일한 데이터에 대해 일관성이 없는 view를 가질 때 발생합니다. 이는 튜토리얼 수준에서 다루기엔 무거운 주제라고 합니다. 프로그래머는 이를 피하는 전략을 알아야 합니다.
+
+메모리 일관성 오류를 피하는 방법은 `happens-before` 관계를 이해하는 것입니다. 이 관계는 단순히 특정한 명령문에 의한 메모리 쓰기가 다른 특정 명령문에 보인다는 것을 보장합니다.
+
+```java
+int counter = 0;
+
+counter++; // A에서 실행합니다.
+
+System.out.println(counter); // B에서 실행합니다.
+```
+
+위의 사례를 예로 들면 같은 스레드에서 두 명령문이 실행되었을 때는 "1"이라고 가정하는 것이 안전합니다. 그러나 다른 스레드에서 실행된다면 값은 "0"으로 출력될 수도 있습니다. 왜냐하면 A에서 변경된 `counter`의 값이 `B`에서는 보인다는 것을 (프로그래머가 둘 사이에 사전에 관계를 설정해주지 않는 이상) 보장해주지는 않기 떄문입니다.
+
+이를 보장해주는 작업이 몇 개 있습니다. 그 중 하나는 동기화입니다.
+
+- 명령문에서 `Thread.start`를 호출하면 `happens-before`를 맺게됩니다.
+- 스레드가 종료되고 `Thread.join`이 다른 스레드에 반환되면 이 역시 `join` 문 이후의 코드와 `happens-before`를 맺게됩니다.
+
+참고로 `happens-before` 관계를 만드는 방법의 종류가 궁금하다면, [이 곳](https://docs.oracle.com/javase/8/docs/api/java/util/concurrent/package-summary.html#MemoryVisibility)을 참고하세요.
+
 ### 참고
 
 - [오라클 자바 튜토리얼(동기화)](https://docs.oracle.com/javase/tutorial/essential/concurrency/sync.html)
 - [오라클 자바 튜토리얼(스레드 간섭)](https://docs.oracle.com/javase/tutorial/essential/concurrency/interfere.html)
+- [오라클 자바 튜토리얼(메모리 일관성 오류)](https://docs.oracle.com/javase/tutorial/essential/concurrency/memconsist.html)
 
 ## 데드락
 
