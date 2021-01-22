@@ -449,6 +449,98 @@ class SimpleThread implements Runnable {
 - `public final int getPriority()`: `java.lang.Thread.getPriority()` 메서드는 해당 스레드의 우선 순위를 반환합니다.
 - `public final void setPriority(int newPriority)`: `java.lang.Thread.setPriority()` 메서드는 새로운 우선순위 값으로 스레드의 우선순위를 바꿉니다. 이 메서드는 새로운 우선순위 값이 1~10 사이에 있지 않을 경우 `IllegalArgumentException`을 던질 수 있습니다.
 
+### 예제 코드
+
+```java
+public class PriorityThread extends Thread {
+
+  public static void main(String[] args) {
+    PriorityThread t1 = new PriorityThread();
+    PriorityThread t2 = new PriorityThread();
+    PriorityThread t3 = new PriorityThread();
+
+    t1.setName("1번 스레드");
+    t2.setName("2번 스레드");
+    t3.setName("3번 스레드");
+
+    printPriority(t1, t2, t3);
+
+    t1.setPriority(2);
+    t2.setPriority(5);
+    t3.setPriority(8);
+
+    printPriority(t1, t2, t3);
+
+    System.out.println("현재 실행중인 스레드: " + Thread.currentThread().getName());
+
+    System.out.println("Main 스레드의 우선순위: " + Thread.currentThread().getPriority());
+
+    Thread.currentThread().setPriority(Thread.MAX_PRIORITY);
+    System.out.println("Main 스레드의 우선순위: " + Thread.currentThread().getPriority());
+    startAll(t1, t2, t3);
+  }
+
+  private static void printPriority(PriorityThread... threads) {
+    for (PriorityThread thread : threads) {
+      System.out.println("[" + thread.getName() + "] 우선순위: " + thread.getPriority());
+    }
+  }
+
+  private static void startAll(PriorityThread... threads) {
+    for (PriorityThread thread : threads) {
+      thread.start();
+    }
+  }
+
+  @Override
+  public void run() {
+    System.out.println("[" + Thread.currentThread().getName() + "] run 메서드 내부");
+    for (int i = 0; i < 5; i++) {
+      try {
+        Thread.sleep(1000);
+        System.out.println("[" + Thread.currentThread().getName() + "] " + (i + 1) + "초");
+      } catch (InterruptedException e) {
+        return;
+      }
+    }
+  }
+}
+```
+
+출력(상황에 따라 다를 수 있음[멀티스레드 프로그램이므로])  
+밑의 초는 그냥 어떻게 동작하는지 궁금해서 넣었습니다.
+
+```text
+[1번 스레드] 우선순위: 5
+[2번 스레드] 우선순위: 5
+[3번 스레드] 우선순위: 5
+[1번 스레드] 우선순위: 2
+[2번 스레드] 우선순위: 5
+[3번 스레드] 우선순위: 8
+현재 실행중인 스레드: main
+Main 스레드의 우선순위: 5
+Main 스레드의 우선순위: 10
+[2번 스레드] run 메서드 내부
+[3번 스레드] run 메서드 내부
+[1번 스레드] run 메서드 내부
+[1번 스레드] 1초
+[3번 스레드] 1초
+[2번 스레드] 1초
+[2번 스레드] 2초
+[1번 스레드] 2초
+[3번 스레드] 2초
+[3번 스레드] 3초
+[1번 스레드] 3초
+[2번 스레드] 3초
+[3번 스레드] 4초
+[2번 스레드] 4초
+[1번 스레드] 4초
+[2번 스레드] 5초
+[1번 스레드] 5초
+[3번 스레드] 5초
+```
+
+
 ### 참고
 
 [Geeks for Geeks-자바 멀티스레딩에서의 스레드 우선순위](https://www.geeksforgeeks.org/java-thread-priority-multithreading/)
