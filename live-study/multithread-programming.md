@@ -613,3 +613,48 @@ Deadlock 만들기
 - [오라클 자바 튜토리얼(동기화)](https://docs.oracle.com/javase/tutorial/essential/concurrency/sync.html)
 
 ## 데드락
+
+데드락은 두 개 이상의 스레드가 계속해서 서로를 기다리며 block 되어 있는 상황을 의미합니다.
+
+철수와 영희는 친구입니다. 그리고 아주 예의바른 사람들입니다. 이 예의의 엄격한 규칙은 친구에게 인사를 할 때, 친구가 인사를 할 때 까지 계속 인사를 해야한다는 것입니다. 불행하게도, 이 규칙은 두 명의 친구가 서로에게 동시에 인사하는 경우에 대한 가능성을 설명해주지는 않습니다.
+
+다음 예제 애플리케이션 `Deadlock`은 이 가능성에 대해서 프로그래밍합니다.
+
+```java
+public class Deadlock {
+  static class Friend {
+    private final String name;
+
+    public Friend(String name) {
+      this.name = name;
+    }
+
+    public String getName() {
+      return this.name;
+    }
+
+    public synchronized void hello(Friend friend) {
+      System.out.format("%s: %s야 안녕!%n", this.name, friend.getName());
+      friend.helloBack(this);
+    }
+
+    public synchronized void helloBack(Friend friend) {
+      System.out.format("%s: %s야 안녕!!!%n", this.name, friend.getName());
+    }
+  }
+
+  public static void main(String[] args) {
+    final Friend 철수 = new Friend("철수");
+    final Friend 영희 = new Friend("영희");
+
+    new Thread(() -> 철수.hello(영희)).start();
+    new Thread(() -> 영희.hello(철수)).start();
+  }
+}
+```
+
+`Deadlock`을 실행하면, `helloBack`을 호출하려고 할 때, 두 스레드가 모두 block될 가능성이 매우 높습니다. 각 스레드는 다른 스레드의 `hello`가 끝나길 기다리고 있기 때문에 끝나지 않습니다.
+
+### 참고
+
+- [오라클 자바 튜토리얼(데드락)](https://docs.oracle.com/javase/tutorial/essential/concurrency/deadlock.html)
