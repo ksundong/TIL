@@ -540,7 +540,6 @@ Main 스레드의 우선순위: 10
 [3번 스레드] 5초
 ```
 
-
 ### 참고
 
 [Geeks for Geeks-자바 멀티스레딩에서의 스레드 우선순위](https://www.geeksforgeeks.org/java-thread-priority-multithreading/)
@@ -551,9 +550,43 @@ Main 스레드의 우선순위: 10
 
 애플리케이션 개발자의 관점에서 보면, 우리는 `main thread`라고 부르는 한 스레드로부터 시작합니다. 이 스레드는 추가적인 스레드를 만들 수 있는 능력이 있습니다.
 
+또한 프로그램이 종료되기 전 마지막으로 종료되는 스레드여야 합니다.
+
+각 자바 프로그램이 실행 될 때 JVM에 의해 Main 스레드가 생성되고, 이 Main 스레드는 `main()` 메서드의 존재를 확인하고 클래스를 초기화 합니다.
+
+### Main Thread만 사용해서 Deadlock 상태 만들기(싱글 스레드에서만 동작)
+
+우리는 Main thread만 사용해서 데드락을 만들 수 있습니다. 이는 싱글 스레드에서만 동작합니다.
+
+```java
+public class DeadlockMainThread {
+
+  public static void main(String[] args) {
+    try {
+      System.out.println("Deadlock 만들기");
+
+      Thread.currentThread().join();
+
+      System.out.println("이 문장은 절대 실행되지 않을겁니다.");
+    } catch (InterruptedException e) {
+      e.printStackTrace();
+    }
+  }
+}
+```
+
+```text
+Deadlock 만들기
+
+```
+
+이후엔 종료되지 않습니다.  
+왜냐하면 `Thread.currentThread().join()`은 Main 스레드가 자기 자신이 종료되기 까지 기다린다는 것입니다. 따라서 Main 스레드는 자기 자신이 죽기까지 기다립니다. 이는 교착상태라고 볼 수 있습니다.
+
 ### 참고
 
-[오라클 자바 튜토리얼(프로세스와 스레드)](https://docs.oracle.com/javase/tutorial/essential/concurrency/procthread.html)
+- [오라클 자바 튜토리얼(프로세스와 스레드)](https://docs.oracle.com/javase/tutorial/essential/concurrency/procthread.html)
+- [Geeks for Geeks(자바 main 스레드)](https://www.geeksforgeeks.org/main-thread-java/)
 
 ## 동기화
 
