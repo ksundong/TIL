@@ -69,6 +69,7 @@
 - [atomic vs volatile vs synchronized 차이](Java/atomic-vs-volatile-vs-synchronized.md)
 - [Java8 이후 추가된 유용한 기능들](Java/java8-after-useful-features.md)
 - [DTO, DAO, VO](Java/dto-dao-vo.md)
+- [JDK, JVM, 자바 메모리 구조](Java/jdk-jvm-java-memory-structure.md)
 
 ### Live-Study
 
