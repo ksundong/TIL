@@ -145,6 +145,98 @@ enum에는 `ordinal()` 이라는 메서드가 제공됩니다. 이는 현재 상
 
 ## EnumSet
 
+`EnumSet`은 `enum`과 함께 동작하는 특별한 `Set`입니다.  
+`EnumSet`은 `Set` 인터페이스를 구현하면서 `AbstractSet`를 상속하지만, 대부분의 메서드를 재정의해서 사용합니다.
+
+`EnumSet`을 사용할 때 유의해야할 점이 있습니다.
+
+- `EnumSet`에는 열거형 값만 저장할 수 있습니다. 그리고 모든 값은 같은 열거형에 속해야합니다.
+- `EnumSet`에는 `null`을 추가할 수 없습니다. 만약 추가하려고 한다면 `NullPointerException`이 발생하게 됩니다.
+- `EnumSet`은 thread-safe하지 않습니다. 만약 동기화가 필요하다면, 외부에서 동기화 처리를 해주어야 합니다.
+- 요소들은 열거형에 정의된 순서에 따라 저장됩니다.
+- `EnumSet`은 복사시에 실패에 안전한 반복자를 사용하므로 컬렉션이 반복되는 도중에 변경되어도 `ConcurrentModificationException`이 발생하지 않습니다.
+
+### EnumSet을 왜 쓸까?
+
+EnumSet은 왜 쓸까요? 저자의 경험상 `EnumSet`은 `enum` 값을 저장할 때, 다른 `Set` 구현체보다 먼저 고려되어야 한다고 합니다.
+
+그럼 Java에서 `EnumSet`은 어떻게 구현되어 있을까요? 한 번 뜯어봅시다.
+
+```java
+public static <E extends Enum<E>> EnumSet<E> noneOf(Class<E> elementType) {
+  Enum<?>[] universe = getUniverse(elementType);
+  if (universe == null)
+    throw new ClassCastException(elementType + " not an enum");
+
+  if (universe.length <= 64)
+    return new RegularEnumSet<>(elementType, universe);
+  else
+    return new JumboEnumSet<>(elementType, universe);
+}
+```
+
+`noneOf()`라는 메서드는 많은 부분에서 사용되고 있습니다. 핵심 연산이라고 볼 수 있겠습니다. 또 특이한 점은 `RegularEnumSet`과 `JumboEnumSet`이 `universe`의 `length` 속성으로 구분이 된다는 점입니다. 그것도 64라는 특징적인 숫자로요.
+
+`RegularEnumSet`은 `long`의 `bit`를 기준으로 `long` 하나로 충분히 표현가능한 경우 사용됩니다. `JumboEnumSet`은 그 이상의 경우에 사용됩니다. 이렇게 사용하는 이유는 각 비트가 현재 열거형에서의 위치를 반영하기 때문에 해당 값이 존재하는 지 아닌지 파악하는 것이 매우 빠르기 때문입니다.
+
+주의할 점은 저장할 데이터의 수가 아닌 열거형에 정의된 상수의 개수만을 고려한다는 점입니다.
+
+따라서 이 구현 때문에 `EnumSet`의 모든 메서드는 산술 비트 연산을 사용해서 구현됩니다. 이는 각 세부 구현체에 가면 자세하게 작성되어 있습니다. 또한 산술 비트 연산의 연산 속도는 매우 빠르기 때문에 모든 작업들이 일정한 시간 안에 실행됩니다.
+
+이는 `HashSet` 같은 다른 `Set` 구현체보다 빠르다고 볼 수 있습니다. 올바른 데이터를 찾기 위해 `hashCode`를 찾을 필요조차 없습니다.
+
+또한 비트 연산 자체의 특성으로 인해서 굉장히 압축적이고 효율적입니다. 이 때문에 메모리를 적게 차지합니다. 이 또한 장점이라고 볼 수 있습니다.
+
+### EnumSet의 연산
+
+EnumSet은 인스턴스를 생성하는 메서드를 제외하고는 대부분은 다른 `Set`과 동일하게 동작합니다.
+
+예제로 색상과 관련된 `Enum`을 정의해보겠습니다.
+
+```java
+public enum Color {
+  RED, YELLOW, GREEN, BLUE, BLACK, WHITE
+}
+```
+
+#### 생성 메서드
+
+`allOf()`와 `noneOf()`가 바로 `EnumSet`을 생성하는 간단한 메서드입니다.
+
+`allOf()`는 해당 `Enum`의 모든 요소들을 포함하는 `EnumSet`을 만듭니다.
+
+```java
+EnumSet.allOf(Color.class);
+```
+
+`noneOf()`는 `allOf()`와 반대의 동작을 합니다. 비어있는 `EnumSet`을 만듭니다.
+
+```java
+EnumSet.noneOf(Color.class);
+```
+
+그리고 `EnumSet`이 `Enum`의 하위 집합 형태로 만들어져야 할 경우, 오버로딩된 `of()` 메서드들을 이용할 수 있습니다.
+
+이는 고정된 수를 정의하는 5개의 메서드와 varargs로 정의하는 메서드로 나뉘어집니다.
+
+이렇게 한 이유는 사실 varargs가 내부적으로 배열을 생성하기 때문에 느려진다고 자바독에서 설명하고 있습니다.
+
+또 다른 방법으로는 `range()` 메서드를 사용하는 것입니다. 이는 해당 상수들의 범위의 enum이 모두 등록됩니다. 이 순서는 Enum에 정의된 순서를 따릅니다.
+
+그리고 `complementOf()`라는 메서드도 있습니다. 이 메서드는 해당 EnumSet의 여집합을 구하는 메서드입니다.
+
+그리고 `copyOf()`라는 메서드는 다른 EnumSet을 복사해오는 메서드입니다. 위에서 설명했듯 안전합니다. 내부적으로 `clone()`메서드를 호출한다고 합니다. 이는 컬렉션이 `enum`을 포함하고 있다면 똑같이 사용할 수 있습니다.
+
+#### 기타 메서드
+
+다른 메서드는 다른 `Set` 구현체들과 동일하게 동작하며, 사용상에 차이는 없습니다.
+
+`add`, `contains`, `forEach`, `remove` 등을 사용할 수 있습니다.
+
+### 참고
+
+[밸덩 EnumSet](https://www.baeldung.com/java-enumset)
+
 ## 참고
 
 [오라클 자바 튜토리얼(열거형)](https://docs.oracle.com/javase/tutorial/java/javaOO/enum.html)
