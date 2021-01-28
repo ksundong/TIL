@@ -12,6 +12,8 @@
    console output을 하이라이팅 할 수 있고, 매칭되는 문자열을 찾을 수 있습니다.
 - String Manipulation
    문자열 조작기능을 지원합니다. 케이스 변환, 인코딩, 디코딩 등의 기능을 지원합니다.
+- Tabnine
+   AI가 학습을 통해 코드 자동완성을 지원해줍니다.
 
 ## Visual
 
