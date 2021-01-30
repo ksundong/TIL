@@ -241,9 +241,11 @@ EnumSet.noneOf(Color.class);
 
 [오라클 자바 튜토리얼(열거형)](https://docs.oracle.com/javase/tutorial/java/javaOO/enum.html)
 
-
 ---
 
 ## 라이브스터디
 
 - `values()`는 컴파일 시점에 삽입된다.
+- 순서 매기기는 1, 2, 3 순서보다는 10, 20, 30 단위로 중간에 추가할 여지를 남겨둔다.
+- 그리고 enum에서 정의한 필드는 기본적으로 default 접근제어자 이므로 적절하게 조절해야합니다.
+  - 당연히 static final 로 정의한다면, 생성자에서는 넣어줄 수 없습니다.
