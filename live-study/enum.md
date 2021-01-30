@@ -240,3 +240,10 @@ EnumSet.noneOf(Color.class);
 ## 참고
 
 [오라클 자바 튜토리얼(열거형)](https://docs.oracle.com/javase/tutorial/java/javaOO/enum.html)
+
+
+---
+
+## 라이브스터디
+
+- `values()`는 컴파일 시점에 삽입된다.
