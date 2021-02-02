@@ -137,6 +137,102 @@ public @interface MyAnnotation {
 
 ## @Documented
 
+애노테이션에 대한 정보가 javadoc 문서에 포함되도록 합니다.
+
+### 예제로 배우는 @Documented
+
+`DocumentTest.java`
+
+```java
+import java.lang.annotation.Documented;
+
+@Documented
+public @interface DocumentTest {
+  String test();
+}
+```
+
+`NonDocumentTest.java`
+
+```java
+public @interface NonDocumentTest {
+  int age();
+}
+```
+
+`AnnotationTest.java`
+
+```java
+public class AnnotationTest {
+
+  public static void main(String[] args) {
+    new AnnotationTest().hello();
+    new AnnotationTest().annotatedHello();
+  }
+
+  /**
+   * javadoc에 애노테이션 정보가 추가되지 않습니다.
+   */
+  @NonDocumentTest(age = 20)
+  public void hello() {
+    System.out.println("hello");
+  }
+
+  /**
+   * javadoc에 애노테이션 정보가 추가됩니다.
+   */
+  @DocumentTest(test = "Hello!")
+  public void annotatedHello() {
+    System.out.println("Hello!!!");
+  }
+}
+```
+
+javadoc을 만들어봅시다. javadoc은 Java가 프로그래밍 역사에 큰 영향을 미친 부분중 하나라고 생각합니다.
+
+`-d` 옵션은 directory를 지정하는 명령어입니다. [출처](https://docs.oracle.com/javase/9/javadoc/javadoc-command.htm)
+
+> `-d` directory
+> Specifies the destination directory where the javadoc command saves the generated HTML files. If you omit the `-d` option, then the files are saved to the current directory. The directory value can be absolute or relative to the current working directory. The destination directory is automatically created when the javadoc command runs.
+
+```shell
+$ javadoc -d <javadoc이 저장될 경로> <해당 패키지 경로>
+$ javadoc -d doc ./*
+Loading source file ./AnnotationTest.java...
+Loading source file ./DocumentTest.java...
+Loading source file ./NonDocumentTest.java...
+Constructing Javadoc information...
+Creating destination directory: "doc/"
+Standard Doclet version 11.0.9
+Building tree for all the packages and classes...
+Generating doc/dev/idion/annotation/AnnotationTest.html...
+Generating doc/dev/idion/annotation/DocumentTest.html...
+Generating doc/dev/idion/annotation/NonDocumentTest.html...
+Generating doc/dev/idion/annotation/package-summary.html...
+Generating doc/dev/idion/annotation/package-tree.html...
+Generating doc/constant-values.html...
+Building index for all the packages and classes...
+Generating doc/overview-tree.html...
+Generating doc/index-all.html...
+Building index for all classes...
+Generating doc/allclasses-index.html...
+Generating doc/allpackages-index.html...
+Generating doc/deprecated-list.html...
+Building index for all classes...
+Generating doc/allclasses.html...
+Generating doc/allclasses.html...
+Generating doc/index.html...
+Generating doc/help-doc.html...
+$ cd doc
+$ open index.html
+```
+
+![javadoc](https://i.imgur.com/kK2G3XG.png)
+
+javadoc에 대해서는 아래 링크를 참고하시면 더 많은 정보를 보실 수 있습니다.
+
+<https://www.baeldung.com/javadoc>
+
 ## 애노테이션 프로세서
 
 ## 참고자료
