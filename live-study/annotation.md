@@ -373,9 +373,15 @@ net.blabla.SpecialProcessor
 - 애노테이션 프로세싱 101은 기본적인 기능으로만 구현합니다.
 - 밸덩은 메이븐을 활용해서 애노테이션 프로세서를 메이븐으로 등록하는 방법 등을 비롯한 다른 방법을 알려줍니다.
 
+### 롬복
+
+사실 롬복은 애노테이션 프로세서가 제공해주는 공개된 API를 벗어나서 자바 코드 그 자체를 조작한다는 문제점을 갖고 있습니다.
+
+또한, 롬복에 대해서 다루는 것은 애노테이션 프로세서를 사용한다는 정도만 알아두면 될 것 같아서 이곳에 정리하지는 않겠습니다.
+
 ## 참고자료
 
-[자바의 정석 3/e](http://www.kyobobook.co.kr/product/detailViewKor.laf?ejkGb=KOR&mallGb=KOR&barcode=9788994492032&orderClick=LEa&Kc=)
-[밸덩 애노테이션 프로세싱과 빌더 만들기](https://www.baeldung.com/java-annotation-processing-builder)
-[더 자바, 코드를 조작하는 다양한 방법](https://www.inflearn.com/course/the-java-code-manipulation?inst=c160e128)
-[애노테이션 프로세싱 101](http://hannesdorfmann.com/annotation-processing/annotationprocessing101)
+- [자바의 정석 3/e](http://www.kyobobook.co.kr/product/detailViewKor.laf?ejkGb=KOR&mallGb=KOR&barcode=9788994492032&orderClick=LEa&Kc=)
+- [밸덩 애노테이션 프로세싱과 빌더 만들기](https://www.baeldung.com/java-annotation-processing-builder)
+- [더 자바, 코드를 조작하는 다양한 방법](https://www.inflearn.com/course/the-java-code-manipulation?inst=c160e128)
+- [애노테이션 프로세싱 101](http://hannesdorfmann.com/annotation-processing/annotationprocessing101)
