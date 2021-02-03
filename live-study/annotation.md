@@ -259,6 +259,83 @@ javadoc에 대해서는 아래 링크를 참고하시면 더 많은 정보를 �
 
 애노테이션 프로세서 API는 `javax.annotation.processing` 패키지에 있으며, 우리가 구현해야 할 주요 인터페이스는 `Processor` 인터페이스이며, 이를 부분적으로 구현한 추상 클래스인 `AbstractProcessor` 클래스입니다. 우리는 `AbstractProcessor`라는 추상클래스를 확장해서 자체적인 애노테이션 프로세서를 만들 수 있습니다.
 
+### AbstractProcessor
+
+우리가 작성할 Annotation Processor는 위에서 말했듯 `AbstractProcessor`를 상속해야합니다.
+
+기본적으로 `AbstractProcessor`를 상속한다면, `process()`메서드는 반드시 구현해야 합니다.
+
+예제를 통해서 알아봅시다.
+
+```java
+import java.util.Set;
+import javax.annotation.processing.AbstractProcessor;
+import javax.annotation.processing.ProcessingEnvironment;
+import javax.annotation.processing.RoundEnvironment;
+import javax.lang.model.SourceVersion;
+import javax.lang.model.element.TypeElement;
+
+public class MyProcessor extends AbstractProcessor {
+
+  @Override
+  public boolean process(Set<? extends TypeElement> annotations, RoundEnvironment roundEnv) {
+    return false;
+  }
+
+  @Override
+  public Set<String> getSupportedAnnotationTypes() {
+    return super.getSupportedAnnotationTypes();
+  }
+
+  @Override
+  public SourceVersion getSupportedSourceVersion() {
+    return super.getSupportedSourceVersion();
+  }
+
+  @Override
+  public synchronized void init(ProcessingEnvironment processingEnv) {
+    super.init(processingEnv);
+  }
+}
+```
+
+- `process(Set<? extends TypeElement> annotations, RoundEnvironment roundEnv)`: 이 메서드는 애노테이션 프로세서의 `main()` 메서드라고 볼 수 있습니다. 여기에 애노테이션에 대한 스캔, 평가, 프로세싱과 자바 파일 생성에 대한 코드를 작성하시면 됩니다. `RoundEnvironment` 파라미터는 애노테이션 프로세서가 애노테이션 프로세싱의 라운드를 쿼리할 수 있도록 해줍니다.
+- `getSupportedAnnotationTypes()`: 애노테이션 프로세서가 어떤 애노테이션들을 위해 등록되었는지 특정해줍니다. 여기서 반환되는 타입인 문자열 셋은 애노테이션 프로세서로 처리하려는 애노테이션 타입에 대한 완전한 이름을 포함해야 합니다. 다시 말해서, 우리는 여기에 우리가 작성한 애노테이션 프로세서가 어떤 애노테이션들을 위해서 만들어졌는지 애노테이션 이름의 집합을 작성해주면 된다는 뜻입니다.
+- `getSupportedSourceVersion()`: 어떤 자바 버전을 사용할지 정의합니다. 대부분 `SourceVersionlateestSupported()`를 반환할 것입니다. 그러나, 특정 버전을 정의하는 경우엔 `SourceVersion.RELEASE_6`과 같은 식으로 정의해줄 수 있습니다. 이렇게 작성하면 자바 6버전에 고정됩니다. 하지만 전자의 경우를 사용하는 것을 권장합니다.
+- `init(ProcessingEnvironment processingEnv)`: 모든 애노테이션 프로세서는 빈 생성자를 반드시 가져야 합니다. 그러나, annotation processing tool에 의해 실행되는 `init()`메서드를 사용하는 방법이 있습니다. 인자로 제공되는 `ProcessingEnvironment` 타입은 몇가지 유용한 유틸리티 클래스인 `Elements`, `Types`, `Filer`를 제공합니다.
+
+Java7 이후로는 애노테이션을 활용한 다음의 표현을 사용하는 것을 추천합니다.
+
+```java
+import java.util.Set;
+import javax.annotation.processing.AbstractProcessor;
+import javax.annotation.processing.ProcessingEnvironment;
+import javax.annotation.processing.RoundEnvironment;
+import javax.annotation.processing.SupportedAnnotationTypes;
+import javax.annotation.processing.SupportedSourceVersion;
+import javax.lang.model.SourceVersion;
+import javax.lang.model.element.TypeElement;
+
+@SupportedSourceVersion(SourceVersion.RELEASE_11)
+@SupportedAnnotationTypes({"My"})
+public class MyProcessor extends AbstractProcessor {
+
+  @Override
+  public boolean process(Set<? extends TypeElement> annotations, RoundEnvironment roundEnv) {
+    return false;
+  }
+
+  @Override
+  public synchronized void init(ProcessingEnvironment processingEnv) {
+    super.init(processingEnv);
+  }
+}
+```
+
+애노테이션 프로세서는 별개의 JVM에서 동작합니다. 따라서 다른 Java 애플리케이션 또한 사용할 수 있다는 의미가 됩니다.
+
+주의할 점은 아무리 작은 프로세서를 만든다 한들 다른 자바 애플리케이션과 동일하게 효율적인 알고리즘과 디자인 패턴을 고민하는 모습을 보여야 합니다.
+
 ## 참고자료
 
 [자바의 정석 3/e](http://www.kyobobook.co.kr/product/detailViewKor.laf?ejkGb=KOR&mallGb=KOR&barcode=9788994492032&orderClick=LEa&Kc=)
