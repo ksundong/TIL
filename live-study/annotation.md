@@ -336,6 +336,36 @@ public class MyProcessor extends AbstractProcessor {
 
 주의할 점은 아무리 작은 프로세서를 만든다 한들 다른 자바 애플리케이션과 동일하게 효율적인 알고리즘과 디자인 패턴을 고민하는 모습을 보여야 합니다.
 
+### 프로세서 등록하기
+
+'작성은 했는데, 이걸 어떻게 javac에 제공해줘야하지?' 라는 고민은 저만 하는 것이 아닐겁니다. 프로세서를 제공하는 방법은 jar 파일을 제공하는 것입니다. 다른 jar 파일과 마찬가지로 컴파일된 애노테이션 프로세서를 jar파일에 패키징합니다. 또한 jar파일에 `META-INF/services`에 위치한 `javax.annotation.processing.Processor`라고 불리는 특별한 파일 또한 패키징해야합니다.
+
+이렇게 작성된 jar파일은 아래의 구조를 가지게됩니다.
+
+```text
+MyProcessor.jar
+  - dev
+    - idion
+      - annotationprocessor
+        - MyProcessor.class
+
+  - META-INF
+    - services
+      - javax.annotation.processing.Processor
+```
+
+javax.annotation.processing.Processor 파일의 내용은 완전한 클래스 이름의 목록이며, 새 줄로 구분합니다.
+
+예를 들어서 다음과 같은 내용을 가질 수 있습니다.
+
+```text
+dev.idion.annotationprocessor.MyProcessor
+com.foo.BarProcessor
+net.blabla.SpecialProcessor
+```
+
+빌드 경로에 MyProcessor.jar를 두면 javac가 자동으로 javax.annotation.processing.Processor 를 감지하고, 이를 읽은 다음 MyProcessor 애노테이션 프로세서를 등록합니다.
+
 ## 참고자료
 
 [자바의 정석 3/e](http://www.kyobobook.co.kr/product/detailViewKor.laf?ejkGb=KOR&mallGb=KOR&barcode=9788994492032&orderClick=LEa&Kc=)
