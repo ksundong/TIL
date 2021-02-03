@@ -366,6 +366,13 @@ net.blabla.SpecialProcessor
 
 빌드 경로에 MyProcessor.jar를 두면 javac가 자동으로 javax.annotation.processing.Processor 를 감지하고, 이를 읽은 다음 MyProcessor 애노테이션 프로세서를 등록합니다.
 
+---
+
+그 밖의 애노테이션을 작성하고, 애노테이션 프로세서를 이용해 코드 생성기능까지 구현하는 예제가 애노테이션 프로세싱 101과 밸덩에 포함되어 있으니, 관심이 있다면 해보면 좋을 것 같습니다.
+
+- 애노테이션 프로세싱 101은 기본적인 기능으로만 구현합니다.
+- 밸덩은 메이븐을 활용해서 애노테이션 프로세서를 메이븐으로 등록하는 방법 등을 비롯한 다른 방법을 알려줍니다.
+
 ## 참고자료
 
 [자바의 정석 3/e](http://www.kyobobook.co.kr/product/detailViewKor.laf?ejkGb=KOR&mallGb=KOR&barcode=9788994492032&orderClick=LEa&Kc=)
