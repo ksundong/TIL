@@ -385,3 +385,10 @@ net.blabla.SpecialProcessor
 - [밸덩 애노테이션 프로세싱과 빌더 만들기](https://www.baeldung.com/java-annotation-processing-builder)
 - [더 자바, 코드를 조작하는 다양한 방법](https://www.inflearn.com/course/the-java-code-manipulation?inst=c160e128)
 - [애노테이션 프로세싱 101](http://hannesdorfmann.com/annotation-processing/annotationprocessing101)
+
+## 라이브 스터디
+
+### 추천하는 책
+
+- 아웃라이어(1만시간의 법칙)
+- 부의 추월차선
