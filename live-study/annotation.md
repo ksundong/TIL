@@ -430,3 +430,55 @@ net.blabla.SpecialProcessor
 - 이 애노테이션이 런타임에 필요한가?
 - 이 애노테이션이 바이트코드에서만 유지되어도 되는가?
 - 컴파일 타임에 소스에서만 남아있어도 되진 않을까?
+
+### Annoatation & Reflection
+
+`.getAnnotations()`와 `.getDeclaredAnnotations()`의 차이: `@Inherited`로 상속해온 Annotation을 표시하는가 안하는가 여부
+
+`.getFields()`와 `.getDeclaredFields()`의 차이: `getDeclaredFields()`는 그 클래스에 선언되어있는 필드를 가져온다. getFields는 public한 것을 가져온다.(상속된 것 포함)
+
+그래서 getter setter가지고 예민하게 구는게 이해가 잘 안된다 ㅋㅋㅋ
+
+---
+
+`Parent.java`
+
+```java
+public class Parent {
+
+  private String parentPrivate;
+  String parentPackagePrivate;
+  protected String parentProtected;
+  public String parentPublic;
+}
+```
+
+`Child.java`
+
+```java
+public class Child extends Parent {
+
+  private String childPrivate;
+  String childPackagePrivate;
+  protected String childProtected;
+  public String childPublic;
+}
+```
+
+`Main.java`
+
+```java
+import java.util.Arrays;
+
+public class Main {
+
+  public static void main(String[] args) {
+    Arrays.stream(Child.class.getDeclaredFields()).forEach(System.out::println);
+
+    System.out.println("============");
+
+    Arrays.stream(Child.class.getFields()).forEach(System.out::println);
+
+  }
+}
+```
