@@ -392,3 +392,13 @@ net.blabla.SpecialProcessor
 
 - 아웃라이어(1만시간의 법칙)
 - 부의 추월차선
+
+### Annotation의 발음
+
+애너테이션으로 들린다
+
+참고로 null은 널
+
+### Annotation은 무엇인가?
+
+주석 같은 것이다. 애너테이션은 기능을 가지고 있지 않다.
