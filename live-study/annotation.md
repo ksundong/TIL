@@ -406,3 +406,9 @@ net.blabla.SpecialProcessor
 따라서 정적이고, 바뀌지 않는 요소만 애너테이션에 사용할 수 있다.
 
 문서화 할 때도 사용해야 하는데, 어떤 값이 들어갈 것인지도 알려주어야 한다.
+
+### 런타임에 CLASS 정보를 읽어들이는 방법
+
+보통 Reflection은 RUNTIME에서만 사용가능하다.
+
+하지만, Bytecode를 읽어들이는 방법도 있는데 ASM이라고 하고 Bytebuddy로 확인할 수 있다고 한다.
