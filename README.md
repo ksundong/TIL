@@ -87,6 +87,7 @@
 - [10주차: 멀티스레드 프로그래밍](live-study/multithread-programming.md)
 - [11주차: 열거형](live-study/enum.md)
 - [12주차: 애노테이션](live-study/annotation.md)
+- [13주차: I/O](live-study/io.md)
 
 ### Kotlin
 
