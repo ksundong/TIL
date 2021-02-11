@@ -19,10 +19,15 @@ Java에서는 입력 출력을 Stream의 형태로 표현할 수 있습니다. �
 Stream은 데이터의 시퀀스라고 정의할 수 있습니다. 다음의 두 Stream으로 분류할 수 있습니다.
 
 - `InputStream`은 소스로부터 데이터를 읽어들이는 용도로 사용합니다.
--`OutputStream`은 어떤 대상에 데이터를 쓰는 용도로 사용합니다.
+- `OutputStream`은 어떤 대상에 데이터를 쓰는 용도로 사용합니다.
 
 Java는 파일 뿐만 아니라 네트워크 I/O에 대해서도 강력하고 유연한 기능을 제공합니다.  
 모든 Stream들은 위의 두 Stream을 상속합니다.
+
+### 참고
+
+- [오라클 자바 튜토리얼(바이트 스트림)](https://docs.oracle.com/javase/tutorial/essential/io/bytestreams.html)
+- [튜토리얼스 포인트(자바 파일과 I/O)](https://www.tutorialspoint.com/java/java_files_io.htm)
 
 ## Byte와 Character 스트림
 
