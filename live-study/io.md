@@ -182,9 +182,32 @@ public class CopyLines {
 
 그리고 이를 뛰어넘는 방법이 텍스트 입력과 출력 자체를 구조화 하는 방법입니다. 이는 Scanning과 Formatting으로 구분할 수 있습니다.
 
+#### 궁금했던 점
+
+`new FileReader()`나 `new FileWriter()`를 선언했는데 `close()`가 되는 것인가? 튜토리얼의 예제코드에서는 `BufferdReader`와 `PrintWriter`만 `close()` 해줬기 때문에 내부에 감싸진 스트림도 `close()` 해줘야 하지 않을까?
+
+`BufferedReader`, `PrintWriter` 구현체의 `close()` 메서드를 자세히 살펴보면, 내부에 감싸고 있는 스트림또한 `close()`를 해주고 있습니다.
+
+```java
+public void close() throws IOException {
+    synchronized (lock) {
+        if (in == null)
+            return;
+        try {
+            in.close();
+        } finally {
+            in = null;
+            cb = null;
+        }
+    }
+}
+```
+
 ### 참고
 
 - [오라클 자바 튜토리얼(바이트 스트림)](https://docs.oracle.com/javase/tutorial/essential/io/bytestreams)
+- [오라클 자바 튜토리얼(캐릭터 스트림)](https://docs.oracle.com/javase/tutorial/essential/io/charstreams.html)
+- [스택 오버플로우(둘다 close?](https://stackoverflow.com/questions/1388602/do-i-need-to-close-both-filereader-and-bufferedreader)
 
 ## 표준 스트림 (System.in, System.out, System.err)
 
