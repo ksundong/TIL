@@ -10,6 +10,33 @@
 
 ## 스트림 (Stream) / 버퍼 (Buffer) / 채널 (Channel) 기반의 I/O
 
+스트림과 버퍼는 뒤에서 설명할 것입니다.
+
+### 채널 기반의 I/O
+
+채널이라는 이름에서 알 수 있듯이 채널은 한 쪽에서 다른 쪽으로의 데이터 흐름을 의미합니다. 자바의 NIO에서 채널기반의 io를 제공합니다. 이 채널은 버퍼로 데이터를 읽고 버퍼에서 데이터를 쓰는데 사용됩니다.
+
+채널 기반의 IO는 기존의 자바 IO에서 사용되던 스트림과 달리, 읽기 쓰기가 모두 가능한 양방향입니다. Java의 NIO 채널은 블로킹, 넌블로킹 모드에서 모두 데이터의 비동기 흐름을 지원합니다.
+
+#### Channel의 구현체
+
+Java NIO에서의 채널은 다음의 클래스로 구현되었습니다.
+
+- `FileChannel` - 파일에서 데이터를 읽기 위해 파일 채널을 사용합니다. 파일 채널의 객체는 파일 객체를 직접 생성할 수 업습니다. 따라서 파일 객체에서 `getChannel()` 메서드를 호출해서 생성할 수 있습니다.
+- `DatagramChannel` - 데이터그램 채널은 UDP(User Datagram Protocol)를 통해 네트워크를 통한 데이터 읽고쓰기를 할 수 있습니다. 데이터그램 채널의 객체는 팩토리 메서드 방식으로 생성할 수 있습니다.
+- `SocketChannel` - 소켓 채널은 TCP(Transmission Contorol Protocol)를 통해 네트워크를 통한 데이터 읽고쓰기를 할 수 있습니다. 이 역시 팩토리 메서드를 사용해 새로운 객체를 생성해줄 수 있습니다.
+- `ServerSocketChannel` - 서버 소켓 채널은 웹 서버와 동일하게 TCP 연결을 통해 데이터를 읽고 씁니다. 들어오는 모든 연결에 대해 소켓 채널이 생성됩니다.
+
+### 채널과 스트림의 차이
+
+- 채널은 읽고 쓰기가 모두 가능한 양방향이지만, 스트림은 단방향으로만 가능합니다.
+- 채널은 비동기를 지원합니다.
+- 채널은 항상 버퍼를 이용하지만 스트림은 래핑을 해주어야 합니다.
+
+### 참고
+
+- [tutorials point(Java NIO - Channels)](https://www.tutorialspoint.com/java_nio/java_nio_channels.htm)
+
 ## InputStream과 OutputStream
 
 Java에서는 입력 출력을 Stream의 형태로 표현할 수 있습니다. 입력 소스를 담당하는 `InputStream`과 출력을 나타내는 `OutputStream`으로 나눌 수 있습니다.
@@ -232,6 +259,9 @@ BufferedWriter out = new BufferedWriter(new FileWriter("src/main/resources/outpu
 
 스트림을 수동으로 플러시하기 위해서는 `flush` 메서드를 호출하세요. `flush` 메서드는 모든 출력 스트림에서 사용가능하지만, 버퍼되지 않은 스트림에서는 아무런 효과가 없습니다.
 
+### 참고
+
+- [오라클 튜토리얼(버퍼된 스트림)](https://docs.oracle.com/javase/tutorial/essential/io/buffers.html)
+
 ## 표준 스트림 (System.in, System.out, System.err)
 
-## 파일 읽고 쓰기
