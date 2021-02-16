@@ -209,6 +209,29 @@ public void close() throws IOException {
 - [오라클 자바 튜토리얼(캐릭터 스트림)](https://docs.oracle.com/javase/tutorial/essential/io/charstreams.html)
 - [스택 오버플로우(둘다 close?](https://stackoverflow.com/questions/1388602/do-i-need-to-close-both-filereader-and-bufferedreader)
 
+## 버퍼 스트림
+
+우리가 지금까지 사용한 대부분의 스트림은 Buffer되지 않은 I/O를 사용합니다. 이 Buffer되지 않았다의 의미는 읽기 및 쓰기 요청이 OS단에 바로 전달되어 처리됨을 의미합니다. 이러한 각 요청은 종종 디스크 액세스, 네트워크 활동, 또는 상대적으로 비용이 많이드는 다른 작업을 트리거 하기 때문에 프로그램의 효율성을 떨어뜨리는 원인이 될 수 있습니다.
+
+위에서 설명한 종류의 오버헤드를 줄이기 위해서 Java에서는 Buffer된 I/O 스트림을 구현했습니다. 버퍼된 입력 스트림은 Buffer로 알려진 메모리 영역에서 데이터를 읽습니다. native 입력 API는 버퍼가 비어있을 때에만 호출됩니다. 이와 비슷하게, Buffer된 출력 스트림은 버퍼에 데이터를 쓰고, 버퍼가 가특찬 경우에만 native 출력 API가 호출됩니다.
+
+프로그램은 버퍼되지 않은 스트림 객체가 버퍼된 스트림 클래스의 생성자에 전달되는 우리가 몇 번 사용한 래핑 관용구를 사용하여 버퍼되지 않은 스트림을 버퍼된 스트림으로 변환할 수 있습니다.
+
+```java
+BufferedReader in = new BufferedReader(new FileReader("src/main/resources/input.txt"));
+BufferedWriter out = new BufferedWriter(new FileWriter("src/main/resources/output.txt"));
+```
+
+이러한 버퍼된 스트림 클래스들은 네가지가 있습니다. `BufferedInputStream`, `BufferedOutputStream`은 버퍼된 바이트 스트림을 만들고, `BufferedReader`와 `BufferedWriter`는 버퍼된 문자 스트림을 만듭니다.
+
+### 버퍼된 스트림 플러시(flush)
+
+우리는 버퍼가 채워질 때까지 기다리지 않고, 중요한 지점에서 버퍼에 저장된 데이터를 쓰는 것이 좋습니다. 이를 버퍼 플러시라고 합니다.
+
+일부 버퍼된 출력 클래스는 `autoflush`를 지원합니다. 이는 생성자의 매개변수를 통해 선택적으로 정의될 수 있습니다. `autoflush`가 활성화되면, 특정 키 이벤트는 버퍼가 플러시되도록 합니다. 예를 들어, `PrintWriter` 객체는 자동 플러시가 활성화 되었을 때, `println` 또는 `format`을 호출할 때마다 버퍼를 플러시합니다.
+
+스트림을 수동으로 플러시하기 위해서는 `flush` 메서드를 호출하세요. `flush` 메서드는 모든 출력 스트림에서 사용가능하지만, 버퍼되지 않은 스트림에서는 아무런 효과가 없습니다.
+
 ## 표준 스트림 (System.in, System.out, System.err)
 
 ## 파일 읽고 쓰기
