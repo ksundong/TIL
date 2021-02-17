@@ -33,6 +33,47 @@ Java NIO에서의 채널은 다음의 클래스로 구현되었습니다.
 - 채널은 비동기를 지원합니다.
 - 채널은 항상 버퍼를 이용하지만 스트림은 래핑을 해주어야 합니다.
 
+### 예제 코드(파일 처리)
+
+`temp.txt`
+
+```text
+Hello World!
+```
+
+`ChannelDemo.java`
+
+```java
+import java.io.IOException;
+import java.io.RandomAccessFile;
+import java.nio.ByteBuffer;
+import java.nio.channels.FileChannel;
+
+public class ChannelDemo {
+
+  public static void main(String[] args) throws IOException {
+    // "r", "rw", "rws", "rwd" 모드가 있다.
+    try (RandomAccessFile file = new RandomAccessFile("src/main/resources/temp.txt", "r")) {
+      FileChannel channel = file.getChannel();
+      ByteBuffer byteBuffer = ByteBuffer.allocate(512); // 힙에 넌다이렉트 버퍼 생성
+      while (channel.read(byteBuffer) > 0) {
+        // 출력하기 위해 flip을 사용해서 버퍼를 비움
+        byteBuffer.flip();
+        while (byteBuffer.hasRemaining()) {
+          System.out.print((char) byteBuffer.get());
+        }
+      }
+    }
+  }
+}
+```
+
+**Output**
+
+```text
+Hello World!
+```
+
 ### 참고
 
 - [tutorials point(Java NIO - Channels)](https://www.tutorialspoint.com/java_nio/java_nio_channels.htm)
