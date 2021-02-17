@@ -306,3 +306,24 @@ BufferedWriter out = new BufferedWriter(new FileWriter("src/main/resources/outpu
 
 ## 표준 스트림 (System.in, System.out, System.err)
 
+`System`에는 `in`, `out`, `err` 라는 스트림이 일반적으로 입력 및 출력 용도로 사용됩니다. 가장 일반적으로 사용되는 것은 `System.out`으로 CLI 프로그램을 작성할 때, 콘솔에 출력을 쓰는데 사용합니다.
+
+`System.in`, `System.out`, `System.err`은 JVM이 시작될 때 Java 런타임에 의해 초기화되므로 스트림을 직접 초기화 할 필요가 없으며, 런타임에 교체또한 가능합니다.
+
+### System.in
+
+`System.in`은 일반적으로 콘솔 프로그램의 키보드 입력에 연결되는 `InputStream`입니다. 명령줄에서 Java 애플리케이션을 실행하고 CLI에 포커스가 있는 동안 키보드를 통해서 무언가를 입력하면 해당 Java 애플리케이션은 `System.in`을 통해서 키보드 입력을 읽을 수 있습니다. 그러나 다른 애플리케이션의 키보드 입력은 읽을 수 없습니다.
+
+`System.in`은 일반적으로 CLI에서만 전달되기 떄문에 자주 사용되지 않습니다.
+
+### System.out
+
+`System.out`은 문자를 쓸 수 있는 `PrintStream` 입니다. 일반적으로 CLI나 콘솔에 데이터를 출력합니다. `System.out`은 실행결과를 사용자에게 표시하는 방법으로 CLI에서 많이 사용됩니다. 또, 디버그를 위한 로그를 출력할 때 자주 사용되곤 합니다.
+
+### System.err
+
+`System.err`는 `PrintStream`이지만 일반적으로 오류 텍스트를 출력하는 데만 사용됩니다. 몇몇 프로그램은 이런 표준 에러 출력을 빨간색 텍스트로 표시하여 오류 텍스트임을 명확하게 보여줍니다.
+
+### 참고
+
+- [tutorials jenkov system-in-out-error](http://tutorials.jenkov.com/java-io/system-in-out-error.html)
