@@ -38,6 +38,7 @@
 - [도서](#Books)
 - [면접](#Interview)
 - [생산성](#Productivity)
+- [DevOps](#DevOps)
 
 ---
 
@@ -206,3 +207,7 @@
 - [교착상태와 기아상태](Interview/deadlock-and-starvation.md)
 
 ### Productivity
+
+### DevOps
+
+- [CI/CD란 무엇이며, 왜 필요한가?](DevOps/ci-cd.md)
