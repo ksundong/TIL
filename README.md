@@ -89,6 +89,7 @@
 - [11주차: 열거형](live-study/enum.md)
 - [12주차: 애노테이션](live-study/annotation.md)
 - [13주차: I/O](live-study/io.md)
+- [14주차: 제네릭](live-study/generics.md)
 
 ### Kotlin
 
