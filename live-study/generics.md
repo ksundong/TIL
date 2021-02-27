@@ -312,3 +312,111 @@ boolean same = Util.compare(p1, p2);
 ```
 
 ## Erasure
+
+제네릭을 구현하기 위해서 자바 컴파일러가 타입 제거를 수행합니다.
+
+- 제네릭의 타입 파라미터의 범위를 지정하지 않은 경우 `Object`로 바꿉니다. 따라서 생성된 바이트코드에는 일반적인 클래스, 인터페이스, 메서드만 포함됩니다.
+- 타입 안정성을 위해 필요한 경우에 타입 캐스팅을 넣습니다.
+- `extends` 된 제네릭 타입에서 다형성을 보호하기 위해서 브릿지 메서드를 생성합니다.
+
+이를 수행하면 결과적으로 제네릭을 사용할 떄, 런타임에는 오버헤드가 발생하지 않습니다.
+
+### 수행 과정
+
+예제 코드를 통해서 보겠습니다.
+
+```java
+public class Node<T> {
+
+    private T data;
+    private Node<T> next;
+
+    public Node(T data, Node<T> next) {
+        this.data = data;
+        this.next = next;
+    }
+
+    public T getData() { return data; }
+    // ...
+}
+```
+
+1. 모든 타입 파라미터를 지우고, 바인드가 되어있는 경우를 첫번째 바인드로 대체하고, 바인드가 되어있지 않으면 `Object`로 대체합니다.
+    ```java
+    public class Node {
+
+        private Object data;
+        private Node next;
+
+        public Node(Object data, Node next) {
+            this.data = data;
+            this.next = next;
+        }
+
+        public Object getData() { return data; }
+        // ...
+    ```
+    - 바운드가 되어 있는 경우
+        ```java
+        public class Node<T extends Comparable<T>> {
+
+        private T data;
+        private Node<T> next;
+
+        public Node(T data, Node<T> next) {
+            this.data = data;
+            this.next = next;
+        }
+
+        public T getData() { return data; }
+        // ...
+        }
+        ```
+        컴파일러는 T가 바인딩 된 클래스인 `Comparable`로 대체해줍니다.
+        ```java
+        public class Node {
+
+            private Comparable data;
+            private Node next;
+
+            public Node(Comparable data, Node next) {
+                this.data = data;
+                this.next = next;
+            }
+
+            public Comparable getData() { return data; }
+            // ...
+        }
+        ```
+2. 제네릭 메서드의 타입 파라미터도 제거합니다.
+    ```java
+    public static <T> int count(T[] anArray, T elem) {
+        int cnt = 0;
+        for (T e : anArray)
+            if (e.equals(elem))
+                ++cnt;
+            return cnt;
+    }
+    ```
+    `T`가 bound 되어있지 않으므로 이 코드는 다음과 같이 변경됩니다.
+    ```java
+    public static int count(Object[] anArray, Object elem) {
+        int cnt = 0;
+        for (Object e : anArray)
+            if (e.equals(elem))
+                ++cnt;
+            return cnt;
+    }
+    ```
+
+### 타입 삭제와 브리지 메서드
+
+타입 삭제를 수행하면 문제가 발생할 수 있습니다. 그래서 컴파일러는 브리지 메서드를 합성해줍니다.
+
+우리가 이에 대해 알아야 하는 이유는 스택트레이스가 남을 때, 당황스러울 수 있기 때문입니다.
+
+타입 캐스팅이 이루어져야 하는 경우 컴파일러가 알아서 브리지 메서드를 만들어줍니다.
+
+### 참고
+
+- [오라클 자바 튜토리얼(타입 제거)](https://docs.oracle.com/javase/tutorial/java/generics/erasure.html)
