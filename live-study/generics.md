@@ -420,3 +420,17 @@ public class Node<T> {
 ### 참고
 
 - [오라클 자바 튜토리얼(타입 제거)](https://docs.oracle.com/javase/tutorial/java/generics/erasure.html)
+
+## 제네릭의 제한
+
+- 기본 타입은 제네릭 타입에 사용할 수 없습니다.
+- 타입 파라미터의 인스턴스를 생성할 수는 없습니다.
+- 타입이 타입 파라미터인 `static` 필드는 선언할 수 없습니다.
+- 매개변수 타입을 캐스팅하거나 `instanceof`를 사용할 수 없습니다.
+- 매개변수 타입의 배열은 만들 수 없습니다.
+- 제네릭 클래스는 `Throwable` 클래스를 직접, 간접적으로 `extends` 할 수 없습니다. 다만 T를 `throwable`에는 사용할 수 있습니다.
+- 같은 로타입이 되는 파라미터 타입들이 지워지는 경우 오버로딩할 수 없습니다.
+
+### 참고
+
+- [오라클 자바 튜토리얼(제네릭의 제한)](https://docs.oracle.com/javase/tutorial/java/generics/restrictions.html)
