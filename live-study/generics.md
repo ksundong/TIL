@@ -192,4 +192,33 @@ Box rawBox = new Box();
 
 ## 제네릭 메소드 만들기
 
+제네릭 메서드는 자기 자신의 타입 파라미터를 사용하는 메서드입니다. 이는 제네릭 타입을 선언하는 것과 유사하지만, 제네릭 메서드의 타입 파라미터의 스코프는 선언된 메서드에 한정됩니다. 제네릭 클래스 생성자, static, non-static 메서드에서 사용할 수 있습니다.
+
+제네릭 메서드의 문법은 메서드 반환 값 앞에 꺽쇠 괄호 안에 타입 파라미터 목록을 추가해주면됩니다.
+
+```java
+public class Util {
+  public static <K, V> boolean compare(Pair<K, V> p1, Pair<K, V> p2) {
+    return p1.getKey().equals(p2.getKey()) &&
+           p1.getValue().equals(p2.getValue());
+  }
+}
+```
+
+이 메서드는 다음과 같이 사용할 수 있습니다.
+
+```java
+Pair<Integer, String> p1 = new Pair<>(1, "apple");
+Pair<Integer, String> p2 = new Pair<>(2, "pear");
+boolean same = Util.<Integer, String>compare(p1, p2);
+```
+
+이는 타입 인자를 명시적으로 표시해주었습니다. 이는 컴파일러가 추론을 해줄 수 있기 때문에 다음과 같이 줄여쓸 수 있습니다.
+
+```java
+Pair<Integer, String> p1 = new Pair<>(1, "apple");
+Pair<Integer, String> p2 = new Pair<>(2, "pear");
+boolean same = Util.compare(p1, p2);
+```
+
 ## Erasure
