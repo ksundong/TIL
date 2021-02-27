@@ -174,6 +174,20 @@ Pair<String, String> p2 = new OrderedPair<>("hello", "world");
 OrderedPair<String, Box<Integer>> p = new OrderedPair<>("primes", new Box<>());
 ```
 
+### Raw 타입
+
+로 타입은 유형 인수가 없는 제네릭 클래스 또는 인터페이스를 의미합니다.
+
+```java
+Box rawBox = new Box();
+```
+
+이는 `Box` 타입의 `raw type`이라고 부릅니다.
+
+이 raw Type은 타입 인자로 `Object`가 되었다고 가정합니다.
+
+이는 컴파일러에서 생성을 경고하고, 제네릭 메서드를 사용할 때에도 경고합니다. 이는 제네릭을 사용하는 이유인 컴파일 타임 타입 안정성을 런타임으로 연기하기 때문에 발생합니다. 따라서 우리는 로타입을 사용하는 것을 지양해야합니다.
+
 ## 제네릭 주요 개념(바운디드 타입, 와일드 카드)
 
 ## 제네릭 메소드 만들기
