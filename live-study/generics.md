@@ -79,6 +79,101 @@ public class Box<T> {
 
 ## 재네릭 사용법
 
+제네릭 타입을 호출하고 인스턴스화 하는 방법은 간단합니다.
+
+우리가 위에서 만들었던 `Box` 클래스를 예로 들자면 다음과 같은 코드를 작성할 수 있습니다.
+
+`Box <Integer> integerBox;`
+
+여기서 `Integer`가 위치한 곳을 타입 인자라고 합니다.
+
+> 타입 파라미터와 타입 인자의 차이
+>
+> 타입 파라미터는 파라미터화 된 타입을 생성하기 위해서 사용합니다. 우리가 제네릭 클래스를 정의할 때 사용한 것이 타입 파라미터입니다.
+>
+> 타입 인자는 제네릭 클래스를 사용할 때, 타입을 인자로 받는 부분을 의미합니다. 우리가 제네릭 클래스를 실제로 사용할 때 사용합니다.
+
+`integerBox` 또한 선언한다고 실제 인스턴스가 생성되지는 않습니다. 단순히 `Integer` 값을 사용하는 `Box` 클래스임을 설명합니다.
+
+제네릭 클래스는 다른 이름으로 parameterized type이라고도 합니다.
+
+이 클래스를 인스턴스화 하기 위해서는 다른 인스턴스를 만들때와 마찬가지로 `new` 키워드를 사용하고, 클래스 이름과 괄호 사이에 `<Integer>`를 넣어주면 됩니다.
+
+### 다이아몬드 연산자
+
+Java SE 7 이후부터 컴파일러가 코드의 문맥을 판단해서 타입 인수를 추론해 줄 수 있게 되었습니다. 이는 이전에 타입 추론에 대해서 논의할 때, 나왔던 적이 있습니다.
+
+제네릭 클래스의 생성자를 호출하는데 필요한 정보를 명시하지 않고 `<>`이렇게 바꿔줄 수 있습니다.
+
+```java
+Box<Integer> integerBox = new Box<Integer>(); // before
+Box<Integer> integerBox = new Box<>(); // after
+```
+
+이로 인해서 보다 편리하게 프로그래밍이 가능해졌습니다.
+
+왜 이를 다이아몬드 연산자라고 부르냐면 `<>`의 모양이 다이아몬드 모양과 비슷하기 때문입니다.
+
+### 여러개의 타입 파라미터 정의하기
+
+제네릭 클래스는 여러개의 타입 파라미터를 가질 수 있습니다. 예를 들어, `Pair`라는 인터페이스가 있고, 이를 구현하는 `OrderedPair` 구현체가 있습니다.
+
+```java
+public interface Pair<K, V> {
+
+  public K getKey();
+
+  public V getValue();
+}
+
+public class OrderedPair<K, V> implements Pair<K, V> {
+
+  private K key;
+  private V value;
+
+  public OrderedPair(K key, V value) {
+    this.key = key;
+    this.value = value;
+  }
+
+  @Override
+  public K getKey() {
+    return key;
+  }
+
+  @Override
+  public V getValue() {
+    return value;
+  }
+}
+```
+
+다음의 두 문장은 `OrderedPair` 클래스의 인스턴스를 만듭니다.
+
+```java
+Pair<String, Integer> p1 = new OrderedPair<String, Integer>("Even", 8);
+Pair<String, String> p2 = new OrderedPair<String, String>("hello", "world");
+```
+
+`p1`의 코드가 동작하는 이유는 오토 박싱이 적용되기 때문입니다.
+
+위에서 언급했던 다이아몬드 연산자를 적용하면, 타입 추론에 의해 다음과 같이 고칠 수 있습니다.
+
+```java
+Pair<String, Integer> p1 = new OrderedPair<>("Even", 8);
+Pair<String, String> p2 = new OrderedPair<>("hello", "world");
+```
+
+제네릭 인터페이스를 정의하는 것은 제네릭 클래스를 정의하는 것과 유사합니다.
+
+### 제네릭을 타입 파라미터로 사용할 수 있을까?
+
+당연히 가능합니다. 제네릭을 타입 파라미터로 사용하면 다음과 같은 코드가 작성될 수 있습니다.
+
+```java
+OrderedPair<String, Box<Integer>> p = new OrderedPair<>("primes", new Box<>());
+```
+
 ## 제네릭 주요 개념(바운디드 타입, 와일드 카드)
 
 ## 제네릭 메소드 만들기
