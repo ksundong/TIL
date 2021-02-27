@@ -190,6 +190,48 @@ Box rawBox = new Box();
 
 ## 제네릭 주요 개념(바운디드 타입, 와일드 카드)
 
+### 바운디드 타입
+
+우리가 제네릭 클래스를 사용할 때, 타입 인자로 받고싶은 타입을 특정 타입으로 제한하고 싶은 경우가 있습니다.
+
+이럴 때 바운디드 타입을 사용해주면 됩니다.
+
+바운디드 타입 파라미터를 선언하기 위해서는 '타입 파라미터의 이름', '`extends` 키워드', '상위 경계'를 나열하면 됩니다. 여기서 `extends`는 `implements`도 의미합니다.
+
+```java
+public class Box<T> {
+
+  private T t;
+
+  public void set(T t) {
+    this.t = t;
+  }
+
+  public T get() {
+    return t;
+  }
+
+  public <U extends Number> void inspect(U u) {
+    System.out.println("T: " + t.getClass().getName());
+    System.out.println("U: " + u.getClass().getName());
+  }
+
+  public static void main(String[] args) {
+    Box<Integer> integerBox = new Box<>();
+    integerBox.set(10);
+    integerBox.inspect("some text"); // 컴파일 에러발생 (String 타입)
+  }
+}
+```
+
+이는 제네릭 메서드에만 사용할 수 있는 것이 아니라, 제네릭 클래스 선언에도 이용할 수 있습니다.
+
+또한, 여러 유형을 가지도록 할 수도 있습니다. `<T extends B1 & B2 & B3>`
+
+이렇게 경계가 여러개라면 나열된 모든 타입의 하위 타입이어야 합니다. 그리고 클래스와 인터페이스를 같이 사용하는 경우 클래스를 먼저 지정해야 합니다.
+
+### 와일드 카드
+
 ## 제네릭 메소드 만들기
 
 제네릭 메서드는 자기 자신의 타입 파라미터를 사용하는 메서드입니다. 이는 제네릭 타입을 선언하는 것과 유사하지만, 제네릭 메서드의 타입 파라미터의 스코프는 선언된 메서드에 한정됩니다. 제네릭 클래스 생성자, static, non-static 메서드에서 사용할 수 있습니다.
