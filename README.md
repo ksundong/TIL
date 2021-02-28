@@ -90,6 +90,7 @@
 - [12주차: 애노테이션](live-study/annotation.md)
 - [13주차: I/O](live-study/io.md)
 - [14주차: 제네릭](live-study/generics.md)
+- [15주차: 람다식](live-study/lambda.md)
 
 ### Kotlin
 
