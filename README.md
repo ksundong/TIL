@@ -100,6 +100,7 @@
 
 - [호이스팅, 클로저, this(이해가 잘 안간다)](JavaScript/hoisting-closure-and-this.md)
 - [비동기 자바스크립트, 프로미스](JavaScript/asynchronous-javascript-and-promise.md)
+- [SSR과 CSR](JavaScript/ssr-and-csr.md)
 
 ### Design Pattern
 
