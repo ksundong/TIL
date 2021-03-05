@@ -130,4 +130,55 @@ MyFunction method(MyFunction f) {
 
 ## Variable Capture
 
+Java의 람다식은 특정 상황에서 람다 함수 body 외부에 선언된 변수에 접근할 수 있습니다.
+
+Java의 람다식은 다음 유형의 변수에 접근할 수 있습니다.
+
+- 지역 변수
+- 인스턴스 변수
+- 클래스 변수
+
+### 지역 변수 캡쳐
+
+Java의 람다식은 함수 본문 외부에서 선언된 지역 변수의 값에 접근할 수 있습니다. 단, 이 변수는 사실상 변경되지 않는 것이 확인된 변수만 접근해서 람다식에서 값을 조작할 수 있습니다. 개발자는 컴파일러가 확실하게 `final`임을 알 수 있게끔 키워드를 입력해주는 것도 좋습니다.
+
+```java
+String myString = "Test";
+
+(chars) -> {
+  return myString + ":" + new String(chars);
+}
+```
+
+위와같이 접근할 수 있습니다.
+
+### 인스턴스 변수 캡쳐
+
+Java의 람다식은 인스턴스 변수에도 접근할 수 있습니다.
+
+```java
+public class EventConsumerImpl {
+
+    private String name = "MyConsumer";
+
+    public void attach(MyEventProducer eventProducer) {
+        eventProducer.listen(e -> {
+            System.out.println(this.name);
+        });
+    }
+}
+```
+
+이곳의 인스턴스 변수(`this.name`)가 바뀌면, 람다식이 참조하는 변수도 함께 바뀝니다. 이것이 인스턴스 캡쳐입니다.
+
+이는 익명 클래스와 다른점인데 익명 클래스는 자체적인 인스턴스 변수를 가질 수 있기 때문에 다릅니다.
+
+### 클래스 변수 캡쳐
+
+Java의 람다식은 클래스 변수에도 접근할 수 있습니다. 이는 접근할 수 있는 모든 영역에서 접근 가능하므로 그다지 신기한 기능은 아닙니다.
+
+### 참고
+
+- [Jenkov 튜토리얼(람다)](http://tutorials.jenkov.com/java/lambda-expressions.html#variable-capture)
+
 ## 메소드, 생성자 레퍼런스
