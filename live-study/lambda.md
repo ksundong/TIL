@@ -182,3 +182,59 @@ Java의 람다식은 클래스 변수에도 접근할 수 있습니다. 이는 �
 - [Jenkov 튜토리얼(람다)](http://tutorials.jenkov.com/java/lambda-expressions.html#variable-capture)
 
 ## 메소드, 생성자 레퍼런스
+
+### 메서드 레퍼런스
+
+앞으로 설명할 메소드, 생성자 레퍼런스를 이용하면, 람다식을 더욱더 간결하게 표현할 수 있습니다.
+
+람다식이 하나의 메서드만 호출하는 경우, 메서드 레퍼런스를 이용할 수 있습니다.
+
+```java
+Function<String, Integer> f = s -> Integer.parseInt(s);
+
+Function<String, Integer> f2 = Integer::parseInt;
+```
+
+이것이 가능한 이유는 생략된 부분을 컴파일러가 타입 추론을 통해서 알아 낼 수 있기 때문입니다.
+
+이렇게 클래스 이름을 사용하는 대신 인스턴스의 참조변수를 적어줄 수 있는 경우도 있습니다. 이는 이미 생성된 객체의 메서드를 람다식에서 사용하는 경우, 외부에 존재하는 인스턴스의 참조변수를 통해서 메서드 레퍼런스를 사용할 수 있습니다.
+
+```java
+MyClasss obj = new MyClass();
+Function<String, Boolean> f = (x) -> obj.equals(x);
+Function<String, Boolean> f2 = obj::equals;
+```
+
+즉 메서드 레퍼런스가 가능한 경우는
+
+- static 메서드 참조: 클래스명::메서드명
+- 인스턴스 메서드 참조: 클래스명::메서드명
+- 특정 객체의 인스턴스 메서드 참조: 참조변수명::메서드명
+
+입니다.
+
+### 생성자 레퍼런스
+
+생성자 또한 레퍼런스를 이용할 수 있습니다.
+
+
+```java
+Supplier<MyClass> s = () -> new MyClass();
+Supplier<MyClass> s2 = MyClass::new;
+
+BiFunction<Integer, String, MyClass> bf = (i, s) -> new MyClass(i, s);
+BiFunction<Integer, String, MyClass> bf2 = MyClass::new;
+```
+
+매개변수가 여러개라면 함수형 인터페이스를 새로 정의해서 사용할 수도 있습니다.
+
+배열을 생성하는 방법은 다음과 같습니다.
+
+```java
+Function<Integer, int[]> f = x -> new int[x];
+Function<Integer, int[]> f2 = int[]::new;
+```
+
+### 참조
+
+- 자바의 정석
